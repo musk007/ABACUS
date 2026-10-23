@@ -27,9 +27,10 @@ LLD_CLASSES = [
 ]
 
 ATTRIBUTE_VOCAB = {
+    "Cell_Size": [0, 1, 2],
     "Nuclear_Chromatin": [0, 1],
     "Nuclear_Shape": [0, 1],
-    "Nucleus": [0, 1],
+    "Nucleolus": [0, 1],
     "Cytoplasm": [0, 1],
     "Cytoplasmic_Basophilia": [0, 1],
     "Cytoplasmic_Vacuoles": [0, 1],

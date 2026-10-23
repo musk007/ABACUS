@@ -307,6 +307,9 @@ def main() -> None:
         help="Save detection-derived features to JSON after running the pipeline.",
     )
     ap.add_argument("--random-state", type=int, default=42)
+    ap.add_argument("--fold", type=int, default=None)
+    ap.add_argument("--folds-json", type=Path, default=HERE / "wbc_unified" / "config" / "cv_folds.json")
+    ap.add_argument("--exclude", nargs="*", default=["24"])
     args = ap.parse_args()
 
     if not args.yolo_weights.is_file():
@@ -329,6 +332,11 @@ def main() -> None:
     split = discover_lld_split_from_cv(args.cv_root)
     train_ids = [pid for pid in split.get("train", []) if pid in labels]
     test_ids = [pid for pid in split.get("test", []) if pid in labels]
+    if args.fold is not None:
+        test_set = set(json.loads(args.folds_json.read_text())["folds"][args.fold])
+        everyone = [pid for pid in labels if pid not in args.exclude]
+        train_ids = [p for p in everyone if p not in test_set]
+        test_ids = [p for p in everyone if p in test_set]
     if not train_ids or not test_ids:
         raise SystemExit("Could not resolve LLD train/test patient IDs.")
 

@@ -18,10 +18,9 @@ cmd="${1:-}"
 shift || true
 
 prepare_data() {
-  python scripts/01_aggregate_gt.py --data-root /l/users/roba.majzoub/LLD_organized
-  python scripts/02_aggregate_pred.py
-  python scripts/10_build_grpo_e2e.py --rebuild-sft 
-  python scripts/06_prepare_verl_data.py
+  python scripts/10_build_grpo_e2e.py ${GT_STATS_JSON:+--stats-json "$GT_STATS_JSON"} ${FOLD:+--fold "$FOLD"}
+  python scripts/06_prepare_verl_data.py ${FOLD:+--fold "$FOLD"}
+
 }
 
 case "$cmd" in

@@ -1,0 +1,111 @@
+{
+  "stage": "dinobloom_stage1_joint",
+  "split": "test",
+  "det_weights": "/home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/runs/detector/train/weights/best.pt",
+  "attr_weights": "/home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/runs/attribute_dinobloom/train/best_attr_dinobloom.pt",
+  "dinobloom_variant": "l",
+  "dinobloom_weights": "/home/roba.majzoub/.cache/huggingface/hub/models--MarrLab--DinoBloom/snapshots/e025b6824330fc57b3b9dfe1f66ec5141c1bc4ff/pytorch_model_l.bin",
+  "detection": {
+    "map50": 0.18627738422474271,
+    "map50_95": 0.10179912010314118,
+    "precision": 0.2725181239588994,
+    "recall": 0.28615196799136805
+  },
+  "attributes_gt_crops": {
+    "per_attribute": {
+      "Nuclear_Chromatin": {
+        "accuracy": 0.8256382400869093,
+        "precision": 0.8729096989966555,
+        "recall": 0.8606760098928277,
+        "f1": 0.8667496886674969
+      },
+      "Nuclear_Shape": {
+        "accuracy": 0.9016838674633352,
+        "precision": 0.9802834257547751,
+        "recall": 0.914367816091954,
+        "f1": 0.9461790068391317
+      },
+      "Nucleolus": {
+        "accuracy": 0.8365019011406845,
+        "precision": 0.7853881278538812,
+        "recall": 0.6243194192377496,
+        "f1": 0.6956521739130435
+      },
+      "Cytoplasm": {
+        "accuracy": 0.8881042911461162,
+        "precision": 0.9780608634111819,
+        "recall": 0.8876043673731535,
+        "f1": 0.9306397306397306
+      },
+      "Cytoplasmic_Basophilia": {
+        "accuracy": 0.8636610537751223,
+        "precision": 0.9249394673123487,
+        "recall": 0.8788343558282209,
+        "f1": 0.9012976799056233
+      },
+      "Cytoplasmic_Vacuoles": {
+        "accuracy": 0.910917979359044,
+        "precision": 0.48872180451127817,
+        "recall": 0.40372670807453415,
+        "f1": 0.4421768707482993
+      },
+      "Cell_Size": {
+        "accuracy": 0.6605105920695274,
+        "f1_macro": 0.48258769198911233
+      }
+    },
+    "mean_accuracy": 0.841,
+    "mean_f1": 0.7522
+  },
+  "attributes_e2e": {
+    "per_attribute": {
+      "Nuclear_Chromatin": {
+        "accuracy": 0.8283541553503531,
+        "precision": 0.8797629127857748,
+        "recall": 0.8565539983511954,
+        "f1": 0.8680033416875522
+      },
+      "Nuclear_Shape": {
+        "accuracy": 0.9060293318848452,
+        "precision": 0.9803801348865726,
+        "recall": 0.9189655172413793,
+        "f1": 0.9486799169385939
+      },
+      "Nucleolus": {
+        "accuracy": 0.8392178164041282,
+        "precision": 0.7958236658932715,
+        "recall": 0.6225045372050817,
+        "f1": 0.6985743380855397
+      },
+      "Cytoplasm": {
+        "accuracy": 0.8897338403041825,
+        "precision": 0.9787835926449788,
+        "recall": 0.8888888888888888,
+        "f1": 0.9316728374284753
+      },
+      "Cytoplasmic_Basophilia": {
+        "accuracy": 0.870722433460076,
+        "precision": 0.9270833333333334,
+        "recall": 0.8872699386503068,
+        "f1": 0.9067398119122257
+      },
+      "Cytoplasmic_Vacuoles": {
+        "accuracy": 0.9120043454644216,
+        "precision": 0.49635036496350365,
+        "recall": 0.422360248447205,
+        "f1": 0.4563758389261745
+      },
+      "Cell_Size": {
+        "accuracy": 0.6409560021727322,
+        "f1_macro": 0.4645937235749275
+      }
+    },
+    "mean_accuracy": 0.841,
+    "mean_f1": 0.7535,
+    "n_matched": 1841,
+    "n_gt_cells": 1841,
+    "n_skipped_no_det": 0,
+    "mean_match_iou": 0.7733518911878711
+  },
+  "written_at": "2026-09-15T16:58:49.661088+00:00"
+}

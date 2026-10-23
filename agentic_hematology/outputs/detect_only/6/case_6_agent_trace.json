@@ -1,9 +1,0 @@
-{
-  "patient_id": "6",
-  "dataset_source": "lld",
-  "routing_notes": [],
-  "agent_actions": [],
-  "n_reflect_iterations": 0,
-  "flagged_for_review": false,
-  "review_reasons": []
-}

@@ -8,7 +8,8 @@ data_root: /l/users/roba.majzoub/LLD_organized
 predictions:
   - cv/runs/predict/infer/test_predictions.json
 
-reports_gt_dir: "{data_root}/report"
+reports_gt_dir: "/home/roba.majzoub/research/AgenticHematology/LLM_reports"
+gt_stats_json: /home/roba.majzoub/research/AgenticHematology/data_preprocessing/patient_WBC_stats_100X.json
 
 output:
   summaries_gt: data/patient_summaries/gt

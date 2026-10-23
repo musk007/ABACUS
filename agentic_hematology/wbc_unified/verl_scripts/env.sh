@@ -9,8 +9,12 @@ LORA_RANK="${LORA_RANK:-64}"
 LORA_ALPHA="${LORA_ALPHA:-128}"
 LORA_TARGETS="${LORA_TARGETS:-all-linear}"
 
-REPORT_LLM_ARTIFACT_ROOT="/home/roba.majzoub/research/AgenticHematology/report_llm"
-export REPORT_LLM_ARTIFACT_ROOT="${REPORT_LLM_ARTIFACT_ROOT:-/home/roba.majzoub/research/AgenticHematology/report_llm}"
+export FOLD="${FOLD:-}"
+if [[ -n "$FOLD" ]]; then
+  export REPORT_LLM_ARTIFACT_ROOT="/home/roba.majzoub/research/AgenticHematology/report_llm/fold${FOLD}"
+else
+  export REPORT_LLM_ARTIFACT_ROOT="${REPORT_LLM_ARTIFACT_ROOT:-/home/roba.majzoub/research/AgenticHematology/report_llm}"
+fi
 mkdir -p "${REPORT_LLM_ARTIFACT_ROOT}"/{data,runs,outputs,cache,logs}
 
 export CUDA_HOME=/usr/local/cuda-12.2
@@ -21,7 +25,8 @@ export SFT_SAVE_DIR="${SFT_SAVE_DIR:-${REPORT_LLM_ARTIFACT_ROOT}/runs/verl/sft_$
 export GRPO_SAVE_DIR="${GRPO_SAVE_DIR:-${REPORT_LLM_ARTIFACT_ROOT}/runs/verl/grpo_${VERL_RUN_TAG}}"
 export GRPO_LORA_STEP="${GRPO_LORA_STEP:-30}"
 export GRPO_LORA_ADAPTER="${GRPO_LORA_ADAPTER:-${GRPO_SAVE_DIR}/global_step_${GRPO_LORA_STEP}/actor/lora_adapter_lm}"
-export SFT_LORA_ADAPTER="${SFT_LORA_ADAPTER:-${SFT_SAVE_DIR}/global_step_50/lora_adapter}"
+_sft_step="$(cat "${SFT_SAVE_DIR}/latest_checkpointed_iteration.txt" 2>/dev/null || echo 50)"
+export SFT_LORA_ADAPTER="${SFT_LORA_ADAPTER:-${SFT_SAVE_DIR}/global_step_${_sft_step}/lora_adapter}"
 # vLLM language_model_only rejects visual.* LoRA keys; FSDP actor uses _lm, vLLM rollout uses _vllm
 SFT_LORA_ADAPTER_LM="${SFT_LORA_ADAPTER%/}_lm"
 if [ -f "${SFT_LORA_ADAPTER_LM}/adapter_model.safetensors" ]; then
@@ -32,6 +37,7 @@ if [ ! -f "${VLLM_LORA_ADAPTER}/adapter_model.safetensors" ]; then
   VLLM_LORA_ADAPTER="${SFT_LORA_ADAPTER}"
 fi
 export VLLM_LORA_ADAPTER
+export CV_FOLDS_JSON="${CV_FOLDS_JSON:-/home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/configs/cv_folds.json}"
 
 export HF_HOME="${HF_HOME:-${REPORT_LLM_ARTIFACT_ROOT}/cache/huggingface}"
 export HF_DATASETS_CACHE="${HF_DATASETS_CACHE:-${HF_HOME}/datasets}"
@@ -40,7 +46,7 @@ export PIP_CACHE_DIR="${PIP_CACHE_DIR:-${REPORT_LLM_ARTIFACT_ROOT}/cache/pip}"
 # echo "${HF_HOME}"
 mkdir -p "${HF_HOME}" "${PIP_CACHE_DIR}"
 
-export LOCAL_MODEL_ROOT VERL_MODEL_DIR MODEL_PATH VERL_RUN_TAG
+export LOCAL_MODEL_ROOT VERL_MODEL_DIR MODEL_PATH VERL_RUN_TAG CV_FOLDS_JSON
 export LORA_RANK LORA_ALPHA LORA_TARGETS
 export REPORT_LLM_ARTIFACT_ROOT SFT_SAVE_DIR GRPO_SAVE_DIR GRPO_LORA_STEP GRPO_LORA_ADAPTER SFT_LORA_ADAPTER
 

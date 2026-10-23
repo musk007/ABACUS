@@ -14,15 +14,16 @@
 
 **Cohort morphology (n = 161 abnormal promyelocytes):** predominantly medium cells (98.8%) with abundant (100.0%), moderately basophilic (100.0%) cytoplasm and absent cytoplasmic vacuolation (100.0%); nuclei show open chromatin (99.4%), irregular contours (100.0%), and prominent nucleoli (83.2%).
 
-**Morphologic interpretation:** The abnormal promyelocyte cohort is morphologically cohesive, with medium cell size, open chromatin, irregular nuclear contours, abundant moderately basophilic cytoplasm, and absent vacuolation all showing strong dominance. Nucleolar prominence is common but not uniform at 83.2%, indicating a minor component with less conspicuous nucleoli rather than a fully homogeneous blast population. This pattern is supportive of an abnormal promyelocytic proliferation and is internally consistent with the report impression.
+**Morphologic interpretation:** The abnormal promyelocyte cohort shows a highly uniform pattern of medium cell size, irregular nuclear contours, and abundant, moderately basophilic cytoplasm without vacuolation. Nearly universal open nuclear chromatin together with strongly predominant prominent nucleoli supports nuclear immaturity despite the abundant cytoplasm. This combination characterizes an immature-cell pattern with substantial cytoplasmic development rather than a scant-cytoplasm morphology.
 
 **Diagnostic flags:** blasts present; blast threshold met; abnormal promyelocytes present.
 
-**Impression:** Acute Promyelocytic Leukemia (APL / AML-M3, suspected).
+**Impression:** Findings consistent with an acute leukaemia showing abnormal promyelocyte morphology. Definitive classification requires clinical correlation and ancillary studies.
 
-Abnormal promyelocytes dominate the smear (91.5% of WBCs) with a blast-equivalent burden of 92.6%, meeting criteria for acute leukemia.
+Abnormal promyelocytes comprise 91.5% of WBCs, with a blast-equivalent burden of 92.6%, meeting criteria for acute leukaemia.
 
 **Differential considerations:**
+- Acute promyelocytic leukaemia — requires urgent PML::RARA confirmation.
 - AML, not otherwise specified (less likely given promyelocyte morphology).
 
 **Recommended workup:**
@@ -32,7 +33,9 @@ Abnormal promyelocytes dominate the smear (91.5% of WBCs) with a blast-equivalen
 - Bone marrow aspirate and biopsy for confirmation.
 - Cytogenetics for t(15;17) and screening for variant RARA translocations.
 
-**QC:** 60 FOVs; 176/203 cells classifiable (13.3% artefact); cohort cell count = 161; global canvas stitching inactive.
+**QC:** 60 FOVs; 176/203 cells classifiable (13.3% artefact); cohort cell count = 161.
+
+**Not assessed:** erythrocyte and platelet morphology, dysplastic features, smear staining quality, and whether fields originate from the optimal monolayer zone. Findings are based on leukocyte morphology only.
 
 ---
 *Automated multi-image peripheral blood smear analysis. Findings are intended to support — not replace — review by a board-certified hematopathologist.*

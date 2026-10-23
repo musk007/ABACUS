@@ -1,0 +1,5769 @@
+{
+  "backend": "dinobloom",
+  "celltype_source": "yolo",
+  "classifier_model": "/home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/runs/classifier/dinobloom/random_forest/leukemia_random_forest.pkl",
+  "conf_threshold": 0.25,
+  "max_cells": null,
+  "n_patients": 409,
+  "in_distribution": {
+    "n_patients": 52,
+    "accuracy": 0.5769230769230769,
+    "labels": [
+      "ALL",
+      "AML",
+      "CLL",
+      "CML"
+    ],
+    "confusion_matrix": [
+      [
+        2,
+        5,
+        0,
+        0
+      ],
+      [
+        6,
+        28,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        8,
+        0,
+        0
+      ]
+    ],
+    "classification_report": "              precision    recall  f1-score   support\n\n         ALL       0.25      0.29      0.27         7\n         AML       0.68      0.76      0.72        37\n         CLL       0.00      0.00      0.00         0\n         CML       0.00      0.00      0.00         8\n\n    accuracy                           0.58        52\n   macro avg       0.23      0.26      0.25        52\nweighted avg       0.52      0.58      0.55        52\n"
+  },
+  "by_diagnosis_group": {
+    "Acute leukemia": {
+      "n_patients": 46,
+      "blast_pct_mean": 12.352173913043476,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 29.071125216631334,
+      "predicted_distribution": {
+        "AML": 33,
+        "APML": 1,
+        "ALL": 9,
+        "CLL": 3
+      }
+    },
+    "Healthy": {
+      "n_patients": 99,
+      "blast_pct_mean": 0.5909090909090909,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 2.5641700139465025,
+      "predicted_distribution": {
+        "AML": 83,
+        "ALL": 16
+      }
+    },
+    "Lymphoma": {
+      "n_patients": 57,
+      "blast_pct_mean": 5.280701754385965,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 16.192183934237296,
+      "predicted_distribution": {
+        "AML": 44,
+        "ALL": 11,
+        "CLL": 2
+      }
+    },
+    "MDS": {
+      "n_patients": 38,
+      "blast_pct_mean": 4.88421052631579,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 16.863687651840465,
+      "predicted_distribution": {
+        "AML": 30,
+        "CLL": 4,
+        "ALL": 4
+      }
+    },
+    "MDS-MPN": {
+      "n_patients": 22,
+      "blast_pct_mean": 3.2681818181818185,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 6.4975090586271715,
+      "predicted_distribution": {
+        "AML": 21,
+        "ALL": 1
+      }
+    },
+    "MPN": {
+      "n_patients": 48,
+      "blast_pct_mean": 1.1958333333333333,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 3.269745041878478,
+      "predicted_distribution": {
+        "AML": 47,
+        "CLL": 1
+      }
+    },
+    "Plasma cell neoplasm": {
+      "n_patients": 57,
+      "blast_pct_mean": 4.654385964912281,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 18.56862161910483,
+      "predicted_distribution": {
+        "AML": 50,
+        "ALL": 5,
+        "CLL": 2
+      }
+    },
+    "Reactive changes": {
+      "n_patients": 42,
+      "blast_pct_mean": 0.5190476190476191,
+      "blast_pct_median": 0.0,
+      "blast_pct_std": 1.352112649441623,
+      "predicted_distribution": {
+        "AML": 40,
+        "CLL": 1,
+        "ALL": 1
+      }
+    }
+  },
+  "patients": [
+    {
+      "patient_id": "ALK_183",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "ALL",
+      "lld_label": "ALL",
+      "n_cells": 499,
+      "n_informative": 7,
+      "blast_pct": 14.3,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Monoblast": 14.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_184",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_185",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 499,
+      "n_informative": 10,
+      "blast_pct": 10.0,
+      "differential": {
+        "Promonocyte": 80.0,
+        "Neutrophil": 10.0,
+        "Lymphoblast": 10.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_186",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "ALL",
+      "lld_label": "ALL",
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 12.5,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Myeloblast": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_187",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AL",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 1,
+      "blast_pct": 100.0,
+      "differential": {
+        "Monoblast": 100.0
+      },
+      "predicted_class": "APML"
+    },
+    {
+      "patient_id": "ALK_188",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 66.7,
+        "Neutrophil": 33.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_189",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_190",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_191",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 14.3,
+      "differential": {
+        "Promonocyte": 71.4,
+        "Lymphocyte": 14.3,
+        "Lymphoblast": 14.3
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_192",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 499,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_193",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.0,
+        "Monocyte": 10.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_194",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 95.0,
+      "differential": {
+        "Monoblast": 90.0,
+        "Lymphoblast": 5.0,
+        "Promonocyte": 5.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_195",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 151,
+      "blast_pct": 99.3,
+      "differential": {
+        "Monoblast": 99.3,
+        "Neutrophil": 0.7
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_196",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "ALL",
+      "lld_label": "ALL",
+      "n_cells": 499,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_197",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 7.7,
+      "differential": {
+        "Promonocyte": 92.3,
+        "Myeloblast": 7.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_198",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 0,
+      "blast_pct": 0.0,
+      "differential": {},
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "ALK_199",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 432,
+      "n_informative": 41,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_200",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 189,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_201",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 498,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_202",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 75.0,
+      "differential": {
+        "Monoblast": 25.0,
+        "Lymphoblast": 25.0,
+        "Neutrophil": 25.0,
+        "Myeloblast": 25.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_203",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 75.0,
+        "Neutrophil": 16.7,
+        "Monocyte": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_204",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 465,
+      "n_informative": 17,
+      "blast_pct": 17.6,
+      "differential": {
+        "Promonocyte": 82.4,
+        "Monoblast": 17.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_205",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_206",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Neutrophil": 14.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_207",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 1,
+      "blast_pct": 100.0,
+      "differential": {
+        "Monoblast": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_208",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_209",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 498,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_210",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 474,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_211",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 485,
+      "n_informative": 23,
+      "blast_pct": 4.3,
+      "differential": {
+        "Promonocyte": 78.3,
+        "Neutrophil": 13.0,
+        "Atypical lymphocyte": 4.3,
+        "Monoblast": 4.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_212",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 499,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_213",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_214",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 1,
+      "blast_pct": 0.0,
+      "differential": {
+        "Neutrophil": 100.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "ALK_215",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 466,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_216",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AL",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_217",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 18.2,
+      "differential": {
+        "Promonocyte": 72.7,
+        "Monoblast": 18.2,
+        "Neutrophil": 9.1
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_218",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 41,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_219",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "ALL",
+      "lld_label": "ALL",
+      "n_cells": 499,
+      "n_informative": 24,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.8,
+        "Monocyte": 4.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_220",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 369,
+      "n_informative": 2,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_221",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "ALK_222",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_223",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 489,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Neutrophil": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_224",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "ALL",
+      "lld_label": "ALL",
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_225",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "ALL",
+      "lld_label": "ALL",
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_226",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "ALL",
+      "lld_label": "ALL",
+      "n_cells": 500,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.5,
+        "Neutrophil": 4.5
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "ALK_227",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 500,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "ALK_228",
+      "diagnosis_coarse": "Acute leukemia",
+      "diagnosis_fine": "AML",
+      "lld_label": "AML",
+      "n_cells": 492,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_224",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.0,
+        "Neutrophil": 5.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_225",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_226",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 3.4,
+      "differential": {
+        "Promonocyte": 86.2,
+        "Neutrophil": 10.3,
+        "Lymphoblast": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_227",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 91.7,
+        "Neutrophil": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_228",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 41,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_229",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 91.7,
+        "Monocyte": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_230",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 8.3,
+      "differential": {
+        "Promonocyte": 83.3,
+        "Lymphocyte": 8.3,
+        "Lymphoblast": 8.3
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_231",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_232",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 496,
+      "n_informative": 42,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_233",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 28,
+      "blast_pct": 3.6,
+      "differential": {
+        "Promonocyte": 96.4,
+        "Myeloblast": 3.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_234",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 496,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_235",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 2,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_236",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 7,
+      "blast_pct": 28.6,
+      "differential": {
+        "Promonocyte": 57.1,
+        "Lymphocyte": 14.3,
+        "Myeloblast": 14.3,
+        "Lymphoblast": 14.3
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_237",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 488,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_238",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_239",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_240",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "HCL",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 100.0,
+      "differential": {
+        "Monoblast": 76.9,
+        "Lymphoblast": 15.4,
+        "Myeloblast": 7.7
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_241",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_242",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_243",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_244",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_245",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_246",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 45,
+      "blast_pct": 2.2,
+      "differential": {
+        "Promonocyte": 95.6,
+        "Neutrophil": 2.2,
+        "Myeloblast": 2.2
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_247",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 84.6,
+        "Monocyte": 7.7,
+        "Neutrophil": 7.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_248",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 129,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Neutrophil": 75.0,
+        "Promonocyte": 25.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_249",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "HCL",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 2,
+      "blast_pct": 50.0,
+      "differential": {
+        "Promonocyte": 50.0,
+        "Lymphoblast": 50.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_250",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 12.5,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Monoblast": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_251",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.7,
+        "Myelocyte": 5.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_252",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "T-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 32,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_253",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 16.7,
+      "differential": {
+        "Promonocyte": 66.7,
+        "Neutrophil": 16.7,
+        "Monoblast": 16.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_254",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 84.6,
+        "Neutrophil": 15.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_255",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 31,
+      "blast_pct": 3.2,
+      "differential": {
+        "Promonocyte": 93.5,
+        "Neutrophil": 3.2,
+        "Monoblast": 3.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_256",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 72.7,
+        "Neutrophil": 9.1,
+        "Monocyte": 9.1,
+        "Atypical lymphocyte": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_257",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_258",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 9,
+      "blast_pct": 11.1,
+      "differential": {
+        "Promonocyte": 88.9,
+        "Myeloblast": 11.1
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_259",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_260",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_261",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_262",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.9,
+        "Lymphocyte": 7.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_263",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.3,
+        "Neutrophil": 6.7
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_264",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_265",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 52,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.2,
+        "Monocyte": 3.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_266",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.9,
+        "Myelocyte": 7.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_267",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 86.7,
+        "Neutrophil": 13.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_268",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 80.0,
+        "Lymphocyte": 20.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_269",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 31,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.8,
+        "Neutrophil": 3.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_270",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 2,
+      "blast_pct": 50.0,
+      "differential": {
+        "Monoblast": 50.0,
+        "Promonocyte": 50.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "LYM_271",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_272",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 63,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.4,
+        "Neutrophil": 1.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_273",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.1,
+        "Myelocyte": 5.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_274",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 28,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.4,
+        "Monocyte": 3.6
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_275",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_276",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "HCL",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 2,
+      "blast_pct": 0.0,
+      "differential": {
+        "Neutrophil": 50.0,
+        "Promonocyte": 50.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "LYM_277",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 495,
+      "n_informative": 103,
+      "blast_pct": 1.9,
+      "differential": {
+        "Promonocyte": 96.1,
+        "Monoblast": 1.0,
+        "Lymphocyte": 1.0,
+        "Neutrophil": 1.0,
+        "Myeloblast": 1.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "LYM_278",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 24,
+      "blast_pct": 4.2,
+      "differential": {
+        "Promonocyte": 91.7,
+        "Monocyte": 4.2,
+        "Myeloblast": 4.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_279",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "LYM_280",
+      "diagnosis_coarse": "Lymphoma",
+      "diagnosis_fine": "B-cell neoplasm",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 5.3,
+      "differential": {
+        "Promonocyte": 94.7,
+        "Myeloblast": 5.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_100",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_101",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 81.8,
+        "Monocyte": 18.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_102",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MDS / MPN",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.1,
+        "Atypical lymphocyte": 3.4,
+        "Neutrophil": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_103",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.7,
+        "Neutrophil": 4.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_104",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 17,
+      "blast_pct": 11.8,
+      "differential": {
+        "Promonocyte": 88.2,
+        "Monoblast": 11.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_105",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 24,
+      "blast_pct": 4.2,
+      "differential": {
+        "Promonocyte": 79.2,
+        "Neutrophil": 16.7,
+        "Monoblast": 4.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_106",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 40,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_107",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "MDP_108",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MPN / MDS-RS-T",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 70,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.9,
+        "Neutrophil": 2.9,
+        "Lymphocyte": 1.4,
+        "Monocyte": 1.4,
+        "Atypical lymphocyte": 1.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_109",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 45,
+      "blast_pct": 2.2,
+      "differential": {
+        "Promonocyte": 97.8,
+        "Monoblast": 2.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_110",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MDS / MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 71,
+      "blast_pct": 2.8,
+      "differential": {
+        "Promonocyte": 95.8,
+        "Monocyte": 1.4,
+        "Monoblast": 1.4,
+        "Myeloblast": 1.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_111",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 32,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.9,
+        "Neutrophil": 3.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_112",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MDS / MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_91",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 6.7,
+      "differential": {
+        "Promonocyte": 86.7,
+        "Lymphocyte": 6.7,
+        "Monoblast": 6.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_92",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 26,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.2,
+        "Neutrophil": 3.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_93",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 55.6,
+        "Neutrophil": 33.3,
+        "Monocyte": 11.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_94",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 5.6,
+      "differential": {
+        "Promonocyte": 94.4,
+        "Lymphoblast": 5.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_95",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MPN / MDS-RS-T",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_96",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MDS / MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 28.6,
+      "differential": {
+        "Promonocyte": 57.1,
+        "Monoblast": 28.6,
+        "Neutrophil": 14.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_97",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "CMML",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 10,
+      "blast_pct": 10.0,
+      "differential": {
+        "Promonocyte": 80.0,
+        "Neutrophil": 10.0,
+        "Monoblast": 10.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_98",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MDS / MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 37,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDP_99",
+      "diagnosis_coarse": "MDS-MPN",
+      "diagnosis_fine": "MDS / MPN",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 53,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.1,
+        "Monocyte": 1.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_155",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 9,
+      "blast_pct": 11.1,
+      "differential": {
+        "Promonocyte": 88.9,
+        "Myeloblast": 11.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_156",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 1,
+      "blast_pct": 0.0,
+      "differential": {
+        "Myelocyte": 100.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "MDS_157",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 82,
+      "n_informative": 2,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_158",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 1,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "MDS_159",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Neutrophil": 14.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_160",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 104,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.1,
+        "Atypical lymphocyte": 1.0,
+        "Neutrophil": 1.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_161",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "MDS_162",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 75.0,
+        "Neutrophil": 25.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_163",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 14,
+      "blast_pct": 7.1,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Myeloblast": 7.1,
+        "Neutrophil": 7.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_164",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.4,
+        "Neutrophil": 5.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_165",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_166",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 9.1,
+      "differential": {
+        "Promonocyte": 81.8,
+        "Neutrophil": 9.1,
+        "Myeloblast": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_167",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_168",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 88.9,
+        "Neutrophil": 11.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_169",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.9,
+        "Neutrophil": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_170",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.6,
+        "Monocyte": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_171",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 24,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_172",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 66.7,
+        "Neutrophil": 33.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_173",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 1,
+      "blast_pct": 100.0,
+      "differential": {
+        "Lymphoblast": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "MDS_174",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_175",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 75.0,
+        "Neutrophil": 25.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "MDS_176",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 8.3,
+      "differential": {
+        "Promonocyte": 91.7,
+        "Myeloblast": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_177",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 2,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "MDS_178",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_179",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_180",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_181",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 59,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.3,
+        "Neutrophil": 1.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_182",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 6,
+      "blast_pct": 33.3,
+      "differential": {
+        "Promonocyte": 66.7,
+        "Monoblast": 33.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_183",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "MDS_184",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_185",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_186",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 88.9,
+        "Neutrophil": 11.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_187",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 6,
+      "blast_pct": 16.7,
+      "differential": {
+        "Promonocyte": 83.3,
+        "Myeloblast": 16.7
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "MDS_188",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 37,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.3,
+        "Monocyte": 2.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_189",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_190",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 27,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.3,
+        "Neutrophil": 3.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_191",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 35,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.1,
+        "Neutrophil": 2.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MDS_192",
+      "diagnosis_coarse": "MDS",
+      "diagnosis_fine": "MDS",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 154,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.1,
+        "Neutrophil": 1.3,
+        "Monocyte": 0.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_191",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.7,
+        "Neutrophil": 4.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_192",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "ET",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 42,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.5,
+        "Neutrophil": 9.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_193",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_194",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 476,
+      "n_informative": 56,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.6,
+        "Monocyte": 3.6,
+        "Neutrophil": 1.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_195",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 246,
+      "n_informative": 12,
+      "blast_pct": 16.7,
+      "differential": {
+        "Promonocyte": 75.0,
+        "Myeloblast": 16.7,
+        "Neutrophil": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_196",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 60,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.7,
+        "Monocyte": 1.7,
+        "Atypical lymphocyte": 1.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_197",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 497,
+      "n_informative": 36,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_198",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 500,
+      "n_informative": 74,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_199",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.8,
+        "Monocyte": 6.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_200",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 54,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.6,
+        "Neutrophil": 3.7,
+        "Myelocyte": 3.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_201",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "ET",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Atypical lymphocyte": 7.1,
+        "Neutrophil": 7.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_202",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.6,
+        "Myelocyte": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_203",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 500,
+      "n_informative": 56,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.6,
+        "Neutrophil": 3.6,
+        "Lymphocyte": 1.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_204",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 67,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.5,
+        "Lymphocyte": 1.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_205",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_206",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 34,
+      "blast_pct": 2.9,
+      "differential": {
+        "Promonocyte": 70.6,
+        "Neutrophil": 20.6,
+        "Monocyte": 5.9,
+        "Monoblast": 2.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_207",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 81,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.5,
+        "Neutrophil": 1.2,
+        "Monocyte": 1.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_208",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 67,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.5,
+        "Neutrophil": 1.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_209",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_210",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_211",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_212",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 500,
+      "n_informative": 40,
+      "blast_pct": 5.0,
+      "differential": {
+        "Promonocyte": 92.5,
+        "Myeloblast": 5.0,
+        "Lymphocyte": 2.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_213",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.1,
+        "Monocyte": 5.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_214",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 74,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_215",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Atypical lymphocyte": 4.8,
+        "Lymphocyte": 4.8,
+        "Neutrophil": 4.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_216",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 38,
+      "blast_pct": 7.9,
+      "differential": {
+        "Promonocyte": 89.5,
+        "Myeloblast": 7.9,
+        "Lymphocyte": 2.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_217",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 34,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.1,
+        "Lymphocyte": 2.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_218",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 33,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.0,
+        "Monocyte": 3.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_219",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 25,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_220",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 37,
+      "blast_pct": 2.7,
+      "differential": {
+        "Promonocyte": 97.3,
+        "Myeloblast": 2.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_221",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.5,
+        "Lymphocyte": 4.8,
+        "Neutrophil": 4.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_222",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_223",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_224",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_225",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 496,
+      "n_informative": 25,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.0,
+        "Neutrophil": 4.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_226",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "ET",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 28,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.9,
+        "Monocyte": 3.6,
+        "Lymphocyte": 3.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_227",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 38,
+      "blast_pct": 2.6,
+      "differential": {
+        "Promonocyte": 92.1,
+        "Neutrophil": 2.6,
+        "Atypical lymphocyte": 2.6,
+        "Monoblast": 2.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_228",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 500,
+      "n_informative": 41,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.7,
+        "Neutrophil": 4.9,
+        "Monocyte": 2.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_229",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 73.3,
+        "Neutrophil": 26.7
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "MPN_230",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 10.5,
+      "differential": {
+        "Promonocyte": 89.5,
+        "Myeloblast": 10.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_231",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_232",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "PV",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 9.1,
+      "differential": {
+        "Promonocyte": 90.9,
+        "Myeloblast": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_233",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_234",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_235",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 69.2,
+        "Neutrophil": 15.4,
+        "Monocyte": 7.7,
+        "Atypical lymphocyte": 7.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_236",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "CML",
+      "lld_label": "CML",
+      "n_cells": 500,
+      "n_informative": 62,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.4,
+        "Neutrophil": 1.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_237",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 43,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "MPN_238",
+      "diagnosis_coarse": "MPN",
+      "diagnosis_fine": "MPN",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_225",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.0,
+        "Myelocyte": 5.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_226",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "PCN_227",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 80.0,
+        "Neutrophil": 20.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_228",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_229",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_230",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_231",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_232",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 88.9,
+        "Neutrophil": 11.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_233",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_234",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 5.0,
+      "differential": {
+        "Promonocyte": 95.0,
+        "Myeloblast": 5.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_235",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_236",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_237",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 66.7,
+        "Neutrophil": 33.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_238",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.9,
+        "Lymphocyte": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_239",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.0,
+        "Neutrophil": 10.0,
+        "Lymphocyte": 5.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_240",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.4,
+        "Basophil": 5.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_241",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_242",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_243",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_244",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 25,
+      "blast_pct": 4.0,
+      "differential": {
+        "Promonocyte": 96.0,
+        "Myeloblast": 4.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_245",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_246",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_247",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 91.3,
+        "Neutrophil": 4.3,
+        "Lymphocyte": 4.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_248",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "PCN_249",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.7,
+        "Neutrophil": 5.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_250",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_251",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 35,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_252",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Neutrophil": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_253",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 491,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_254",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 36,
+      "blast_pct": 2.8,
+      "differential": {
+        "Promonocyte": 94.4,
+        "Myeloblast": 2.8,
+        "Lymphocyte": 2.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_255",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_256",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.1,
+        "Lymphocyte": 3.4,
+        "Monocyte": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_257",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_258",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "PCL",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.6,
+        "Neutrophil": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_259",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_260",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 40,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_261",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 11,
+      "blast_pct": 18.2,
+      "differential": {
+        "Promonocyte": 72.7,
+        "Monoblast": 9.1,
+        "Myeloblast": 9.1,
+        "Lymphocyte": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_262",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 121,
+      "blast_pct": 0.8,
+      "differential": {
+        "Promonocyte": 84.3,
+        "Neutrophil": 13.2,
+        "Monoblast": 0.8,
+        "Atypical lymphocyte": 0.8,
+        "Monocyte": 0.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_263",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 5,
+      "blast_pct": 20.0,
+      "differential": {
+        "Promonocyte": 80.0,
+        "Lymphoblast": 20.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_264",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 1,
+      "blast_pct": 100.0,
+      "differential": {
+        "Monoblast": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "PCN_265",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_266",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 497,
+      "n_informative": 2,
+      "blast_pct": 100.0,
+      "differential": {
+        "Monoblast": 50.0,
+        "Lymphoblast": 50.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "PCN_267",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 66.7,
+        "Neutrophil": 33.3
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "PCN_268",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Neutrophil": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_269",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Neutrophil": 14.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_270",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 3,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_271",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "PCN_272",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 88.9,
+        "Neutrophil": 11.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_273",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.9,
+        "Neutrophil": 7.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_274",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_275",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "PCN_276",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_277",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 75.0,
+        "Neutrophil": 25.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_278",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 382,
+      "n_informative": 30,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.7,
+        "Monocyte": 3.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_279",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 8.3,
+      "differential": {
+        "Promonocyte": 75.0,
+        "Neutrophil": 16.7,
+        "Monoblast": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_280",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 32,
+      "blast_pct": 6.2,
+      "differential": {
+        "Promonocyte": 90.6,
+        "Monoblast": 6.2,
+        "Monocyte": 3.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "PCN_281",
+      "diagnosis_coarse": "Plasma cell neoplasm",
+      "diagnosis_fine": "MM",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.7,
+        "Monocyte": 4.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_169",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 51,
+      "blast_pct": 2.0,
+      "differential": {
+        "Promonocyte": 96.1,
+        "Neutrophil": 2.0,
+        "Myeloblast": 2.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_170",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 89.5,
+        "Neutrophil": 5.3,
+        "Lymphocyte": 5.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_171",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_172",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 42,
+      "blast_pct": 2.4,
+      "differential": {
+        "Promonocyte": 97.6,
+        "Monoblast": 2.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_173",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 35,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 91.4,
+        "Neutrophil": 8.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_174",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_175",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 25,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_176",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_177",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 76.5,
+        "Neutrophil": 23.5
+      },
+      "predicted_class": "CLL"
+    },
+    {
+      "patient_id": "RCH_178",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 80.0,
+        "Neutrophil": 20.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_179",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_180",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 28,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.4,
+        "Monocyte": 3.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_181",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 5,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_182",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_183",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.4,
+        "Neutrophil": 5.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_184",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_185",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 300,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Neutrophil": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_186",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 27,
+      "blast_pct": 3.7,
+      "differential": {
+        "Promonocyte": 92.6,
+        "Neutrophil": 3.7,
+        "Monoblast": 3.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_187",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_188",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 50,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 98.0,
+        "Monocyte": 2.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_189",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 30,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.7,
+        "Monocyte": 3.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_190",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 497,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Neutrophil": 75.0,
+        "Promonocyte": 25.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_191",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 78.9,
+        "Neutrophil": 10.5,
+        "Myelocyte": 5.3,
+        "Lymphocyte": 5.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_192",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 3.4,
+      "differential": {
+        "Promonocyte": 72.4,
+        "Neutrophil": 20.7,
+        "Lymphocyte": 3.4,
+        "Myeloblast": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_193",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 10,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_194",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 94.7,
+        "Lymphocyte": 5.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_195",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 494,
+      "n_informative": 20,
+      "blast_pct": 5.0,
+      "differential": {
+        "Promonocyte": 95.0,
+        "Myeloblast": 5.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_196",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 34,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.1,
+        "Neutrophil": 2.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_197",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.5,
+        "Myelocyte": 4.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_198",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 300,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_199",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Lymphocyte": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_200",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 27,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "RCH_201",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.3,
+        "Monocyte": 7.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_202",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.0,
+        "Monocyte": 5.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_203",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.8,
+        "Neutrophil": 6.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_204",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Atypical lymphocyte": 14.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_205",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 36,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_206",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 357,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_207",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.9,
+        "Neutrophil": 7.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_208",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_209",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 38,
+      "blast_pct": 5.3,
+      "differential": {
+        "Promonocyte": 92.1,
+        "Myeloblast": 5.3,
+        "Neutrophil": 2.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "RCH_210",
+      "diagnosis_coarse": "Reactive changes",
+      "diagnosis_fine": "Reactive changes",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 55,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.9,
+        "Neutrophil": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_396",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 42,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 78.6,
+        "Neutrophil": 19.0,
+        "Monocyte": 2.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_397",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_398",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 486,
+      "n_informative": 26,
+      "blast_pct": 3.8,
+      "differential": {
+        "Promonocyte": 96.2,
+        "Myeloblast": 3.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_399",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 228,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Monocyte": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_400",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_401",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.3,
+        "Lymphocyte": 7.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_402",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 25,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_403",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_404",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 64,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.9,
+        "Monocyte": 3.1
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_405",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 25,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.0,
+        "Monocyte": 4.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_406",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_407",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.5,
+        "Lymphocyte": 4.8,
+        "Neutrophil": 4.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_408",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_409",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 83.3,
+        "Neutrophil": 16.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_410",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 30,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.0,
+        "Neutrophil": 10.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_411",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 26,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.2,
+        "Monocyte": 3.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_412",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.2,
+        "Lymphocyte": 4.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_413",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 41,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_414",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 50.0,
+        "Monocyte": 25.0,
+        "Neutrophil": 25.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_415",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 497,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.9,
+        "Neutrophil": 9.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_416",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 27,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_417",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 17,
+      "blast_pct": 5.9,
+      "differential": {
+        "Promonocyte": 94.1,
+        "Myeloblast": 5.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_418",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Neutrophil": 12.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_419",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_420",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 24,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Monocyte": 8.3,
+        "Neutrophil": 4.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_421",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 26,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.2,
+        "Monocyte": 3.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_422",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_423",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 27,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_424",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 43,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.7,
+        "Neutrophil": 2.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_425",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 30,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.7,
+        "Neutrophil": 3.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_426",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_427",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_428",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 86.7,
+        "Neutrophil": 6.7,
+        "Lymphocyte": 6.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_429",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_430",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_431",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.9,
+        "Lymphocyte": 4.5,
+        "Neutrophil": 4.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_432",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 25,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_433",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 24,
+      "blast_pct": 4.2,
+      "differential": {
+        "Promonocyte": 95.8,
+        "Myeloblast": 4.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_434",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 4.3,
+      "differential": {
+        "Promonocyte": 95.7,
+        "Myeloblast": 4.3
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_435",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_436",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 23.1,
+      "differential": {
+        "Promonocyte": 76.9,
+        "Myeloblast": 23.1
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_437",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_438",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 85.7,
+        "Monocyte": 14.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_439",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 24,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.8,
+        "Neutrophil": 4.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_440",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_441",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.2,
+        "Myelocyte": 4.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_442",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 29,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.1,
+        "Myelocyte": 3.4,
+        "Monocyte": 3.4
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_443",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 32,
+      "blast_pct": 3.1,
+      "differential": {
+        "Promonocyte": 96.9,
+        "Myeloblast": 3.1
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_444",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 49,
+      "blast_pct": 2.0,
+      "differential": {
+        "Promonocyte": 98.0,
+        "Myeloblast": 2.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_445",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 28,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_446",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 32,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_447",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 88.2,
+        "Lymphocyte": 5.9,
+        "Neutrophil": 5.9
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_448",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_449",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 7,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_450",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 27,
+      "blast_pct": 3.7,
+      "differential": {
+        "Promonocyte": 96.3,
+        "Myeloblast": 3.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_451",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 77,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.4,
+        "Monocyte": 2.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_452",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 36,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 97.2,
+        "Neutrophil": 2.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_453",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 8,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 87.5,
+        "Lymphocyte": 12.5
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_454",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.3,
+        "Myelocyte": 6.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_455",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_456",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 496,
+      "n_informative": 66,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 93.9,
+        "Monocyte": 3.0,
+        "Neutrophil": 3.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_457",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_458",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_459",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 18,
+      "blast_pct": 5.6,
+      "differential": {
+        "Promonocyte": 77.8,
+        "Neutrophil": 11.1,
+        "Lymphocyte": 5.6,
+        "Monoblast": 5.6
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_460",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 453,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.0,
+        "Monocyte": 5.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_461",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 6,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_462",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 18,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_463",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 27,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_464",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 91.7,
+        "Monocyte": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_465",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.7,
+        "Neutrophil": 4.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_466",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 27,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.6,
+        "Monocyte": 3.7,
+        "Neutrophil": 3.7
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_467",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 24,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 83.3,
+        "Neutrophil": 16.7
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_468",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 31,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.8,
+        "Lymphocyte": 3.2
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_469",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 22,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_470",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 20,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_471",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 479,
+      "n_informative": 43,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_472",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_473",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 12,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 91.7,
+        "Neutrophil": 8.3
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_474",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 28,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_475",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 44,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_476",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 26,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 96.2,
+        "Monocyte": 3.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_477",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 9,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_478",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 4,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_479",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 17,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_480",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 26,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_481",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 19,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 89.5,
+        "Neutrophil": 10.5
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_482",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 110,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 99.1,
+        "Neutrophil": 0.9
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_483",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 39,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_484",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 496,
+      "n_informative": 14,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_485",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 16,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_486",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 498,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_487",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 95.2,
+        "Monocyte": 4.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_488",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 15,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "ALL"
+    },
+    {
+      "patient_id": "SCD_489",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 496,
+      "n_informative": 36,
+      "blast_pct": 2.8,
+      "differential": {
+        "Promonocyte": 97.2,
+        "Myeloblast": 2.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_490",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 13,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_491",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 497,
+      "n_informative": 11,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_492",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 23,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 100.0
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_493",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 499,
+      "n_informative": 21,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 90.5,
+        "Myelocyte": 4.8,
+        "Neutrophil": 4.8
+      },
+      "predicted_class": "AML"
+    },
+    {
+      "patient_id": "SCD_494",
+      "diagnosis_coarse": "Healthy",
+      "diagnosis_fine": "Stem cell donor",
+      "lld_label": null,
+      "n_cells": 500,
+      "n_informative": 27,
+      "blast_pct": 0.0,
+      "differential": {
+        "Promonocyte": 92.6,
+        "Neutrophil": 3.7,
+        "Monocyte": 3.7
+      },
+      "predicted_class": "AML"
+    }
+  ]
+}

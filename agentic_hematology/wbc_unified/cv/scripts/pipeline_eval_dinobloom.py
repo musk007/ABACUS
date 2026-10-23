@@ -28,6 +28,7 @@ import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+import csv
 
 import torch
 import yaml
@@ -40,6 +41,7 @@ from utils.dinobloom_attribute_eval import (  # noqa: E402
     eval_attributes_e2e_dinobloom,
     eval_attributes_gt_dinobloom,
 )
+from data.splits import load_folds  # noqa: E402
 
 DEFAULT_ATTR_WEIGHTS = ROOT / "runs" / "attribute_dinobloom" / "train" / "best_attr_dinobloom.pt"
 DEFAULT_DET_WEIGHTS = ROOT / "runs" / "detector" / "train" / "weights" / "best.pt"
@@ -64,22 +66,44 @@ def _mean_accuracy(per_attr: dict[str, dict[str, float]]) -> float:
     accs = [v["accuracy"] for v in per_attr.values() if "accuracy" in v]
     return round(sum(accs) / len(accs), 4) if accs else 0.0
 
+def _mean_f1(per_attr: dict[str, dict[str, float]]) -> float:
+    vals = [v.get("f1", v.get("f1_macro")) for v in per_attr.values()]
+    vals = [x for x in vals if x is not None]
+    return round(sum(vals) / len(vals), 4) if vals else 0.0
+
 
 def _read_ckpt_meta(attr_weights: Path) -> dict:
     ckpt = torch.load(attr_weights, map_location="cpu", weights_only=False)
     return ckpt if isinstance(ckpt, dict) else {}
+
+def _resolve_fold(args, manifest: Path) -> tuple[Path, str]:
+    """With --fold: manifest copy where fold patients are 'test', all others 'train'."""
+    if args.fold is None:
+        return manifest, args.split
+    test_pids = load_folds()[args.fold]
+    out = args.json_out.parent / f"_{manifest.stem}_fold{args.fold}.csv"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with manifest.open() as fin, out.open("w", newline="") as fout:
+        reader = csv.DictReader(fin)
+        writer = csv.DictWriter(fout, fieldnames=reader.fieldnames)
+        writer.writeheader()
+        for row in reader:
+            row["split"] = "test" if row["patient_id"] in test_pids else "train"
+            writer.writerow(row)
+    return out, "test"
 
 
 def eval_attribute_gt(args) -> dict:
     device = torch.device(f"cuda:{args.device}" if args.device.isdigit() else args.device)
     cfg = yaml.safe_load(args.config.read_text())
     manifest = Path(cfg["attr_manifest"])
+    manifest, split = _resolve_fold(args, manifest)
     ckpt = _read_ckpt_meta(args.attr_weights)
 
     metrics = eval_attributes_gt_dinobloom(
         args.attr_weights,
         manifest,
-        args.split,
+        split,
         device,
         args.batch,
         dinobloom_weights=args.dinobloom_weights,
@@ -88,16 +112,14 @@ def eval_attribute_gt(args) -> dict:
     per_attr = _metrics_payload(metrics)
     payload = {
         "stage": "dinobloom_attribute_gt_crops",
-        "split": args.split,
+        "split": split,
+        "fold": args.fold,
         "attr_weights": str(args.attr_weights.resolve()),
         "dinobloom_variant": ckpt.get("dinobloom_variant"),
         "dinobloom_weights": ckpt.get("dinobloom_weights"),
         "per_attribute": per_attr,
         "mean_accuracy": _mean_accuracy(per_attr),
-        "mean_f1": round(
-            sum(v.get("f1", 0.0) for v in per_attr.values()) / max(len(per_attr), 1),
-            4,
-        ),
+        "mean_f1": _mean_f1(per_attr)
     }
     if args.json_out:
         _write(args.json_out, payload)
@@ -108,11 +130,13 @@ def eval_joint(args) -> dict:
     device = torch.device(f"cuda:{args.device}" if args.device.isdigit() else args.device)
     cfg = yaml.safe_load(args.config.read_text())
     manifest = Path(cfg["attr_manifest"])
+    manifest, split = _resolve_fold(args, manifest)
+    det_yaml = ROOT / "configs" / f"dataset_fold{args.fold}.yaml" if args.fold is not None else args.config
 
     det = YOLO(str(args.det_weights))
     det_metrics = det.val(
-        data=str(args.config),
-        split=args.split,
+        data=str(det_yaml),
+        split="test" if args.fold is not None else args.split,
         imgsz=args.imgsz,
         conf=args.conf,
         iou=args.iou_nms,
@@ -125,7 +149,7 @@ def eval_joint(args) -> dict:
     gt_attr = eval_attributes_gt_dinobloom(
         args.attr_weights,
         manifest,
-        args.split,
+        split,
         device,
         args.batch,
         dinobloom_weights=args.dinobloom_weights,
@@ -135,7 +159,7 @@ def eval_joint(args) -> dict:
         args.det_weights,
         args.attr_weights,
         manifest,
-        args.split,
+        split,
         device,
         conf=args.conf,
         iou_nms=args.iou_nms,
@@ -155,7 +179,8 @@ def eval_joint(args) -> dict:
 
     payload = {
         "stage": "dinobloom_stage1_joint",
-        "split": args.split,
+        "split": split,
+        "fold": args.fold,
         "det_weights": str(args.det_weights.resolve()),
         "attr_weights": str(args.attr_weights.resolve()),
         "dinobloom_variant": ckpt.get("dinobloom_variant"),
@@ -169,18 +194,12 @@ def eval_joint(args) -> dict:
         "attributes_gt_crops": {
             "per_attribute": per_attr_gt,
             "mean_accuracy": _mean_accuracy(per_attr_gt),
-            "mean_f1": round(
-                sum(v.get("f1", 0.0) for v in per_attr_gt.values()) / max(len(per_attr_gt), 1),
-                4,
-            ),
+            "mean_f1": _mean_f1(per_attr_gt)
         },
         "attributes_e2e": {
             "per_attribute": per_attr_e2e,
             "mean_accuracy": _mean_accuracy(per_attr_e2e),
-            "mean_f1": round(
-                sum(v.get("f1", 0.0) for v in per_attr_e2e.values()) / max(len(per_attr_e2e), 1),
-                4,
-            ),
+            "mean_f1": _mean_f1(per_attr_e2e),
             "n_matched": int(e2e_stats.get("n_matched", 0)),
             "n_gt_cells": int(e2e_stats.get("n_gt_cells", 0)),
             "n_skipped_no_det": int(e2e_stats.get("n_skipped_no_det", 0)),
@@ -210,6 +229,7 @@ def _add_shared_args(parser: argparse.ArgumentParser) -> None:
         help="Backbone weights path or 'auto' (read from MLP checkpoint).",
     )
     parser.add_argument("--dinobloom-hub-dir", default=None)
+    parser.add_argument("--fold", type=int, default=None, help="Evaluate CV fold K's held-out patients")
 
 
 def main() -> None:

@@ -15,12 +15,9 @@ from ultralytics import YOLO
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from evaluate import (  # noqa: E402
-    eval_attributes_gt,
-    print_attribute_metrics,
-)
+from evaluate import eval_attributes_gt  # noqa: E402
 from utils.e2e_attributes import eval_attributes_e2e  # noqa: E402
-from utils.labels import ATTR_NAMES  # noqa: E402
+
 
 
 def _write(out: Path, payload: dict) -> Path:
@@ -30,6 +27,15 @@ def _write(out: Path, payload: dict) -> Path:
     print(f"Wrote metrics -> {out}")
     return out
 
+
+def _mean_accuracy(per_attr: dict[str, dict[str, float]]) -> float:
+    accs = [v["accuracy"] for v in per_attr.values() if "accuracy" in v]
+    return round(sum(accs) / len(accs), 4) if accs else 0.0
+
+def _mean_f1(per_attr: dict[str, dict[str, float]]) -> float:
+    vals = [v.get("f1", v.get("f1_macro")) for v in per_attr.values()]
+    vals = [x for x in vals if x is not None]
+    return round(sum(vals) / len(vals), 4) if vals else 0.0
 
 def eval_detector(args) -> dict:
     det = YOLO(str(args.weights))
@@ -68,13 +74,13 @@ def eval_attribute_gt(args) -> dict:
         name: {k: float(v) for k, v in stats.items()}
         for name, stats in (m or {}).items()
     }
-    accs = [v["accuracy"] for v in per_attr.values() if "accuracy" in v]
     payload = {
         "stage": "attribute_gt_crops",
         "split": args.split,
         "weights": str(args.weights.resolve()),
         "per_attribute": per_attr,
-        "mean_accuracy": round(sum(accs) / len(accs), 4) if accs else 0.0,
+        "mean_accuracy": _mean_accuracy(per_attr),
+        "mean_f1": _mean_f1(per_attr),
     }
     if args.json_out:
         _write(args.json_out, payload)
@@ -122,8 +128,7 @@ def eval_joint(args) -> dict:
         name: {k: float(v) for k, v in stats.items()}
         for name, stats in (e2e_metrics or {}).items()
     }
-    acc_gt = [v["accuracy"] for v in per_attr_gt.values() if "accuracy" in v]
-    acc_e2e = [v["accuracy"] for v in per_attr_e2e.values() if "accuracy" in v]
+    
     payload = {
         "stage": "stage1_joint",
         "split": args.split,
@@ -137,11 +142,13 @@ def eval_joint(args) -> dict:
         },
         "attributes_gt_crops": {
             "per_attribute": per_attr_gt,
-            "mean_accuracy": round(sum(acc_gt) / len(acc_gt), 4) if acc_gt else 0.0,
+            "mean_accuracy": _mean_accuracy(per_attr_gt),
+            "mean_f1": _mean_f1(per_attr_gt),
         },
         "attributes_e2e": {
             "per_attribute": per_attr_e2e,
-            "mean_accuracy": round(sum(acc_e2e) / len(acc_e2e), 4) if acc_e2e else 0.0,
+            "mean_accuracy": _mean_accuracy(per_attr_e2e),
+            "mean_f1": _mean_f1(per_attr_e2e),
             "n_matched": int(e2e_stats.get("n_matched", 0)),
             "n_gt_cells": int(e2e_stats.get("n_gt_cells", 0)),
             "mean_match_iou": float(e2e_stats.get("mean_match_iou", 0)),

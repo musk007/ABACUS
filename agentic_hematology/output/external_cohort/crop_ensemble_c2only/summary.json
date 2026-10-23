@@ -1,0 +1,284 @@
+{
+  "classes": [
+    "ALL",
+    "AML",
+    "APML",
+    "CLL",
+    "CML"
+  ],
+  "caitomorph_acute_vs_chronic": {
+    "ensemble": {
+      "n": 52,
+      "n_acute": 44,
+      "n_chronic": 8,
+      "accuracy": 0.8461538461538461,
+      "balanced_accuracy": 0.5,
+      "sensitivity_acute": 1.0,
+      "specificity_chronic": 0.0,
+      "auroc": 0.8437499999999999
+    },
+    "per_fold": [
+      {
+        "n": 52,
+        "n_acute": 44,
+        "n_chronic": 8,
+        "accuracy": 0.8269230769230769,
+        "balanced_accuracy": 0.48863636363636365,
+        "sensitivity_acute": 0.9772727272727273,
+        "specificity_chronic": 0.0,
+        "auroc": 0.75
+      },
+      {
+        "n": 52,
+        "n_acute": 44,
+        "n_chronic": 8,
+        "accuracy": 0.8461538461538461,
+        "balanced_accuracy": 0.6022727272727273,
+        "sensitivity_acute": 0.9545454545454546,
+        "specificity_chronic": 0.25,
+        "auroc": 0.8522727272727273
+      },
+      {
+        "n": 52,
+        "n_acute": 44,
+        "n_chronic": 8,
+        "accuracy": 0.8461538461538461,
+        "balanced_accuracy": 0.5,
+        "sensitivity_acute": 1.0,
+        "specificity_chronic": 0.0,
+        "auroc": 0.8778409090909091
+      },
+      {
+        "n": 52,
+        "n_acute": 44,
+        "n_chronic": 8,
+        "accuracy": 0.8269230769230769,
+        "balanced_accuracy": 0.48863636363636365,
+        "sensitivity_acute": 0.9772727272727273,
+        "specificity_chronic": 0.0,
+        "auroc": 0.6051136363636365
+      },
+      {
+        "n": 52,
+        "n_acute": 44,
+        "n_chronic": 8,
+        "accuracy": 0.8461538461538461,
+        "balanced_accuracy": 0.5,
+        "sensitivity_acute": 1.0,
+        "specificity_chronic": 0.0,
+        "auroc": 0.7613636363636364
+      }
+    ],
+    "per_fold_mean_std": {
+      "accuracy": [
+        0.8384615384615384,
+        0.009421114395319936
+      ],
+      "balanced_accuracy": [
+        0.5159090909090909,
+        0.04347983288570226
+      ],
+      "auroc": [
+        0.7693181818181818,
+        0.0959773292359853
+      ]
+    },
+    "three_class_accuracy_ALL_AML_CML": 0.5576923076923077
+  },
+  "lld_crop_cv": {
+    "n": 46,
+    "five_class_accuracy": 0.782608695652174,
+    "acute_vs_chronic": {
+      "n": 46,
+      "n_acute": 40,
+      "n_chronic": 6,
+      "accuracy": 0.9565217391304348,
+      "balanced_accuracy": 0.9041666666666667,
+      "sensitivity_acute": 0.975,
+      "specificity_chronic": 0.8333333333333334,
+      "auroc": 0.9375
+    }
+  },
+  "caitomorph_by_diagnosis": {
+    "diagnosis_coarse": {
+      "Acute leukemia": {
+        "n": 46,
+        "mean_p_acute": 0.8109,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 22.14
+      },
+      "Healthy": {
+        "n": 99,
+        "mean_p_acute": 0.7542,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 11.1
+      },
+      "Lymphoma": {
+        "n": 57,
+        "mean_p_acute": 0.715,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 14.97
+      },
+      "MDS": {
+        "n": 38,
+        "mean_p_acute": 0.6988,
+        "frac_pred_acute": 0.9211,
+        "mean_blast_pct": 8.73
+      },
+      "MDS-MPN": {
+        "n": 22,
+        "mean_p_acute": 0.6681,
+        "frac_pred_acute": 0.9545,
+        "mean_blast_pct": 6.37
+      },
+      "MPN": {
+        "n": 48,
+        "mean_p_acute": 0.6526,
+        "frac_pred_acute": 0.8125,
+        "mean_blast_pct": 6.88
+      },
+      "Plasma cell neoplasm": {
+        "n": 57,
+        "mean_p_acute": 0.6573,
+        "frac_pred_acute": 0.8772,
+        "mean_blast_pct": 7.79
+      },
+      "Reactive changes": {
+        "n": 42,
+        "mean_p_acute": 0.6736,
+        "frac_pred_acute": 0.8333,
+        "mean_blast_pct": 7.11
+      }
+    },
+    "diagnosis_fine": {
+      "AL": {
+        "n": 2,
+        "mean_p_acute": 0.919,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 28.88
+      },
+      "ALL": {
+        "n": 7,
+        "mean_p_acute": 0.7885,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 20.65
+      },
+      "AML": {
+        "n": 37,
+        "mean_p_acute": 0.8093,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 22.06
+      },
+      "B-cell neoplasm": {
+        "n": 53,
+        "mean_p_acute": 0.7144,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 14.48
+      },
+      "CML": {
+        "n": 8,
+        "mean_p_acute": 0.7022,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 6.87
+      },
+      "CMML": {
+        "n": 14,
+        "mean_p_acute": 0.6797,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 6.24
+      },
+      "ET": {
+        "n": 3,
+        "mean_p_acute": 0.6673,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 6.75
+      },
+      "HCL": {
+        "n": 3,
+        "mean_p_acute": 0.7705,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 27.7
+      },
+      "MDS": {
+        "n": 38,
+        "mean_p_acute": 0.6988,
+        "frac_pred_acute": 0.9211,
+        "mean_blast_pct": 8.73
+      },
+      "MDS / MPN": {
+        "n": 6,
+        "mean_p_acute": 0.6535,
+        "frac_pred_acute": 0.8333,
+        "mean_blast_pct": 7.39
+      },
+      "MM": {
+        "n": 56,
+        "mean_p_acute": 0.6603,
+        "frac_pred_acute": 0.8929,
+        "mean_blast_pct": 7.87
+      },
+      "MPN": {
+        "n": 36,
+        "mean_p_acute": 0.6367,
+        "frac_pred_acute": 0.75,
+        "mean_blast_pct": 6.75
+      },
+      "MPN / MDS-RS-T": {
+        "n": 2,
+        "mean_p_acute": 0.631,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 4.21
+      },
+      "PCL": {
+        "n": 1,
+        "mean_p_acute": 0.4864,
+        "frac_pred_acute": 0.0,
+        "mean_blast_pct": 3.26
+      },
+      "PV": {
+        "n": 1,
+        "mean_p_acute": 0.7856,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 12.11
+      },
+      "Reactive changes": {
+        "n": 42,
+        "mean_p_acute": 0.6736,
+        "frac_pred_acute": 0.8333,
+        "mean_blast_pct": 7.11
+      },
+      "Stem cell donor": {
+        "n": 99,
+        "mean_p_acute": 0.7542,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 11.1
+      },
+      "T-cell neoplasm": {
+        "n": 1,
+        "mean_p_acute": 0.5776,
+        "frac_pred_acute": 1.0,
+        "mean_blast_pct": 2.89
+      }
+    }
+  },
+  "provenance": {
+    "data_root": "/l/users/roba.majzoub/cAItomorph/caitomorph_test_set",
+    "lld_cache": "wbc_unified/cv/runs/celltype/dinobloom_C1C2_group/embeddings_l_224.pt",
+    "celltype_dir": "wbc_unified/cv/runs/celltype/dinobloom_C2_group",
+    "attr_dir": "wbc_unified/cv/runs/attribute_dinobloom/folds",
+    "folds_json": "wbc_unified/config/cv_folds.json",
+    "dinobloom_weights": "/home/roba.majzoub/DinoBloom-L.pth",
+    "dinobloom_variant": "l",
+    "cait_cache": "outputs/external/caitomorph_emb_l_224.pt",
+    "out": "output/external_cohort/crop_ensemble_c2only",
+    "exclude": "['24']",
+    "lld_domains": "['C2']",
+    "in_distribution_only": "False",
+    "max_cells": "None",
+    "imgsz": "224",
+    "batch": "128",
+    "workers": "4",
+    "device": "0",
+    "random_state": "42"
+  }
+}

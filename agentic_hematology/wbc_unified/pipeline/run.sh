@@ -83,12 +83,9 @@ _activate_llm_env
 cd "$REPORT"
 
 export GRPO_FRESH_START="${FORCE_GRPO_FRESH:-1}"
-export REWARD_FN="${REWARD_FN:-$PROJECT/verl_scripts/reward_report_e2e.py}"
+export REWARD_FN="${REWARD_FN:-$PROJECT/verl_scripts/reward_morph.py}"
 export TRAIN_FILE="${ARTIFACT}/data/verl/grpo_e2e/train.parquet"
 export VAL_FILE="${ARTIFACT}/data/verl/grpo_e2e/val.parquet"
-export REWARD_W_REPORT="${REWARD_W_REPORT:-0.50}"
-export REWARD_W_DET="${REWARD_W_DET:-0.25}"
-export REWARD_W_ATTR="${REWARD_W_ATTR:-0.25}"
 export EXPORT_STEP="${EXPORT_STEP:-50}"
 
 SFT_VAL="${ARTIFACT}/data/verl/sft/val.parquet"

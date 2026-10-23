@@ -14,18 +14,20 @@
 | Lymphocytes | 3.6% |
 | Metamyelocytes | 0.9% |
 
-**Morphologic interpretation:** The blast population shows a coherent immature pattern with open nuclear chromatin, prominent nucleoli, irregular nuclear contours, and abundant moderately basophilic cytoplasm. Cell size is predominantly medium at 74.07%, indicating some size heterogeneity but not a strongly pleomorphic cohort. Cytoplasmic vacuoles are absent in the dominant blast population, and the overall morphology is internally concordant with a myeloid blast process.
+**Cohort morphology (n = 27 myeloblasts):** predominantly medium cells (74.1%) with abundant (85.2%), moderately basophilic (100.0%) cytoplasm and absent cytoplasmic vacuolation (92.6%); nuclei show open chromatin (100.0%), irregular contours (92.6%), and prominent nucleoli (100.0%).
+
+**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin and prominent nucleoli, supporting a consistent pattern of nuclear immaturity despite predominantly abundant cytoplasm. Predominantly medium cell size and strongly prevalent irregular nuclear contours characterize the cohort, with uniform moderate cytoplasmic basophilia. The combination defines a cytoplasm-rich immature morphology rather than a scant-cytoplasm pattern, while the strong predominance of absent vacuolation argues against a conspicuously vacuolated phenotype.
 
 **Diagnostic flags:** blasts present; blast threshold met; eosinophilia present; monocytosis present.
 
-**Impression:** Acute Myeloid Leukemia (AML).
+**Impression:** Findings consistent with an acute leukaemia of myeloblastic morphology. Definitive classification requires clinical correlation and ancillary studies.
 
 Myeloid blast-like burden is 24.3% of informative WBCs (overall blast-equivalent burden 24.3%), supporting AML even when mature myeloid cells are also prominent.
 
 **Differential considerations:**
-- AML with recurrent genetic abnormalities.
-- AML with monocytic differentiation.
-- Mixed-phenotype acute leukemia (requires immunophenotyping).
+- AML with recurrent genetic abnormalities (per WHO/ICC).
+- Acute myeloid leukaemia.
+- Mixed-phenotype acute leukaemia (requires immunophenotyping).
 
 **Recommended workup:**
 - Flow cytometric immunophenotyping (myeloid and monocytic markers).
@@ -33,7 +35,9 @@ Myeloid blast-like burden is 24.3% of informative WBCs (overall blast-equivalent
 - Cytogenetics and FISH for recurrent AML abnormalities.
 - Molecular panel including NPM1, FLT3, CEBPA, RUNX1, and TP53.
 
-**QC:** 49 FOVs; 111/119 cells classifiable (6.7% artefact); cohort cell count = 27; global canvas stitching inactive.
+**QC:** 49 FOVs; 111/119 cells classifiable (6.7% artefact); cohort cell count = 27.
+
+**Not assessed:** erythrocyte and platelet morphology, dysplastic features, smear staining quality, and whether fields originate from the optimal monolayer zone. Findings are based on leukocyte morphology only.
 
 ---
 *Automated multi-image peripheral blood smear analysis. Findings are intended to support — not replace — review by a board-certified hematopathologist.*

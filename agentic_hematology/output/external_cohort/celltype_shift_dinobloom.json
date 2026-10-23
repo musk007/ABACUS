@@ -1,0 +1,193 @@
+{
+  "Acute leukemia": {
+    "n_cells": 4600,
+    "pct_none": 15.59,
+    "mean_confidence": 0.43015537177900903,
+    "blast_pct": 39.92,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 6.52,
+      "Atypical lymphocyte": 0.26,
+      "Basophil": 3.5,
+      "Eosinophil": 2.81,
+      "Lymphoblast": 18.57,
+      "Lymphocyte": 11.8,
+      "Metamyelocyte": 2.68,
+      "Monoblast": 2.01,
+      "Monocyte": 2.29,
+      "Myeloblast": 12.83,
+      "Myelocyte": 6.46,
+      "Neutrophil": 14.65,
+      "None": 18.47,
+      "Promonocyte": 15.63
+    }
+  },
+  "Healthy": {
+    "n_cells": 9900,
+    "pct_none": 9.6,
+    "mean_confidence": 0.338926472046008,
+    "blast_pct": 31.6,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 8.95,
+      "Atypical lymphocyte": 0.89,
+      "Basophil": 3.88,
+      "Eosinophil": 10.09,
+      "Lymphoblast": 12.59,
+      "Lymphocyte": 11.85,
+      "Metamyelocyte": 3.7,
+      "Monoblast": 2.74,
+      "Monocyte": 3.85,
+      "Myeloblast": 7.32,
+      "Myelocyte": 9.47,
+      "Neutrophil": 11.55,
+      "None": 10.61,
+      "Promonocyte": 13.11
+    }
+  },
+  "Lymphoma": {
+    "n_cells": 5700,
+    "pct_none": 16.65,
+    "mean_confidence": 0.4096865886319102,
+    "blast_pct": 30.86,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 6.38,
+      "Atypical lymphocyte": 1.28,
+      "Basophil": 3.33,
+      "Eosinophil": 6.59,
+      "Lymphoblast": 15.79,
+      "Lymphocyte": 10.19,
+      "Metamyelocyte": 2.65,
+      "Monoblast": 1.89,
+      "Monocyte": 2.63,
+      "Myeloblast": 6.8,
+      "Myelocyte": 7.91,
+      "Neutrophil": 21.57,
+      "None": 19.97,
+      "Promonocyte": 12.99
+    }
+  },
+  "MDS": {
+    "n_cells": 3782,
+    "pct_none": 14.86,
+    "mean_confidence": 0.4203437972303612,
+    "blast_pct": 22.76,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 6.43,
+      "Atypical lymphocyte": 0.22,
+      "Basophil": 5.96,
+      "Eosinophil": 3.98,
+      "Lymphoblast": 10.25,
+      "Lymphocyte": 11.86,
+      "Metamyelocyte": 1.77,
+      "Monoblast": 1.18,
+      "Monocyte": 2.36,
+      "Myeloblast": 4.91,
+      "Myelocyte": 7.24,
+      "Neutrophil": 27.55,
+      "None": 17.45,
+      "Promonocyte": 16.3
+    }
+  },
+  "MDS-MPN": {
+    "n_cells": 2200,
+    "pct_none": 16.95,
+    "mean_confidence": 0.45306210434572264,
+    "blast_pct": 17.41,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 4.43,
+      "Atypical lymphocyte": 0.77,
+      "Basophil": 1.64,
+      "Eosinophil": 5.25,
+      "Lymphoblast": 5.97,
+      "Lymphocyte": 6.46,
+      "Metamyelocyte": 2.52,
+      "Monoblast": 1.09,
+      "Monocyte": 3.28,
+      "Myeloblast": 5.91,
+      "Myelocyte": 9.74,
+      "Neutrophil": 28.24,
+      "None": 20.42,
+      "Promonocyte": 24.69
+    }
+  },
+  "MPN": {
+    "n_cells": 4800,
+    "pct_none": 15.38,
+    "mean_confidence": 0.4138997886003926,
+    "blast_pct": 17.48,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 5.81,
+      "Atypical lymphocyte": 1.11,
+      "Basophil": 3.64,
+      "Eosinophil": 7.19,
+      "Lymphoblast": 4.09,
+      "Lymphocyte": 6.97,
+      "Metamyelocyte": 2.24,
+      "Monoblast": 2.09,
+      "Monocyte": 3.59,
+      "Myeloblast": 5.49,
+      "Myelocyte": 12.16,
+      "Neutrophil": 28.95,
+      "None": 18.17,
+      "Promonocyte": 16.67
+    }
+  },
+  "Plasma cell neoplasm": {
+    "n_cells": 5700,
+    "pct_none": 13.23,
+    "mean_confidence": 0.453118392784606,
+    "blast_pct": 19.45,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 4.43,
+      "Atypical lymphocyte": 0.32,
+      "Basophil": 3.52,
+      "Eosinophil": 5.38,
+      "Lymphoblast": 6.85,
+      "Lymphocyte": 10.25,
+      "Metamyelocyte": 1.88,
+      "Monoblast": 1.11,
+      "Monocyte": 2.41,
+      "Myeloblast": 7.06,
+      "Myelocyte": 6.41,
+      "Neutrophil": 34.41,
+      "None": 15.24,
+      "Promonocyte": 15.97
+    }
+  },
+  "Reactive changes": {
+    "n_cells": 4200,
+    "pct_none": 11.52,
+    "mean_confidence": 0.392639065617252,
+    "blast_pct": 24.03,
+    "distribution_pct": {
+      "Abnormal promyelocyte": 7.97,
+      "Atypical lymphocyte": 0.67,
+      "Basophil": 3.23,
+      "Eosinophil": 8.07,
+      "Lymphoblast": 9.34,
+      "Lymphocyte": 9.93,
+      "Metamyelocyte": 3.04,
+      "Monoblast": 1.86,
+      "Monocyte": 2.69,
+      "Myeloblast": 4.87,
+      "Myelocyte": 8.02,
+      "Neutrophil": 24.33,
+      "None": 13.02,
+      "Promonocyte": 15.98
+    }
+  },
+  "_lld_test_ground_truth": {
+    "Monoblast": 6.5,
+    "Lymphocyte": 4.8,
+    "Neutrophil": 27.2,
+    "Monocyte": 5.7,
+    "Lymphoblast": 10.4,
+    "Eosinophil": 1.7,
+    "Atypical lymphocyte": 10.6,
+    "Abnormal promyelocyte": 8.7,
+    "Myeloblast": 15.1,
+    "Myelocyte": 6.6,
+    "Metamyelocyte": 1.4,
+    "Basophil": 0.2,
+    "Promonocyte": 1.1
+  }
+}

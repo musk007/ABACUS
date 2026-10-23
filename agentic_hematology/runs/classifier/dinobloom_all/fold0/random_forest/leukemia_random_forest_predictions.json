@@ -1,0 +1,114 @@
+{
+  "13": {
+    "patient_id": "13",
+    "true_label": "ALL",
+    "predicted_class": "ALL",
+    "confidence": 0.684,
+    "class_probabilities": {
+      "ALL": 0.684,
+      "AML": 0.304,
+      "APML": 0.0,
+      "CLL": 0.004,
+      "CML": 0.008
+    },
+    "split": "test"
+  },
+  "17": {
+    "patient_id": "17",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.764,
+    "class_probabilities": {
+      "ALL": 0.156,
+      "AML": 0.764,
+      "APML": 0.076,
+      "CLL": 0.0,
+      "CML": 0.004
+    },
+    "split": "test"
+  },
+  "25": {
+    "patient_id": "25",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.604,
+    "class_probabilities": {
+      "ALL": 0.358,
+      "AML": 0.604,
+      "APML": 0.016,
+      "CLL": 0.002,
+      "CML": 0.02
+    },
+    "split": "test"
+  },
+  "38": {
+    "patient_id": "38",
+    "true_label": "ALL",
+    "predicted_class": "ALL",
+    "confidence": 0.646,
+    "class_probabilities": {
+      "ALL": 0.646,
+      "AML": 0.348,
+      "APML": 0.004,
+      "CLL": 0.002,
+      "CML": 0.0
+    },
+    "split": "test"
+  },
+  "41": {
+    "patient_id": "41",
+    "true_label": "ALL",
+    "predicted_class": "AML",
+    "confidence": 0.678,
+    "class_probabilities": {
+      "ALL": 0.25,
+      "AML": 0.678,
+      "APML": 0.042,
+      "CLL": 0.0,
+      "CML": 0.03
+    },
+    "split": "test"
+  },
+  "48": {
+    "patient_id": "48",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.9,
+    "class_probabilities": {
+      "ALL": 0.024,
+      "AML": 0.9,
+      "APML": 0.022,
+      "CLL": 0.002,
+      "CML": 0.052
+    },
+    "split": "test"
+  },
+  "34": {
+    "patient_id": "34",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.836,
+    "class_probabilities": {
+      "ALL": 0.116,
+      "AML": 0.836,
+      "APML": 0.02,
+      "CLL": 0.0,
+      "CML": 0.028
+    },
+    "split": "test"
+  },
+  "6": {
+    "patient_id": "6",
+    "true_label": "ALL",
+    "predicted_class": "ALL",
+    "confidence": 0.608,
+    "class_probabilities": {
+      "ALL": 0.608,
+      "AML": 0.364,
+      "APML": 0.006,
+      "CLL": 0.006,
+      "CML": 0.016
+    },
+    "split": "test"
+  }
+}

@@ -14,18 +14,17 @@
 
 **Cohort morphology (n = 47 lymphoblasts):** predominantly medium cells (61.7%) with scanty (80.8%), slightly basophilic (100.0%) cytoplasm and absent cytoplasmic vacuolation (100.0%); nuclei show open chromatin (100.0%), irregular contours (97.9%), and inconspicuous nucleoli (100.0%).
 
-**Morphologic interpretation:** The lymphoblast cohort shows a largely cohesive immature blast phenotype with open chromatin, irregular nuclear contours, inconspicuous nucleoli, scanty cytoplasm, slight cytoplasmic basophilia, and absent vacuolation. The medium-cell predominance is borderline at 61.7%, so cell size is better interpreted as mildly heterogeneous rather than uniformly medium-sized. The absence of prominent nucleoli, stronger cytoplasmic basophilia, and vacuolation argues against a more cytoplasm-rich or vacuolated blast pattern.
+**Morphologic interpretation:** The lymphoblast cohort shows uniformly open nuclear chromatin with nearly uniform contour irregularity, supporting an immature nuclear pattern despite consistently inconspicuous nucleoli. Predominantly scant cytoplasm, uniformly slight basophilia, and absent vacuolation define a relatively restrained cytoplasmic phenotype. Cell size is less uniform than the nuclear features, with medium size only weakly dominant and a substantial small-cell component.
 
 **Diagnostic flags:** blasts present; blast threshold met; eosinophilia present.
 
-**Impression:** Acute Lymphoblastic Leukemia (ALL).
+**Impression:** Findings consistent with an acute leukaemia of lymphoblastic morphology. Definitive classification requires clinical correlation and ancillary studies.
 
-Lymphoblasts comprise 59.5% of WBCs, exceeding the 20% blast threshold for acute leukemia.
+Lymphoblasts comprise 59.5% of WBCs (blast-equivalent burden of 59.5%), exceeding the 20% blast threshold for acute leukaemia.
 
 **Differential considerations:**
-- B-lymphoblastic leukemia/lymphoma (most common in adults and children).
-- T-lymphoblastic leukemia/lymphoma.
-- Mixed-phenotype acute leukemia (excluded by immunophenotyping).
+- B- or T-lymphoblastic leukaemia/lymphoma.
+- Mixed-phenotype acute leukaemia (excluded by immunophenotyping).
 
 **Recommended workup:**
 - Flow cytometric immunophenotyping for lineage assignment (B-ALL: CD19, CD22, CD79a, CD10, TdT; T-ALL: cytoCD3, CD7, TdT).
@@ -34,7 +33,9 @@ Lymphoblasts comprise 59.5% of WBCs, exceeding the 20% blast threshold for acute
 - Molecular studies including BCR::ABL1-like signature where available.
 - CSF examination to assess CNS involvement.
 
-**QC:** 56 FOVs; 79/94 cells classifiable (16.0% artefact); cohort cell count = 47; global canvas stitching inactive.
+**QC:** 56 FOVs; 79/94 cells classifiable (16.0% artefact); cohort cell count = 47.
+
+**Not assessed:** erythrocyte and platelet morphology, dysplastic features, smear staining quality, and whether fields originate from the optimal monolayer zone. Findings are based on leukocyte morphology only.
 
 ---
 *Automated multi-image peripheral blood smear analysis. Findings are intended to support — not replace — review by a board-certified hematopathologist.*

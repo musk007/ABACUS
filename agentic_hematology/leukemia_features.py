@@ -312,7 +312,12 @@ def build_feature_row_from_findings(
     detection_result=None,
 ) -> dict[str, float]:
     """Build patient-level tabular features from live detection + aggregation only."""
-    from agentic_hematology.detection_agent_v2 import ATTRIBUTE_ORDER
+    from agentic_hematology.detection_agent_v2 import (
+        BINARY_ATTRIBUTE_ORDER,
+        CELL_SIZE_ATTR,
+        CELL_SIZE_STATES,
+    )
+    ATTRIBUTE_ORDER = BINARY_ATTRIBUTE_ORDER
 
     row = {f"pct_{_slug(cell_type)}": 0.0 for cell_type in CLINICAL_CELL_TYPES}
     for name, value in (findings.cell_percentages_clinical or {}).items():
@@ -326,10 +331,10 @@ def build_feature_row_from_findings(
     row["n_cells_identified_wbc"] = float(findings.n_cells_identified_wbc)
     row["n_cells_informative"] = float(findings.n_cells_identified_wbc)
 
-    counts = findings.cell_counts or {}
+    counts = {_slug(k): v for k, v in (findings.cell_counts or {}).items()}
     denom = max(float(findings.n_cells_identified_wbc), 1.0)
     for group, members in CLINICAL_GROUPS.items():
-        group_count = sum(float(counts.get(member, 0)) for member in members)
+        group_count = sum(float(counts.get(_slug(m), 0)) for m in members)
         row[f"group_{group}_pct"] = round(100.0 * group_count / denom, 4)
 
     attr_values: dict[str, list[float]] = {name: [] for name in ATTRIBUTE_ORDER}
@@ -370,6 +375,18 @@ def build_feature_row_from_findings(
             round(100.0 * sum(v >= 0.5 for v in vals) / len(vals), 4) if vals else 0.0
         )
         row[f"attr_{slug}__mean_prob"] = round(sum(vals) / len(vals), 4) if vals else 0.0
+
+    size_vals: dict[str, list[float]] = {s: [] for s in CELL_SIZE_STATES}
+    source = cells if cells else list((findings.grounding_index or {}).values())
+    for item in source:
+        attrs = item.attributes if hasattr(item, "attributes") else (item.get("attributes") or {})
+        for state in CELL_SIZE_STATES:
+            v = attrs.get(f"{CELL_SIZE_ATTR}_{state}")
+            if isinstance(v, (int, float)):
+                size_vals[state].append(float(v))
+    for state in CELL_SIZE_STATES:
+        vals = size_vals[state]
+        row[f"attr_cell_size__{state}_mean_prob"] = round(sum(vals) / len(vals), 4) if vals else 0.0
 
     if feature_names is None:
         return row

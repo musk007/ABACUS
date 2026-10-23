@@ -1,0 +1,132 @@
+{
+  "11": {
+    "patient_id": "11",
+    "true_label": "ALL",
+    "predicted_class": "ALL",
+    "confidence": 0.628,
+    "class_probabilities": {
+      "ALL": 0.628,
+      "AML": 0.344,
+      "CLL": 0.022,
+      "CML": 0.006
+    },
+    "split": "test"
+  },
+  "19": {
+    "patient_id": "19",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.906,
+    "class_probabilities": {
+      "ALL": 0.038,
+      "AML": 0.906,
+      "CLL": 0.004,
+      "CML": 0.052
+    },
+    "split": "test"
+  },
+  "22": {
+    "patient_id": "22",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.914,
+    "class_probabilities": {
+      "ALL": 0.044,
+      "AML": 0.914,
+      "CLL": 0.02,
+      "CML": 0.022
+    },
+    "split": "test"
+  },
+  "27": {
+    "patient_id": "27",
+    "true_label": "CML",
+    "predicted_class": "CML",
+    "confidence": 0.982,
+    "class_probabilities": {
+      "ALL": 0.006,
+      "AML": 0.012,
+      "CLL": 0.0,
+      "CML": 0.982
+    },
+    "split": "test"
+  },
+  "36": {
+    "patient_id": "36",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.804,
+    "class_probabilities": {
+      "ALL": 0.12,
+      "AML": 0.804,
+      "CLL": 0.012,
+      "CML": 0.064
+    },
+    "split": "test"
+  },
+  "3": {
+    "patient_id": "3",
+    "true_label": "ALL",
+    "predicted_class": "ALL",
+    "confidence": 0.516,
+    "class_probabilities": {
+      "ALL": 0.516,
+      "AML": 0.44,
+      "CLL": 0.036,
+      "CML": 0.008
+    },
+    "split": "test"
+  },
+  "18": {
+    "patient_id": "18",
+    "true_label": "ALL",
+    "predicted_class": "ALL",
+    "confidence": 0.66,
+    "class_probabilities": {
+      "ALL": 0.66,
+      "AML": 0.3,
+      "CLL": 0.03,
+      "CML": 0.01
+    },
+    "split": "test"
+  },
+  "23": {
+    "patient_id": "23",
+    "true_label": "APML",
+    "predicted_class": "AML",
+    "confidence": 0.832,
+    "class_probabilities": {
+      "ALL": 0.004,
+      "AML": 0.832,
+      "CLL": 0.02,
+      "CML": 0.144
+    },
+    "split": "test"
+  },
+  "40": {
+    "patient_id": "40",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.546,
+    "class_probabilities": {
+      "ALL": 0.166,
+      "AML": 0.546,
+      "CLL": 0.052,
+      "CML": 0.236
+    },
+    "split": "test"
+  },
+  "8": {
+    "patient_id": "8",
+    "true_label": "ALL",
+    "predicted_class": "AML",
+    "confidence": 0.532,
+    "class_probabilities": {
+      "ALL": 0.452,
+      "AML": 0.532,
+      "CLL": 0.002,
+      "CML": 0.014
+    },
+    "split": "test"
+  }
+}

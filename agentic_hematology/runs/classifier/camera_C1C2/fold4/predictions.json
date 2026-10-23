@@ -1,0 +1,170 @@
+{
+  "fold": 4,
+  "train_domains": [
+    "C2",
+    "C1"
+  ],
+  "n_train_rows": 76,
+  "classes": [
+    "ALL",
+    "AML",
+    "APML",
+    "CLL",
+    "CML"
+  ],
+  "dinobloom_attr_weights": "wbc_unified/cv/runs/attribute_dinobloom_c1c2/folds/fold4_attr_dinobloom.pt",
+  "predictions": {
+    "14": {
+      "true": "ALL",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.984,
+          "AML": 0.01,
+          "APML": 0.004,
+          "CLL": 0.002,
+          "CML": 0.0
+        },
+        "C1": {
+          "ALL": 0.904,
+          "AML": 0.09,
+          "APML": 0.002,
+          "CLL": 0.004,
+          "CML": 0.0
+        }
+      }
+    },
+    "16": {
+      "true": "AML",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.028,
+          "AML": 0.576,
+          "APML": 0.38,
+          "CLL": 0.002,
+          "CML": 0.014
+        },
+        "C1": {
+          "ALL": 0.064,
+          "AML": 0.836,
+          "APML": 0.098,
+          "CLL": 0.002,
+          "CML": 0.0
+        }
+      }
+    },
+    "20": {
+      "true": "ALL",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.972,
+          "AML": 0.014,
+          "APML": 0.002,
+          "CLL": 0.01,
+          "CML": 0.002
+        },
+        "C1": {
+          "ALL": 0.452,
+          "AML": 0.466,
+          "APML": 0.016,
+          "CLL": 0.026,
+          "CML": 0.04
+        }
+      }
+    },
+    "30": {
+      "true": "CML",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.026,
+          "AML": 0.046,
+          "APML": 0.002,
+          "CLL": 0.004,
+          "CML": 0.922
+        },
+        "C1": {
+          "ALL": 0.016,
+          "AML": 0.024,
+          "APML": 0.0,
+          "CLL": 0.002,
+          "CML": 0.958
+        }
+      }
+    },
+    "35": {
+      "true": "ALL",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.774,
+          "AML": 0.198,
+          "APML": 0.004,
+          "CLL": 0.006,
+          "CML": 0.018
+        },
+        "C1": {
+          "ALL": 0.726,
+          "AML": 0.232,
+          "APML": 0.012,
+          "CLL": 0.018,
+          "CML": 0.012
+        }
+      }
+    },
+    "39": {
+      "true": "AML",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.026,
+          "AML": 0.878,
+          "APML": 0.084,
+          "CLL": 0.0,
+          "CML": 0.012
+        },
+        "C1": {
+          "ALL": 0.078,
+          "AML": 0.852,
+          "APML": 0.028,
+          "CLL": 0.0,
+          "CML": 0.042
+        }
+      }
+    },
+    "45": {
+      "true": "AML",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.154,
+          "AML": 0.81,
+          "APML": 0.008,
+          "CLL": 0.004,
+          "CML": 0.024
+        },
+        "C1": {
+          "ALL": 0.102,
+          "AML": 0.872,
+          "APML": 0.006,
+          "CLL": 0.0,
+          "CML": 0.02
+        }
+      }
+    },
+    "47": {
+      "true": "AML",
+      "by_camera": {
+        "C2": {
+          "ALL": 0.042,
+          "AML": 0.408,
+          "APML": 0.122,
+          "CLL": 0.002,
+          "CML": 0.426
+        },
+        "C1": {
+          "ALL": 0.14,
+          "AML": 0.838,
+          "APML": 0.018,
+          "CLL": 0.0,
+          "CML": 0.004
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,11 @@
 agentic_hematology/wbc_unified/cv/runs/
 *.pt
 agentic_hematology/wbc_unified/cv/runs/
-agentic_hematology/wbc_unified/cv/generated/det_dataset
+**/det_dataset/
+**/det_dataset_fold*/
 agentic_hematology/wbc_unified/cv/runs
 agentic_hematology/wbc_unified/report/outputs
 report_llm
+agentic_hematology/third_part
+outputs
+outputs.tar.gzagentic_hematology/wbc_unified/cv/trained_weights.tar.gz

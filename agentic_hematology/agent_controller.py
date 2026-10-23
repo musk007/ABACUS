@@ -145,13 +145,14 @@ class AgentDecision:
     reason: str
     conf_threshold: float | None = None   # only meaningful for RE_AGGREGATE
     raw: str = ""                          # raw LLM text, for audit
+    error: bool = False 
 
     def to_dict(self) -> dict[str, Any]:
-        return {
-            "action": self.action.value,
-            "reason": self.reason,
-            "conf_threshold": self.conf_threshold,
-        }
+        return {"action": self.action.value, 
+                "reason": self.reason,
+                "conf_threshold": self.conf_threshold, 
+                "error": self.error
+                }
 
 
 # ---------------------------------------------------------------------------
@@ -203,7 +204,7 @@ class ReflectionAgent:
     def __init__(
         self,
         llm: LLMClient,
-        min_conf_threshold: float = 0.2,
+        min_conf_threshold: float = 0.25,
         max_conf_threshold: float = 0.9,
     ):
         self.llm = llm
@@ -237,6 +238,7 @@ class ReflectionAgent:
                 AgentAction.FLAG_FOR_REVIEW,
                 f"reflection LLM call failed ({e}); flagging for safety",
                 raw="",
+                error=True
             )
         print("Reflection agent complete.", flush=True)
 
@@ -250,7 +252,7 @@ class ReflectionAgent:
             if re_aggregate_used:
                 return AgentDecision(
                     AgentAction.FLAG_FOR_REVIEW,
-                    "e_aggregation budget exhausted; escalating instead",
+                    "re_aggregation budget exhausted; escalating instead",
                     raw=raw,
                 )
             ct = decision.conf_threshold
@@ -281,6 +283,7 @@ class ReflectionAgent:
                 AgentAction.FLAG_FOR_REVIEW,
                 "invalid agent JSON; flagging for safety",
                 raw=raw,
+                error=True
             )
 
         action_str = str(obj.get("action", "")).strip().lower()

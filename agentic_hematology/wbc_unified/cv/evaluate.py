@@ -18,15 +18,20 @@ sys.path.insert(0, str(ROOT))
 from data.cell_dataset import CellAttributeDataset  # noqa: E402
 from models.attribute_net import build_attribute_model  # noqa: E402
 from utils.e2e_attributes import eval_attributes_e2e  # noqa: E402
-from utils.labels import ATTR_NAMES  # noqa: E402
-from utils.metrics import attribute_metrics, print_legacy_attribute_table  # noqa: E402
+from utils.labels import BINARY_ATTRS, CELL_SIZE_N_CLASSES  # noqa: E402
+from utils.metrics import (  # noqa: E402
+    attribute_metrics,
+    cell_size_metrics,
+    print_legacy_attribute_table,
+)
 
 
 @torch.no_grad()
 def eval_attributes_gt(attr_weights: Path, manifest: Path, split: str, device, batch: int) -> dict:
     ckpt = torch.load(attr_weights, map_location=device, weights_only=False)
     model = build_attribute_model(
-        num_attrs=len(ATTR_NAMES),
+        num_binary=len(BINARY_ATTRS),
+        num_size=CELL_SIZE_N_CLASSES,
         backbone=ckpt.get("backbone", "efficientnet_b0"),
         pretrained=False,
     )
@@ -35,15 +40,22 @@ def eval_attributes_gt(attr_weights: Path, manifest: Path, split: str, device, b
     model.eval()
     ds = CellAttributeDataset(manifest, split, imgsz=int(ckpt.get("imgsz", 224)))
     loader = DataLoader(ds, batch_size=batch, shuffle=False, num_workers=4)
-    ys, ps = [], []
-    for x, y, _ in loader:
-        x = x.to(device)
-        logits = model(x)
+    ys, ps, sz_t, sz_p = [], [], [], []
+    for x, y, s, _ in loader:
+        bin_logits, size_logits = model(x.to(device))
         ys.append(y.numpy())
-        ps.append(torch.sigmoid(logits).cpu().numpy())
-    y_true = np.concatenate(ys, axis=0)
-    y_pred = np.concatenate(ps, axis=0)
-    return attribute_metrics(y_true, y_pred, ATTR_NAMES)
+        ps.append(torch.sigmoid(bin_logits).cpu().numpy())
+        sz_t.append(s.numpy())
+        sz_p.append(size_logits.argmax(1).cpu().numpy())
+    if not ys:
+        return {}
+    metrics = attribute_metrics(
+        np.concatenate(ys, axis=0), np.concatenate(ps, axis=0), BINARY_ATTRS
+    )
+    size_m = cell_size_metrics(np.concatenate(sz_t), np.concatenate(sz_p))
+    if size_m:
+        metrics["Cell_Size"] = size_m
+    return metrics
 
 
 def print_attribute_metrics(title: str, metrics: dict) -> None:
@@ -51,7 +63,16 @@ def print_attribute_metrics(title: str, metrics: dict) -> None:
     if not metrics:
         print("  (no matched cells)")
         return
-    rows = [[name, m["accuracy"], m["precision"], m["recall"], m["f1"]] for name, m in metrics.items()]
+    rows = [
+        [
+            name,
+            m.get("accuracy", 0.0),
+            m.get("precision", float("nan")),
+            m.get("recall", float("nan")),
+            m.get("f1", m.get("f1_macro", 0.0)),
+        ]
+        for name, m in metrics.items()
+    ]
     print_legacy_attribute_table(rows)
 
 

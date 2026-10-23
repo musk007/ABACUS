@@ -58,6 +58,7 @@ class AggregatedFindings:
     attributes: dict[str, Any]
     report_ready: dict[str, Any]
     grounding_index: dict[str, Any] = field(default_factory=dict)
+    case_record: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -73,6 +74,8 @@ class GroundedReport:
     markdown: str
     grounding_index: dict[str, Any] = field(default_factory=dict)
     backend: str = "template"
+    protocol_markdown: str = ""                                   # report body before appendices
+    protocol_info: dict[str, Any] = field(default_factory=dict)   # enrichment + validation log
 
 
 @dataclass
@@ -98,5 +101,6 @@ class PipelineState:
     n_reflect_iterations: int = 0
     flagged_for_review: bool = False
     review_reasons: list[str] = field(default_factory=list)
+    pre_reflection_snapshot: dict[str, Any] = field(default_factory=dict)
     dataset_source: str = "lld"
     routing_notes: list[str] = field(default_factory=list)

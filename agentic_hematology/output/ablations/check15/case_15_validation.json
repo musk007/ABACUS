@@ -1,0 +1,27 @@
+{
+  "patient_id": "15",
+  "validation_passed": true,
+  "report_delivery_allowed": true,
+  "checks": {
+    "consistency": {
+      "passed": true,
+      "message": "ok",
+      "details": {}
+    },
+    "llm_output": {
+      "passed": true,
+      "message": "ok",
+      "details": {}
+    },
+    "template_json": {
+      "passed": true,
+      "message": "ok",
+      "details": {
+        "passed": true,
+        "parse_errors": [],
+        "consistency_issues": [],
+        "hallucination_issues": []
+      }
+    }
+  }
+}

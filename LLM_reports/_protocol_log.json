@@ -1,0 +1,566 @@
+{
+  "1": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The cohort shows a predominantly medium-sized, cytoplasm-rich pattern, with strongly dominant coarse nuclear chromatin and predominantly inconspicuous nucleoli producing a relatively condensed nuclear appearance. Abundant cytoplasm with uniformly slight basophilia and absent vacuolation argues against a deeply basophilic, vacuolated morphologic pattern. Nuclear contours are variable, with regular contours only weakly dominant, so nuclear shape is less consistent than chromatin texture or cytoplasmic staining.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "2": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a highly consistent pattern of medium size, irregular nuclear contours, and coarse nuclear chromatin, with predominantly inconspicuous nucleoli producing a relatively condensed rather than open, nucleolated nuclear appearance. Scant cytoplasm is only weakly dominant, indicating less uniformity in cytoplasmic volume than in the principal nuclear features. Uniformly slight cytoplasmic basophilia and the strong predominance of absent vacuolation argue against a deeply basophilic, conspicuously vacuolated morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "3": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a consistent immature nuclear pattern, with near-uniform open chromatin and irregular contours despite uniformly inconspicuous nucleoli. Predominantly medium cell size and scant cytoplasm support a relatively compact morphology, although cytoplasmic volume is less uniform than the nuclear features. Uniformly slight cytoplasmic basophilia and absent vacuolation establish a consistent cytoplasmic pattern without marked basophilic or vacuolated differentiation.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "4": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows nearly uniform coarse nuclear chromatin and scant cytoplasm with uniformly inconspicuous nucleoli, indicating a relatively condensed rather than open-chromatin, nucleolated pattern. Cell size is variable, with medium size only weakly dominant over small cells. Irregular nuclear contours predominate but are less consistent than the chromatin and cytoplasmic features. Uniformly slight cytoplasmic basophilia and absent vacuolation reinforce a scant, nonvacuolated cytoplasmic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "5": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a strongly predominant small-cell pattern with nearly uniform scant cytoplasm and open nuclear chromatin, supporting an immature appearance despite inconspicuous nucleoli. Irregular nuclear contours are strongly predominant, whereas the chromatin and cytoplasmic features are more uniformly expressed. Uniformly slight cytoplasmic basophilia and absent vacuolation further characterize a restrained cytoplasmic pattern rather than one with conspicuous cytoplasmic differentiation.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "6": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows uniformly open nuclear chromatin with nearly uniform contour irregularity, supporting an immature nuclear pattern despite consistently inconspicuous nucleoli. Predominantly scant cytoplasm, uniformly slight basophilia, and absent vacuolation define a relatively restrained cytoplasmic phenotype. Cell size is less uniform than the nuclear features, with medium size only weakly dominant and a substantial small-cell component.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "7": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a strongly predominant medium-sized, scant-cytoplasm pattern with frequent nuclear contour irregularity. Uniformly coarse nuclear chromatin and predominantly inconspicuous nucleoli create a relatively condensed nuclear appearance rather than an overtly nucleolated blast pattern. Uniformly slight cytoplasmic basophilia and absent vacuolation argue against a deeply basophilic, vacuolated morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "8": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a predominantly medium-sized, scant-cytoplasm pattern with uniform nuclear contour irregularity and slight cytoplasmic basophilia. Near-uniform coarse nuclear chromatin and inconspicuous nucleoli establish a condensed, nucleolarly inconspicuous nuclear pattern rather than an open-chromatin, prominent-nucleolar appearance. Cytoplasmic vacuolation is predominantly absent but prominent in 25.68%, indicating cytoplasmic heterogeneity despite the highly consistent nuclear features.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "9": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows uniformly open nuclear chromatin with nearly uniform contour irregularity, supporting an immature nuclear pattern despite consistently inconspicuous nucleoli. Cell size is variable, with small cells only weakly dominant rather than defining a uniform small-cell pattern. Strongly predominant scant cytoplasm, uniformly slight basophilia, and absent vacuolation establish a relatively consistent cytoplasmic pattern despite the size variation.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "10": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a highly uniform pattern of medium-sized cells with irregular nuclear contours and open nuclear chromatin, supporting morphologic immaturity despite uniformly inconspicuous nucleoli. Cytoplasm is overwhelmingly scant and uniformly slightly basophilic, reinforcing the relatively spare cytoplasmic appearance. The near-universal absence of vacuolation argues against a conspicuously vacuolated morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "11": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows variable small-to-medium cell size, with only weak predominance of small cells rather than a uniformly small-cell pattern. Uniformly open nuclear chromatin and irregular nuclear contours support an immature nuclear pattern despite consistently inconspicuous nucleoli. Predominantly scant cytoplasm, with uniform slight basophilia and absence of vacuolation, establishes a relatively consistent cytoplasmic pattern despite the size variation.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "12": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The monoblast cohort shows a highly uniform immature nuclear pattern, with open chromatin and prominent nucleoli throughout despite abundant cytoplasm. Uniformly irregular nuclear contours combined with abundant, moderately basophilic cytoplasm support a monocytic morphologic pattern. Cell size is strongly predominantly medium, and the consistent absence of cytoplasmic vacuolation does not detract from the integrated nuclear and cytoplasmic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "13": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a predominantly small-cell pattern with strongly predominant scant cytoplasm and uniformly irregular nuclear contours. Nearly uniform open nuclear chromatin supports morphologic immaturity despite uniformly inconspicuous nucleoli and predominantly small cell size. Uniformly slight cytoplasmic basophilia and absent vacuolation further characterize a restrained cytoplasmic pattern rather than a deeply basophilic, vacuolated appearance.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "14": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a strongly predominant small-cell pattern with nearly uniform scant cytoplasm and uniform nuclear irregularity. Uniformly open nuclear chromatin supports morphologic immaturity despite the small cell size and inconspicuous nucleoli. Uniform slight cytoplasmic basophilia and absent vacuolation further characterize a relatively consistent, cytoplasm-poor pattern rather than a deeply basophilic, vacuolated appearance.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "15": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The monoblast cohort is predominantly medium-sized and shows uniformly open nuclear chromatin with prominent nucleoli, supporting a consistent pattern of nuclear immaturity. Uniformly irregular nuclear contours coexist with abundant, moderately basophilic cytoplasm, indicating that the immature nuclear pattern is not accompanied by scant cytoplasm. Prominent cytoplasmic vacuolation is variably expressed and not strongly dominant, rather than a defining feature throughout the cohort.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "16": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a highly consistent immature nuclear pattern, with uniformly open chromatin, prominent nucleoli, and irregular nuclear contours. Nearly uniform medium cell size and consistently abundant, moderately basophilic cytoplasm characterize cytoplasm-rich blasts rather than a scant-cytoplasm pattern. Cytoplasmic vacuolation is almost entirely absent and is not a defining feature of this cohort.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "17": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a uniform pattern of medium-sized cells with irregular nuclear contours, open chromatin, and prominent nucleoli, supporting nuclear immaturity. Abundant, moderately basophilic cytoplasm accompanies this immature nuclear pattern, rather than a scant-cytoplasm morphology. The consistent absence of cytoplasmic vacuolation further defines the observed pattern but does not establish a specific disease category.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "18": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort is predominantly medium-sized, with uniformly coarse nuclear chromatin and inconspicuous nucleoli producing a condensed nuclear appearance despite consistently irregular nuclear contours. Scant cytoplasm predominates, but the documented abundant-cytoplasm subset indicates greater variation in cytoplasmic volume than in nuclear features. Uniformly slight cytoplasmic basophilia and absent vacuolation argue against a strongly basophilic, vacuolated morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "19": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a highly consistent immature nuclear pattern, with uniformly open chromatin, prominent nucleoli, and irregular nuclear contours. Nearly uniform medium cell size and abundant cytoplasm establish a cytoplasm-rich blast morphology despite the immature nuclear features. Uniform moderate cytoplasmic basophilia and absent vacuolation further characterize this cohesive morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "20": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a predominantly small-cell, scant-cytoplasm pattern, with greater consistency of nuclear features than cell size. Nearly uniform open nuclear chromatin supports an immature appearance despite uniformly inconspicuous nucleoli, while irregular nuclear contours are constant. Uniformly slight cytoplasmic basophilia and near-universal absence of vacuolation reinforce a relatively sparse cytoplasmic phenotype.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "21": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The atypical lymphocyte cohort shows a highly uniform pattern of medium cell size and irregular nuclear contours, with consistently abundant, slightly basophilic cytoplasm. Uniformly coarse nuclear chromatin and inconspicuous nucleoli argue against a blast-like or prominent-nucleolar pattern despite the nuclear contour abnormalities. The combination of nuclear irregularity with abundant cytoplasm characterizes the atypia without establishing a specific lymphoid entity.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "22": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin, prominent nucleoli, and irregular nuclear contours, supporting a consistent pattern of nuclear immaturity. Cell size is variable, with medium cells only weakly predominant over large cells. Nearly universal abundant cytoplasm contrasts with the immature nuclear features, indicating that nuclear immaturity is not accompanied by cytoplasmic paucity. Uniform moderate cytoplasmic basophilia and absence of vacuolation further define a consistent cytoplasmic phenotype despite the size variation.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "23": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The abnormal promyelocyte cohort shows a highly uniform pattern of medium cell size, irregular nuclear contours, and abundant, moderately basophilic cytoplasm without vacuolation. Nearly universal open nuclear chromatin together with strongly predominant prominent nucleoli supports nuclear immaturity despite the abundant cytoplasm. This combination characterizes an immature-cell pattern with substantial cytoplasmic development rather than a scant-cytoplasm morphology.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "24": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a strongly expressed immature nuclear pattern, combining uniformly open chromatin and irregular nuclear contours with predominantly prominent nucleoli. Nearly universal abundant, moderately basophilic cytoplasm accompanies this nuclear immaturity, rather than a scant-cytoplasm blast pattern; cytoplasmic vacuolation is uniformly absent. Medium cell size predominates less strongly than the nuclear and cytoplasmic attributes, indicating size variation within an otherwise morphologically consistent cohort.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "25": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a strongly predominant medium cell size, uniformly open nuclear chromatin and irregular nuclear contours, with nearly universal prominent nucleoli, supporting an immature nuclear pattern. Cytoplasmic abundance is variably expressed and not strongly dominant, contrasting with the highly consistent nuclear features. Uniform moderate cytoplasmic basophilia and absent vacuolation further characterize the cohort but do not establish a specific line of differentiation.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "27": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a cohesive immature nuclear pattern, with uniformly open chromatin and irregular contours accompanied by nearly universal prominent nucleoli. Predominantly medium cell size and abundant, moderately basophilic cytoplasm indicate that nuclear immaturity is not accompanied by uniformly scant cytoplasm. Cell size and cytoplasmic abundance are less uniform than the nuclear features, while cytoplasmic vacuolation is consistently absent.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "28": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin with predominantly prominent nucleoli, supporting an immature nuclear pattern despite predominantly abundant cytoplasm. Nuclear irregularity is nearly universal, whereas medium cell size, nucleolar prominence, and cytoplasmic abundance are strong but less uniform features. Uniform moderate cytoplasmic basophilia and absent vacuolation establish a consistent cytoplasmic pattern across the cohort.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "29": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a predominantly small-cell pattern with uniformly scant, slightly basophilic cytoplasm. Strongly predominant open nuclear chromatin and irregular nuclear contours support nuclear immaturity despite uniformly inconspicuous nucleoli. The combination of small cell size and inconspicuous nucleoli therefore does not indicate a mature lymphoid pattern; uniformly absent vacuolation further characterizes the cytoplasmic phenotype.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "30": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a cohesive immature nuclear pattern, with uniformly open chromatin and strongly predominant prominent nucleoli and irregular nuclear contours in predominantly medium-sized cells. Cytoplasmic abundance is only weakly dominant, indicating variable cytoplasmic volume despite the consistent nuclear immaturity. Moderate cytoplasmic basophilia is strongly predominant and vacuolation is uniformly absent, completing a relatively consistent cytoplasmic staining pattern despite variation in volume.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "31": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a consistent immature nuclear pattern, with uniformly open chromatin, prominent nucleoli, and irregular nuclear contours in predominantly medium-sized cells. Abundant cytoplasm predominates but is less uniform than the nuclear features, indicating variation in cytoplasmic volume despite a shared immature nuclear appearance. Uniform moderate cytoplasmic basophilia and absent vacuolation further characterize the cohort without establishing a specific disease category.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "32": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The atypical lymphocyte cohort shows predominantly medium-sized cells with nearly uniform nuclear contour irregularity, indicating a consistent nuclear pattern despite variation in cell size. Uniformly coarse nuclear chromatin and inconspicuous nucleoli argue against a blast-like or prominent-nucleolus pattern. Cytoplasmic abundance is variably expressed and not strongly dominant, whereas slight basophilia and absence of vacuolation are uniform.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "33": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin, prominent nucleoli, and irregular nuclear contours, supporting a consistent pattern of nuclear immaturity. Nearly universal abundant cytoplasm with uniform moderate basophilia demonstrates that this immature nuclear pattern is not accompanied by cytoplasmic paucity. Cell size is variable, with medium size only weakly dominant, contrasting with the uniform nuclear features. Cytoplasmic vacuolation is uniformly absent.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "34": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin and prominent nucleoli, supporting a consistent pattern of nuclear immaturity despite abundant cytoplasm. Uniform medium cell size contrasts with less uniform, although predominantly irregular, nuclear contours. Cytoplasmic basophilia is predominantly moderate, and the uniformly abundant, nonvacuolated cytoplasm establishes a cytoplasm-rich blast morphology.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "35": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows a strongly predominant medium-sized, scant-cytoplasm pattern with uniformly irregular nuclear contours. Nearly uniform open nuclear chromatin supports morphologic immaturity despite consistently inconspicuous nucleoli. Uniformly slight cytoplasmic basophilia and absent vacuolation, together with scant cytoplasm, argue against a deeply basophilic, vacuolated morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "36": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The promonocyte cohort shows uniformly open nuclear chromatin, prominent nucleoli, and irregular nuclear contours, supporting an immature monocytic morphologic pattern. Abundant, moderately basophilic cytoplasm is uniform, with strongly dominant prominent vacuolation providing a consistent cytoplasmic counterpart to the nuclear immaturity. Cell size is more variable, with medium size only weakly dominant over large cells despite the otherwise highly consistent nuclear and cytoplasmic attributes.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "37": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin, prominent nucleoli, and irregular nuclear contours, providing concordant evidence of nuclear immaturity. Predominantly medium cell size and abundant, consistently moderately basophilic cytoplasm establish a cytoplasm-rich blast pattern despite the immature nuclear features. Cytoplasmic vacuolation is uniformly absent, while nuclear features are more homogeneous than cell size or cytoplasmic abundance.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "38": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows uniformly open nuclear chromatin and irregular nuclear contours, supporting nuclear immaturity despite nearly uniformly inconspicuous nucleoli. Small cell size and scant cytoplasm predominate but are less uniform than the nuclear features. Uniformly slight cytoplasmic basophilia and absent vacuolation complement this predominantly small-cell, scant-cytoplasm pattern without establishing lineage.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "39": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a strongly conserved immature nuclear pattern, with uniformly open chromatin, nearly universal prominent nucleoli, and strongly predominant irregular nuclear contours. Predominantly medium cell size and consistently moderate cytoplasmic basophilia accompany this nuclear immaturity. Cytoplasmic volume is more variable, with scant cytoplasm only weakly dominant, whereas cytoplasmic vacuolation is uniformly absent.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "40": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The promonocyte cohort shows a cohesive pattern of uniformly irregular nuclei and abundant, moderately basophilic cytoplasm with prominent vacuolation. Strongly predominant open nuclear chromatin supports nuclear immaturity despite predominantly inconspicuous nucleoli. The combination of these nuclear features with abundant vacuolated cytoplasm supports immature monocytic morphology in a predominantly medium-sized cohort.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "41": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The lymphoblast cohort shows nearly uniform open nuclear chromatin with consistently irregular nuclear contours, supporting an immature nuclear pattern despite uniformly inconspicuous nucleoli. Medium cell size predominates, but cytoplasmic abundance is variably expressed and not strongly dominant, indicating that scant cytoplasm is not a defining feature of this cohort. Uniformly slight cytoplasmic basophilia and absent vacuolation establish a consistent cytoplasmic character despite variation in cytoplasmic volume.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "42": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin and prominent nucleoli, supporting a consistent pattern of nuclear immaturity despite predominantly abundant cytoplasm. Predominantly medium cell size and strongly prevalent irregular nuclear contours characterize the cohort, with uniform moderate cytoplasmic basophilia. The combination defines a cytoplasm-rich immature morphology rather than a scant-cytoplasm pattern, while the strong predominance of absent vacuolation argues against a conspicuously vacuolated phenotype.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "43": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a uniform immature nuclear pattern, with open chromatin, prominent nucleoli, and irregular nuclear contours throughout. Nearly uniform medium cell size and moderate cytoplasmic basophilia accompany predominantly abundant cytoplasm, indicating that nuclear immaturity is not coupled to uniformly scant cytoplasm. Cytoplasmic vacuolation is essentially absent and does not characterize the dominant morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "44": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort is nearly uniformly medium-sized, with uniformly open nuclear chromatin, prominent nucleoli, and irregular nuclear contours supporting an immature nuclear pattern. Cytoplasmic quantity is variable, with scant cytoplasm only weakly dominant, contrasting with the highly consistent nuclear features. Uniform moderate cytoplasmic basophilia and absent vacuolation further characterize the cohort but do not independently establish lineage or a specific disease entity.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "45": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows a uniform immature nuclear pattern, with open chromatin, prominent nucleoli, and irregular nuclear contours throughout. Nearly uniform medium size and moderate cytoplasmic basophilia contrast with less consistent cytoplasmic abundance, indicating greater variation in cytoplasmic volume than in nuclear morphology. Predominantly abundant cytoplasm does not detract from the nuclear evidence of immaturity, while the near-universal absence of vacuolation argues against a vacuolated morphologic pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "46": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The promonocyte cohort shows a highly uniform immature nuclear pattern, with open chromatin and prominent nucleoli throughout, coupled with consistently irregular nuclear contours. Nearly uniform medium cell size and uniformly abundant, moderately basophilic cytoplasm establish a coherent nuclear\u2013cytoplasmic pattern supportive of immature monocytic morphology. Prominent cytoplasmic vacuolation is strongly predominant but not universal, adding cytoplasmic heterogeneity to the otherwise uniform pattern.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "47": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin, prominent nucleoli, and irregular nuclear contours, supporting an immature nuclear pattern. Abundant, moderately basophilic cytoplasm is also uniform, demonstrating that nuclear immaturity is not accompanied by scant cytoplasm; vacuolation is consistently absent. Cell size is variable, with medium size only weakly dominant and small cells also represented, contrasting with the uniform nuclear and cytoplasmic features.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  },
+  "48": {
+    "enriched": true,
+    "attempts": 1,
+    "issues": [],
+    "section": "**Morphologic interpretation:** The myeloblast cohort shows uniformly open nuclear chromatin and prominent nucleoli, supporting a consistent pattern of nuclear immaturity with uniformly irregular nuclear contours. Strong predominance of medium-sized cells and abundant cytoplasm, together with uniform moderate basophilia, characterizes a relatively cytoplasm-rich blast morphology despite the immature nuclear features. Cytoplasmic vacuolation is largely absent and is not a defining feature of the cohort.",
+    "validation": {
+      "passed": true,
+      "parse_errors": [],
+      "consistency_issues": [],
+      "hallucination_issues": []
+    }
+  }
+}

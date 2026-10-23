@@ -4,12 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from .report_validation import (
-    classification_to_dict,
-    compare_report_to_findings_json,
-    evaluate_numerical_hallucination,
-    findings_to_det_agg,
-)
+
 
 
 @dataclass
@@ -20,6 +15,8 @@ class ValidationResult:
 
 
 class ReportConsistencyValidator:
+    """The predicted class appears in the Agentic Diagnosis appendix, not in the
+    impression, which is deliberately lineage-level."""
     def validate(self, state) -> ValidationResult:
         if state.report is None:
             return ValidationResult(False, "missing report")
@@ -29,6 +26,30 @@ class ReportConsistencyValidator:
                 "predicted class is not mentioned in report markdown",
             )
         return ValidationResult(True, "ok")
+
+class ProtocolReportValidator:
+    """Same validation as reference construction: template numbers against the record
+    (0.11 pp tolerance) and numeric containment of the LLM section. Runs on the report
+    body, before the pipeline appendices."""
+
+    def validate(self, state) -> ValidationResult:
+        if state.report is None or state.findings is None or not state.findings.case_record:
+            return ValidationResult(False, "missing report or protocol record")
+        info = state.report.protocol_info.get("validation")
+        if info is None:
+            from data_preprocessing.report_protocol import validate
+            r = validate(state.case_id, state.findings.case_record, state.report.protocol_markdown)
+            info = {
+                "passed": r.passed,
+                "parse_errors": r.parse_errors,
+                "consistency_issues": r.consistency_issues,
+                "hallucination_issues": r.hallucination_issues,
+            }
+        if info["passed"]:
+            return ValidationResult(True, "ok", details=info)
+        issues = info["parse_errors"] + info["consistency_issues"] + info["hallucination_issues"]
+        return ValidationResult(False, "; ".join(issues[:4]), details=info)
+
 
 
 class LLMOutputValidator:
@@ -44,51 +65,5 @@ class LLMOutputValidator:
         return ValidationResult(True, "ok")
 
 
-class TemplateJsonConsistencyValidator:
-    """Verify report numbers match findings.report_ready / aggregation JSON."""
-
-    def validate(self, state) -> ValidationResult:
-        if state.report is None:
-            return ValidationResult(False, "missing report")
-        if state.findings is None:
-            return ValidationResult(False, "missing findings for JSON cross-check")
-
-        result = compare_report_to_findings_json(
-            state.report.markdown,
-            state.findings,
-        )
-        if result["passed"]:
-            return ValidationResult(True, "ok", details=result)
-        msg = "; ".join(result["mismatches"][:4])
-        if len(result["mismatches"]) > 4:
-            msg += f" (+{len(result['mismatches']) - 4} more)"
-        return ValidationResult(False, msg, details=result)
 
 
-class NumericalHallucinationValidator:
-    """Screen numeric claims in the report body against pipeline JSON evidence."""
-
-    def validate(self, state) -> ValidationResult:
-        if state.report is None:
-            return ValidationResult(False, "missing report")
-        if state.findings is None:
-            return ValidationResult(False, "missing findings for evidence pool")
-
-        det_agg = findings_to_det_agg(state.findings)
-        clf = classification_to_dict(state.classification)
-        hall = evaluate_numerical_hallucination(
-            state.report.markdown,
-            det_agg,
-            clf,
-        )
-        if hall["n_untraceable"] == 0:
-            return ValidationResult(True, "ok", details=hall)
-
-        examples = hall.get("untraceable_examples") or []
-        msg = (
-            f"{hall['n_untraceable']}/{hall['n_claims']} numeric claims untraceable "
-            f"(rate={hall['hallucination_rate']})"
-        )
-        if examples:
-            msg += f"; e.g. {examples[0]}"
-        return ValidationResult(False, msg, details=hall)

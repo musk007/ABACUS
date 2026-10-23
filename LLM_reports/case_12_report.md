@@ -14,16 +14,16 @@
 
 **Cohort morphology (n = 337 monoblasts):** predominantly medium cells (95.2%) with abundant (100.0%), moderately basophilic (100.0%) cytoplasm and absent cytoplasmic vacuolation (100.0%); nuclei show open chromatin (100.0%), irregular contours (100.0%), and prominent nucleoli (100.0%).
 
-**Morphologic interpretation:** The monoblast cohort is morphologically cohesive, with medium cell size, open nuclear chromatin, irregular nuclear contours, prominent nucleoli, and abundant moderately basophilic cytoplasm. The combination of prominent nucleoli, open chromatin, irregular nuclei, and ample cytoplasm is supportive of an immature monocytic blast population. No clinically meaningful cytoplasmic vacuolation or major attribute heterogeneity is evident within the reported blast cohort.
+**Morphologic interpretation:** The monoblast cohort shows a highly uniform immature nuclear pattern, with open chromatin and prominent nucleoli throughout despite abundant cytoplasm. Uniformly irregular nuclear contours combined with abundant, moderately basophilic cytoplasm support a monocytic morphologic pattern. Cell size is strongly predominantly medium, and the consistent absence of cytoplasmic vacuolation does not detract from the integrated nuclear and cytoplasmic pattern.
 
 **Diagnostic flags:** blasts present; blast threshold met.
 
-**Impression:** Acute Myeloid Leukemia with monocytic differentiation (AML-M5 / acute monoblastic or monocytic leukemia, suspected).
+**Impression:** Findings consistent with an acute leukaemia showing monocytic differentiation. Definitive classification requires clinical correlation and ancillary studies.
 
-Monoblasts comprise 91.1% of WBCs with prominent nucleoli and abundant moderately basophilic cytoplasm, consistent with a monocytic-lineage acute leukemia.
+Monoblasts comprise 90.6% of WBCs (blast-equivalent burden of 91.1%), consistent with a monocytic-lineage acute leukaemia.
 
 **Differential considerations:**
-- Acute myelomonocytic leukemia (AML-M4).
+- Acute myelomonocytic leukaemia.
 - AML with KMT2A rearrangement (frequently monocytic).
 - Blastic plasmacytoid dendritic cell neoplasm (excluded by immunophenotyping).
 
@@ -34,7 +34,9 @@ Monoblasts comprise 91.1% of WBCs with prominent nucleoli and abundant moderatel
 - Cytogenetics and FISH including KMT2A (11q23) rearrangements.
 - Molecular panel including NPM1, FLT3-ITD/TKD, and AML fusion screen.
 
-**QC:** 88 FOVs; 372/412 cells classifiable (9.7% artefact); cohort cell count = 337; global canvas stitching inactive.
+**QC:** 88 FOVs; 372/412 cells classifiable (9.7% artefact); cohort cell count = 337.
+
+**Not assessed:** erythrocyte and platelet morphology, dysplastic features, smear staining quality, and whether fields originate from the optimal monolayer zone. Findings are based on leukocyte morphology only.
 
 ---
 *Automated multi-image peripheral blood smear analysis. Findings are intended to support — not replace — review by a board-certified hematopathologist.*

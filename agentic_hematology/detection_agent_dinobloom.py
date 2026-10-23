@@ -22,7 +22,14 @@ from PIL import Image
 from torchvision import transforms
 
 from .detection_agent import LLD_CLASSES
-from .detection_agent_v2 import ATTRIBUTE_ORDER, EfficientNetAttributeClassifier, _resolve_device
+from .detection_agent_v2 import (
+    ATTRIBUTE_ORDER,
+    BINARY_ATTRIBUTE_ORDER,
+    CELL_SIZE_ATTR,
+    CELL_SIZE_STATES,
+    EfficientNetAttributeClassifier,
+    _resolve_device,
+)
 
 LLD_CLASS_TO_IDX = {name: idx for idx, name in enumerate(LLD_CLASSES)}
 
@@ -138,12 +145,18 @@ class DinoBloomKNNAttributePredictor:
             self._bank_emb = data["embeddings"].astype(np.float32)
             self._bank_y = data["labels"].astype(np.int8)
             self._bank_valid = data["valid"].astype(bool)
+            self._bank_size = data["size_labels"].astype(np.int8)
         else:
             logger.info("Building DinoBloom k-NN bank from %s split=%s (one-time cache)...", manifest, train_split)
             rows = _load_manifest_rows(manifest, train_split)
             if not rows:
                 raise ValueError(f"No train rows in manifest {manifest}")
-            self._bank_emb, self._bank_y, self._bank_valid = self._embed_manifest_rows(rows, embed_batch, pad)
+            (
+                self._bank_emb,
+                self._bank_y,
+                self._bank_valid,
+                self._bank_size,
+            ) = self._embed_manifest_rows(rows, embed_batch, pad)
             cache.parent.mkdir(parents=True, exist_ok=True)
             np.savez_compressed(
                 cache,
@@ -164,10 +177,12 @@ class DinoBloomKNNAttributePredictor:
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
         n = len(rows)
         d = self.embedder.embed_dim
-        a = len(ATTRIBUTE_ORDER)
+        a = len(BINARY_ATTRIBUTE_ORDER)
         embeddings = np.zeros((n, d), dtype=np.float32)
         labels = np.full((n, a), -1, dtype=np.int8)
         valid = np.zeros((n, a), dtype=bool)
+        size_labels = np.full(n, -1, dtype=np.int8)
+
 
         batch_crops: List[Image.Image] = []
         batch_idx: List[int] = []
@@ -184,15 +199,18 @@ class DinoBloomKNNAttributePredictor:
         for i, row in enumerate(rows):
             batch_crops.append(_crop_from_manifest_row(row, DINOBLOOM_INPUT_SIZE, pad))
             batch_idx.append(i)
-            for j, name in enumerate(ATTRIBUTE_ORDER):
+            for j, name in enumerate(BINARY_ATTRIBUTE_ORDER):
                 v = int(row[name])
                 if v in (0, 1):
                     labels[i, j] = v
                     valid[i, j] = True
+            sv = int(row[CELL_SIZE_ATTR])
+            if 0 <= sv < len(CELL_SIZE_STATES):
+                size_labels[i] = sv
             if len(batch_crops) >= batch:
                 flush()
         flush()
-        return embeddings, labels, valid
+        return embeddings, labels, valid, size_labels
 
     def predict(self, embeddings: np.ndarray) -> Tuple[List[Dict[str, float]], List[Dict[str, float]]]:
         if len(embeddings) == 0:
@@ -207,19 +225,20 @@ class DinoBloomKNNAttributePredictor:
             row_attrs: Dict[str, float] = {}
             row_probs: Dict[str, float] = {}
             order = np.argsort(-sims[i])
-            for j, name in enumerate(ATTRIBUTE_ORDER):
-                picked: List[int] = []
+            for j, name in enumerate(BINARY_ATTRIBUTE_ORDER):
+                size_picked: List[int] = []
                 for idx in order:
-                    if self._bank_valid[idx, j]:
-                        picked.append(int(self._bank_y[idx, j]))
-                    if len(picked) >= self.k:
+                    if self._bank_size[idx] >= 0:
+                        size_picked.append(int(self._bank_size[idx]))
+                    if len(size_picked) >= self.k:
                         break
-                if picked:
-                    prob = float(np.mean(picked))
-                else:
-                    prob = 0.0
-                row_attrs[name] = prob
-                row_probs[name] = prob
+                counts = np.bincount(size_picked, minlength=len(CELL_SIZE_STATES)) if size_picked else None
+                for k_i, state in enumerate(CELL_SIZE_STATES):
+                    p = float(counts[k_i] / len(size_picked)) if size_picked else 0.0
+                    row_attrs[f"{CELL_SIZE_ATTR}_{state}"] = p
+                    row_probs[f"{CELL_SIZE_ATTR}_{state}"] = p
+                row_attrs[CELL_SIZE_ATTR] = float(int(np.argmax(counts)) if size_picked else 0)
+                row_probs[CELL_SIZE_ATTR] = row_attrs[CELL_SIZE_ATTR]
             attrs.append(row_attrs)
             attr_probs.append(row_probs)
         return attrs, attr_probs
@@ -443,7 +462,7 @@ class DinoBloomAttributeClassifier:
                 self._torch_head = ckpt.eval().to(self.device)
             elif isinstance(ckpt, dict) and "model" in ckpt:
                 in_dim = ckpt.get("embed_dim", self.embedder.embed_dim)
-                out_dim = ckpt.get("num_attrs", len(ATTRIBUTE_ORDER))
+                out_dim = ckpt.get("num_attrs", len(BINARY_ATTRIBUTE_ORDER) + 3)
                 head = build_dinobloom_attribute_head(in_dim, out_dim)
                 head.load_state_dict(ckpt["model"])
                 self._torch_head = head.eval().to(self.device)
@@ -464,9 +483,14 @@ class DinoBloomAttributeClassifier:
             x = torch.from_numpy(embeddings).to(self.device)
             with torch.inference_mode():
                 logits = self._torch_head(x)
-                probs = torch.sigmoid(logits).cpu().numpy()
+                nb = len(BINARY_ATTRIBUTE_ORDER)
+                bin_probs = torch.sigmoid(logits[:, :nb]).cpu().numpy()
+                size_probs = torch.softmax(logits[:, nb:], dim=1).cpu().numpy()
             for i in range(n):
-                row = {name: float(probs[i, j]) for j, name in enumerate(ATTRIBUTE_ORDER)}
+                row = {name: float(bin_probs[i, j]) for j, name in enumerate(BINARY_ATTRIBUTE_ORDER)}
+                for k, state in enumerate(CELL_SIZE_STATES):
+                    row[f"{CELL_SIZE_ATTR}_{state}"] = float(size_probs[i, k])
+                row[CELL_SIZE_ATTR] = float(size_probs[i].argmax())
                 attrs.append(dict(row))
                 attr_probs.append(dict(row))
             return attrs, attr_probs
@@ -475,7 +499,7 @@ class DinoBloomAttributeClassifier:
             row_attrs: Dict[str, float] = {}
             row_probs: Dict[str, float] = {}
             emb = embeddings[i : i + 1]
-            for name in ATTRIBUTE_ORDER:
+            for name in BINARY_ATTRIBUTE_ORDER:
                 clf = self._probes.get(name)
                 if clf is None:
                     row_attrs[name] = 0.0
@@ -488,6 +512,12 @@ class DinoBloomAttributeClassifier:
                     prob_pos = pred
                 row_attrs[name] = prob_pos
                 row_probs[name] = prob_pos
+            for state in CELL_SIZE_STATES:
+                row_attrs[f"{CELL_SIZE_ATTR}_{state}"] = 0.0
+                row_probs[f"{CELL_SIZE_ATTR}_{state}"] = 0.0
+            row_attrs[CELL_SIZE_ATTR] = 0.0
+            row_probs[CELL_SIZE_ATTR] = 0.0
+            
             attrs.append(row_attrs)
             attr_probs.append(row_probs)
         return attrs, attr_probs
@@ -641,15 +671,13 @@ class DinoBloomCellClassifier:
             x = torch.from_numpy(embeddings).to(self.device)
             with torch.inference_mode():
                 logits = self._torch_head(x)
-                prob = torch.softmax(logits, dim=-1)
-                pred = prob.argmax(dim=-1).cpu().numpy()
-                confidences = prob.max(dim=-1).values.cpu().numpy().tolist()
-            labels = []
-            for idx in pred:
-                if self._class_names and 0 <= int(idx) < len(self._class_names):
-                    labels.append(self._class_names[int(idx)])
-                else:
-                    labels.append(LLD_CLASSES[int(idx) % len(LLD_CLASSES)])
+                probs = torch.softmax(logits, dim=1).cpu().numpy()
+            idx = probs.argmax(axis=1)
+            labels = [
+                self._class_names[i] if i < len(self._class_names) else str(i)
+                for i in idx
+            ]
+            confidences = probs.max(axis=1).tolist()
             return self._map_to_lld(labels, confidences, yolo_types)
 
         if self.fallback_to_yolo_type:

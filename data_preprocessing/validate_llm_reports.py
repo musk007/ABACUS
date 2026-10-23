@@ -41,14 +41,7 @@ PCT_TOLERANCE = 0.11   # one-decimal-place rounding wiggle room
 NUM_TOL = 0.06         # float-comparison tolerance for hallucination check
 
 # Numbers always allowed in LLM output even if not in the inputs.
-DEFAULT_WHITELIST: set[float] = {
-    20.0,     # WHO/ICC blast threshold
-    10.0,     # CML accelerated phase
-    5.0,      # lymphocytosis threshold
-    2.0,      # basophilia threshold
-    1.0, 3.0, 4.0, 6.0, 7.0,   # FAB indices
-    2022.0,   # WHO 5th ed.
-}
+DEFAULT_WHITELIST: set[float] = {20.0, 10.0, 5.0, 2.0, 65.0}   # must match report_protocol.NUMERIC_WHITELIST
 
 CELL_TYPE_MAP = {
     "Lymphoblasts": "lymphoblast",
@@ -111,6 +104,7 @@ class Result:
     consistency_issues: list[str] = field(default_factory=list)
     hallucination_issues: list[str] = field(default_factory=list)
     parse_errors: list[str] = field(default_factory=list)
+    label_qc: list[str] = field(default_factory=list)   # impression vs dataset label; not a failure
 
 
 # ---------------------------------------------------------------------------
@@ -166,21 +160,23 @@ def parse_report(text: str) -> tuple[dict[str, Any], str, list[str]]:
     m = re.search(r"\*\*Impression:\*\*\s*(.+?)\.", text)
     parsed["impression"] = m.group(1).strip() if m else None
 
-    # Blast-burden sentence — accept multiple phrasings.
-    m = re.search(
-        r"(?:Lymphoblasts?|Myeloblasts?|Monoblasts?|Abnormal promyelocytes?|Blasts?)\s+"
-        r"(?:comprise|burden is|comprises)\s*([\d.]+)%", text,
-    )
-    parsed["dominant_blast_pct"] = float(m.group(1)) if m else None
+    # Blast-equivalent burden (the template always uses this phrase).
+    m = re.search(r"blast-equivalent burden(?: of| is)?\s*([\d.]+)%", text)
+    parsed["blast_pool_pct"] = float(m.group(1)) if m else None
 
-    # Optional "total blast-equivalent burden N%"
-    m = re.search(r"total blast-equivalent burden\s*([\d.]+)%", text)
-    parsed["blast_pool_pct"] = float(m.group(1)) if m else parsed.get("dominant_blast_pct")
+    # "<Cell type>s comprise N% of WBCs" -> checked against that cell type's own percentage.
+    parsed["comprise"] = {}
+    for label, pct in re.findall(
+        r"(Lymphoblasts|Myeloblasts|Monoblasts|Abnormal promyelocytes)\s+comprise\s*([\d.]+)%", text
+    ):
+        key = _LABEL_LOOKUP.get(label.lower())
+        if key:
+            parsed["comprise"][key] = float(pct)
 
     # QC line
     m = re.search(
         r"\*\*QC:\*\*\s*(\d+)\s*FOVs;\s*(\d+)/(\d+)\s*cells classifiable\s*"
-        r"\(([\d.]+)%\s*artefact\);\s*cohort cell count\s*=\s*(\d+);",
+        r"\(([\d.]+)%\s*artefact\);\s*cohort cell count\s*=\s*(\d+)[;.]",
         text,
     )
     if m:
@@ -246,6 +242,10 @@ def compare_case(parsed: dict[str, Any], case: dict[str, Any]) -> list[str]:
 
     # Differential percentages
     clinical = {k.lower(): v for k, v in case.get("cell_percentages_clinical", {}).items()}
+    for cell, report_pct in parsed.get("comprise", {}).items():
+        expected = round(float(clinical.get(cell, 0.0)), 1)
+        if abs(report_pct - expected) > PCT_TOLERANCE:
+            issues.append(f"rationale {cell}: report={report_pct}, json={expected}")
     for cell, report_pct in parsed.get("differential", {}).items():
         if cell.lower() not in clinical:
             issues.append(f"differential {cell!r} missing in json")
@@ -261,7 +261,7 @@ def compare_case(parsed: dict[str, Any], case: dict[str, Any]) -> list[str]:
         aliases = DIAGNOSIS_ALIASES.get(diag, [diag])
         lower = impression.lower()
         if not any(a.lower() in lower for a in aliases):
-            issues.append(f"impression mismatch: report={impression!r}, json={diag!r}")
+            issues.append(f"LABEL_QC impression mismatch: report={impression!r}, json={diag!r}")
 
     return issues
 
@@ -327,7 +327,9 @@ def validate_one(case_id: str, case: dict[str, Any], report_text: str) -> Result
     parsed, llm_section, parse_errors = parse_report(report_text)
     r = Result(case_id=case_id, parse_errors=parse_errors)
 
-    r.consistency_issues = compare_case(parsed, case)
+    issues = compare_case(parsed, case)
+    r.label_qc = [i for i in issues if i.startswith("LABEL_QC")]
+    r.consistency_issues = [i for i in issues if not i.startswith("LABEL_QC")]
 
     if llm_section:
         # Exclude the LLM section itself from the source-of-truth text;

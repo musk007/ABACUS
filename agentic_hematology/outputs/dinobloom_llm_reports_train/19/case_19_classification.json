@@ -1,6 +1,0 @@
-{
-  "patient_id": "19",
-  "predicted_class": "AML",
-  "confidence": 0.9999,
-  "rationale": "learned classifier prediction from detection-derived features"
-}

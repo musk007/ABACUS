@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""Train attribute classifier on GT cell crops (EfficientNet-B0)."""
 from __future__ import annotations
+"""Train attribute classifier on GT cell crops (EfficientNet-B0)."""
+"""
+VAL_PATIENTS = {"2", "3", "13", "38",      # ALL  — 365 cells (20.0%)
+                "17", "33", "37", "44"}    # AML  — 545 cells (20.0%)
+"""
 
 import argparse
 import json
@@ -20,11 +24,11 @@ from tqdm import tqdm
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
-from data.cell_dataset import CellAttributeDataset, compute_pos_weights  # noqa: E402
-from models.attribute_net import build_attribute_model, masked_bce_loss  # noqa: E402
-from utils.labels import ATTR_NAMES  # noqa: E402
-from utils.metrics import attribute_metrics  # noqa: E402
-
+from data.splits import N_FOLDS, test_patients_for_fold  
+from data.cell_dataset import CellAttributeDataset, compute_pos_weights, compute_size_class_weights  # noqa: E402
+from models.attribute_net import attribute_loss, build_attribute_model  # noqa: E402
+from utils.labels import BINARY_ATTRS, ATTR_NAMES  # noqa: E402
+from utils.metrics import attribute_metrics, cell_size_metrics  # noqa: E402
 
 def init_distributed() -> tuple[int, int, int, bool]:
     """Return (rank, local_rank, world_size, is_distributed)."""
@@ -48,19 +52,28 @@ def cleanup_distributed(is_distributed: bool) -> None:
 
 
 @torch.no_grad()
-def evaluate(model, loader, device, pos_weight):
+def evaluate(model, loader, device):
     model.eval()
-    ys, ps = [], []
-    for x, y, _ in loader:
-        x = x.to(device)
-        logits = model(x)
+    ys, ps, sz_t, sz_p = [], [], [], []
+    for x, y, s, _ in loader:
+        bin_logits, size_logits = model(x.to(device))
         ys.append(y.numpy())
-        ps.append(torch.sigmoid(logits).cpu().numpy())
+        ps.append(torch.sigmoid(bin_logits).cpu().numpy())
+        sz_t.append(s.numpy())
+        sz_p.append(size_logits.argmax(1).cpu().numpy())
     if not ys:
         return {}
-    y_true = np.concatenate(ys, axis=0)
-    y_pred = np.concatenate(ps, axis=0)
-    return attribute_metrics(y_true, y_pred, ATTR_NAMES)
+    m = attribute_metrics(np.concatenate(ys), np.concatenate(ps), BINARY_ATTRS)
+    size_m = cell_size_metrics(np.concatenate(sz_t), np.concatenate(sz_p))
+    if size_m:
+        m["Cell_Size"] = size_m
+    return m
+
+
+def mean_attr_f1(metrics: dict) -> float:
+    if not metrics:
+        return 0.0
+    return sum(m.get("f1", m.get("f1_macro", 0.0)) for m in metrics.values()) / len(metrics)
 
 
 def main() -> None:
@@ -76,7 +89,21 @@ def main() -> None:
     ap.add_argument("--backbone", type=str, default="efficientnet_b0", choices=["efficientnet_b0", "resnet18"])
     ap.add_argument("--project", type=Path, default=ROOT / "runs" / "attribute")
     ap.add_argument("--name", type=str, default="train")
+    ap.add_argument(
+        "--fold",
+        type=int,
+        default=None,
+        help=f"CV fold to hold out (0..{N_FOLDS - 1}). Omit for the final full-data run.",
+    )
+    ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
+
+    torch.manual_seed(args.seed)
+    np.random.seed(args.seed)
+
+    val_patients = test_patients_for_fold(args.fold) if args.fold is not None else frozenset()
+    is_cv = args.fold is not None
+    run_name = args.name or (f"cv_fold{args.fold}" if is_cv else "train")
 
     rank, local_rank, world_size, is_distributed = init_distributed()
     is_main = rank == 0
@@ -105,13 +132,21 @@ def main() -> None:
         if is_main:
             print(f"Capped dataloader workers to {args.workers}/GPU ({args.workers * world_size} total)")
 
-    train_ds = CellAttributeDataset(manifest, "train", imgsz=args.imgsz)
-    val_ds = CellAttributeDataset(manifest, "test", imgsz=args.imgsz)
-    if is_main:
-        print(
-            f"Attribute train cells: {len(train_ds)}  val: {len(val_ds)}  "
-            f"world_size={world_size}  batch={args.batch} ({batch_per_gpu}/GPU)"
+    train_ds = CellAttributeDataset(manifest, "train", imgsz=args.imgsz, fold=args.fold)
+    val_loader = None
+    if is_cv:
+        val_ds = CellAttributeDataset(manifest, "test", imgsz=args.imgsz, fold=args.fold)
+        val_loader = DataLoader(
+            val_ds, batch_size=batch_per_gpu, shuffle=False,
+            num_workers=args.workers, pin_memory=True,
         )
+    if is_main:
+        if is_cv:
+            print(f"CV fold {args.fold}: held-out patients {sorted(val_patients, key=int)}")
+            print(f"  train cells: {len(train_ds)}  val cells: {len(val_ds)}")
+        else:
+            print(f"FINAL run on all train patients: {len(train_ds)} cells, "
+                  f"{args.epochs} epochs, no held-out selection")
 
     train_sampler = DistributedSampler(train_ds, shuffle=True) if is_distributed else None
     train_loader = DataLoader(
@@ -121,21 +156,25 @@ def main() -> None:
         sampler=train_sampler,
         num_workers=args.workers,
         pin_memory=True,
-        drop_last=True,
-    )
-    val_loader = DataLoader(
-        val_ds, batch_size=batch_per_gpu, shuffle=False, num_workers=args.workers, pin_memory=True
+        drop_last=False,
     )
 
-    pos_weight = compute_pos_weights(manifest, "train").to(device)
-    model = build_attribute_model(num_attrs=len(ATTR_NAMES), backbone=args.backbone, pretrained=True).to(device)
+    # Weights come from this run's training subset only.
+    pos_weight = compute_pos_weights(manifest, "train", fold=args.fold).to(device)
+    size_weight = compute_size_class_weights(manifest, "train", fold=args.fold).to(device)
+    if is_main:
+        print(f"  pos_weight  {dict(zip(BINARY_ATTRS, [round(v, 3) for v in pos_weight.tolist()]))}")
+        print(f"  size_weight {[round(v, 3) for v in size_weight.tolist()]}  (small, medium, large)")
+
+    model = build_attribute_model(
+        num_binary=len(BINARY_ATTRS), num_size=3, backbone=args.backbone, pretrained=True
+    ).to(device)
     if is_distributed:
         model = DDP(model, device_ids=[local_rank], output_device=local_rank)
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=args.epochs)
 
-    best_f1 = -1.0
-    history = []
+    history: list[dict] = []
 
     for epoch in range(args.epochs):
         if train_sampler is not None:
@@ -144,11 +183,14 @@ def main() -> None:
         running = 0.0
         n_batches = 0
         pbar = tqdm(train_loader, desc=f"epoch {epoch+1}/{args.epochs}", leave=False, disable=not is_main)
-        for x, y, _ in pbar:
-            x, y = x.to(device), y.to(device)
+        for x, y, s, _ in pbar:
+            x, y, s = x.to(device), y.to(device), s.to(device)
             opt.zero_grad(set_to_none=True)
-            logits = model(x)
-            loss = masked_bce_loss(logits, y, pos_weight=pos_weight)
+            bin_logits, size_logits = model(x)
+            loss = attribute_loss(
+                bin_logits, y, size_logits, s,
+                pos_weight=pos_weight, size_weight=size_weight,
+            )
             loss.backward()
             nn.utils.clip_grad_norm_(model.parameters(), 5.0)
             opt.step()
@@ -157,32 +199,48 @@ def main() -> None:
         sched.step()
 
         eval_model = model.module if is_distributed else model
-        metrics = evaluate(eval_model, val_loader, device, pos_weight) if is_main else {}
-        mean_f1 = sum(m.get("f1", 0) for m in metrics.values()) / max(len(metrics), 1)
-        row = {"epoch": epoch + 1, "train_loss": running / max(n_batches, 1), "mean_attr_f1": mean_f1, "per_attr": metrics}
-        if is_main:
-            history.append(row)
-            print(f"epoch {epoch+1}: loss={row['train_loss']:.4f}  mean_attr_f1={mean_f1:.4f}")
-
-        state = eval_model.state_dict()
-        ckpt = {
-            "model": state,
-            "backbone": args.backbone,
-            "attr_names": ATTR_NAMES,
-            "imgsz": args.imgsz,
-            "pos_weight": pos_weight.cpu(),
+        metrics = evaluate(eval_model, val_loader, device) if (is_main and val_loader) else {}
+        row = {
             "epoch": epoch + 1,
-            "metrics": metrics,
+            "train_loss": running / max(n_batches, 1),
+            "mean_attr_f1": mean_attr_f1(metrics),
+            "per_attr": metrics,
         }
         if is_main:
-            torch.save(ckpt, save_dir / "last_attr.pt")
-            if mean_f1 >= best_f1:
-                best_f1 = mean_f1
-                torch.save(ckpt, save_dir / "best_attr.pt")
+            history.append(row)
+            if metrics:
+                per_attr = "  ".join(
+                    f"{k}={v.get('f1', v.get('f1_macro', 0)):.3f}" for k, v in metrics.items()
+                )
+                print(f"epoch {epoch+1}: loss={row['train_loss']:.4f}  "
+                      f"mean_attr_f1={row['mean_attr_f1']:.4f}  |  {per_attr}")
+            else:
+                print(f"epoch {epoch+1}: loss={row['train_loss']:.4f}")
 
+    # Only the final epoch is saved: in CV the weights are throwaway (we want
+    # the curve), and in the final run E* already came from cross-validation.
     if is_main:
-        (save_dir / "history.json").write_text(json.dumps(history, indent=2))
-        print(f"Best attribute weights: {save_dir / 'best_attr.pt'}  (mean_f1={best_f1:.4f})")
+        ckpt = {
+            "model": (model.module if is_distributed else model).state_dict(),
+            "backbone": args.backbone,
+            "attr_names": ATTR_NAMES,
+            "binary_attrs": BINARY_ATTRS,
+            "num_size": 3,
+            "imgsz": args.imgsz,
+            "pos_weight": pos_weight.cpu(),
+            "size_weight": size_weight.cpu(),
+            "fold": args.fold,
+            "val_patients": sorted(val_patients, key=int) if val_patients else [],
+            "epochs_trained": args.epochs,
+            "seed": args.seed,
+            "metrics": history[-1]["per_attr"] if history else {},
+        }
+        out_name = "best_attr.pt" if not is_cv else f"fold{args.fold}_attr.pt"
+        torch.save(ckpt, save_dir / out_name)
+        hist_name = f"history_fold{args.fold}.json" if is_cv else "history.json"
+        (save_dir / hist_name).write_text(json.dumps(history, indent=2))
+        print(f"Saved {save_dir / out_name} and {save_dir / hist_name}")
+
     cleanup_distributed(is_distributed)
 
 

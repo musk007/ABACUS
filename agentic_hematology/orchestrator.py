@@ -92,9 +92,8 @@ from .report_generator import BaseReportGenerator, TemplateReportGenerator
 from .schemas import AggregatedFindings, DetectionResult, PipelineState
 from .validators import (
     LLMOutputValidator,
-    NumericalHallucinationValidator,
+    ProtocolReportValidator,
     ReportConsistencyValidator,
-    TemplateJsonConsistencyValidator,
 )
 
 VALID_TOOLS = {
@@ -106,6 +105,34 @@ VALID_TOOLS = {
                 "validate",
                 "explain",
             }
+
+# ---------------------------------------------------------------------------
+# Lineage guard: deterministic post-report consistency check
+# ---------------------------------------------------------------------------
+MYELOID_SUBTYPES = {"AML", "APML", "CML"}
+LYMPHOID_SUBTYPES = {"ALL", "CLL"}
+_COHORT_RE = re.compile(r"\*\*Cohort morphology \(n = \d+ ([^)]+?)\):\*\*")
+
+
+def lineage_conflict(state: PipelineState) -> str | None:
+    """Reason string if the predicted subtype's lineage contradicts the report's cohort, else None."""
+    if state.classification is None or state.report is None:
+        return None
+    pred = state.classification.predicted_class
+    if pred not in MYELOID_SUBTYPES | LYMPHOID_SUBTYPES:
+        return None
+    m = _COHORT_RE.search(state.report.protocol_markdown or state.report.markdown)
+    if not m:
+        return None
+    cohort = m.group(1).strip().lower()
+    cohort_lymphoid = "lympho" in cohort
+    if cohort_lymphoid == (pred in MYELOID_SUBTYPES):
+        pred_lineage = "myeloid" if pred in MYELOID_SUBTYPES else "lymphoid"
+        cohort_lineage = "lymphoid" if cohort_lymphoid else "non-lymphoid"
+        return (f"lineage conflict: predicted {pred} ({pred_lineage}) but the dominant "
+                f"cohort in the report is {cohort} ({cohort_lineage})")
+    return None
+
 # ---------------------------------------------------------------------------
 # Intents
 # ---------------------------------------------------------------------------
@@ -122,6 +149,7 @@ class RouteDecision:
     intent: Intent
     tool_sequence: list[str]
     rationale: str
+    precondition_violation_caught: bool = False
 
 @dataclass
 class OrchestratorRequest:
@@ -205,6 +233,36 @@ class RuleBasedRouter:
         # FULL_REPORT — anything mentioning a report.
         (re.compile(r"\breport\b", re.I), Intent.FULL_REPORT),
     ]
+
+    def _safe_decision(self, intent: Intent, request: OrchestratorRequest, rationale: str):
+        tools = tools_for_intent(intent)
+
+        if "detect" in tools and not request.image_paths:
+            return RouteDecision(
+                intent=Intent.EXPLAIN,
+                tool_sequence=["explain"],
+                rationale=rationale + "; blocked because detection requires image inputs",
+                precondition_violation_caught=True,
+            )
+            
+
+        if (
+            "detect" not in tools
+            and request.precomputed_findings is None
+            and intent != Intent.EXPLAIN
+        ):
+            return RouteDecision(
+                intent=Intent.EXPLAIN,
+                tool_sequence=["explain"],
+                rationale=rationale + "; blocked because precomputed findings are missing",
+                precondition_violation_caught=True,
+            )
+
+        return RouteDecision(
+            intent=intent,
+            tool_sequence=tools,
+            rationale=rationale,
+        )
     
 
     def route(self, request: OrchestratorRequest) -> RouteDecision:
@@ -241,18 +299,19 @@ class RuleBasedRouter:
 
         for pattern, intent in self._PATTERNS:
             if pattern.search(text):
-                return RouteDecision(
-                    intent=intent,
-                    tool_sequence=tools_for_intent(intent),
+                return self._safe_decision(
+                    intent,
+                    request,
                     rationale=f"matched rule {pattern.pattern!r}",
                 )
 
         intent = Intent.FULL_REPORT
-        return RouteDecision(
-            intent=intent,
-            tool_sequence=tools_for_intent(intent),
-            rationale="no specific rule matched; defaulting to full report",
-        )
+        return self._safe_decision(
+                    intent,
+                    request,
+                    rationale="no specific rule matched; defaulting to full report",
+                )
+
 
 
 class LLMRouter:
@@ -261,12 +320,13 @@ class LLMRouter:
     the rule router if the LLM is unavailable or returns garbage.
     """
 
-    def __init__(self, llm_complete, fallback: RuleBasedRouter | None = None):
+    def __init__(self, llm_complete, fallback: RuleBasedRouter | None = None, canonical_tools: bool = True):
         """
         :param llm_complete: a callable (system:str, user:str) -> str.
         """
         self.llm_complete = llm_complete
         self.fallback = fallback or RuleBasedRouter()
+        self.canonical_tools = canonical_tools
         
 
     _SYSTEM = """
@@ -310,6 +370,7 @@ class LLMRouter:
         "rationale": "The user requested a complete diagnosis."
         }
         """
+    
 
     def route(self, request: OrchestratorRequest) -> RouteDecision:
         if request.forced_intent:
@@ -339,19 +400,10 @@ class LLMRouter:
             payload = json.loads(match.group(0))
 
             intent = Intent(payload["intent"])
-            tools = payload["tool_sequence"]
+            tools = tools_for_intent(intent) if self.canonical_tools else payload["tool_sequence"]
             rationale = payload.get("rationale", "LLM router")
 
-            # ---------- Validate preconditions against the actual request ----------
-            # A plan that needs images but has none, or skips detection without
-            # precomputed findings, will crash downstream => reject so we fall back.
-            if "detect" in tools and not request.image_paths:
-                raise ValueError("Plan requires detection but no image paths were supplied.")
-
-            if "detect" not in tools and request.precomputed_findings is None:
-                raise ValueError(
-                    "Plan skips detection but no precomputed findings were supplied."
-                )
+        
             # ---------- Validate tools ----------
 
             if not isinstance(tools, list):
@@ -360,6 +412,26 @@ class LLMRouter:
             if not all(tool in VALID_TOOLS for tool in tools):
                 raise ValueError(f"Unknown tool in plan: {tools}")
 
+            if not tools:
+                raise ValueError("Empty tool_sequence.")
+            if len(set(tools)) != len(tools):
+                raise ValueError(f"Duplicate tools in plan: {tools}")
+            if (intent == Intent.EXPLAIN) != (tools == ["explain"]):
+                raise ValueError(f"Intent {intent.value} inconsistent with tools {tools}")
+            order = ["detect", "aggregate", "classify", "reflect", "report", "validate"]
+            idx = [order.index(t) for t in tools if t in order]
+            if idx != sorted(idx):
+                raise ValueError(f"Tools out of order: {tools}")
+
+            if "explain" in tools:
+                if len(tools) > 1:
+                    raise ValueError("EXPLAIN should not be combined with other tools.")
+            else:
+                if "detect" in tools and not request.image_paths:
+                    raise ValueError("Plan requires detection but no image paths were supplied.")
+                if "detect" not in tools and request.precomputed_findings is None:
+                    raise ValueError("Plan skips detection but no precomputed findings were supplied.")
+            
             # ---------- Validate ordering ----------
 
             if (
@@ -396,13 +468,68 @@ class LLMRouter:
             )
 
         except Exception as e:
-            print(
-                f"LLM tool router failed ({type(e).__name__}: {e}); "
-                "falling back to rule router.",
-                flush=True,
+            fallback_decision = self.fallback.route(request)
+            fallback_decision.precondition_violation_caught = True
+            fallback_decision.rationale = (
+                f"LLM plan rejected due to precondition/order violation: {e}; "
+                f"fallback: {fallback_decision.rationale}"
             )
-            return self.fallback.route(request)
+            return fallback_decision
 
+def build_pre_reflection_snapshot(state: PipelineState) -> dict[str, Any]:
+    snapshot = {
+        "conf_threshold": state.conf_threshold,
+        "detection_and_attribute_classification": None,
+        "aggregation": None,
+        "leukemia_classification": None,
+    }
+
+    if state.detection_result is not None:
+        det = state.detection_result
+        snapshot["detection_and_attribute_classification"] = {
+            "case_id": det.case_id,
+            "n_images": det.n_images,
+            "n_detections": len(det.detections),
+            "detections": [
+                {
+                    "cell_id": d.cell_id,
+                    "image_id": d.image_id,
+                    "bbox_xyxy": [float(v) for v in d.bbox_xyxy],
+                    "cell_type": d.cell_type,
+                    "objectness": float(d.objectness),
+                    "cell_type_prob": float(d.cell_type_prob) if d.cell_type_prob is not None else None,
+                    "attributes": d.attributes,
+                    "attribute_probs": {k: float(v) for k, v in d.attribute_probs.items()},
+                }
+                for d in det.detections
+            ],
+        }
+
+    if state.findings is not None:
+        f = state.findings
+        snapshot["aggregation"] = {
+            "case_id": f.case_id,
+            "n_images": f.n_images,
+            "n_cells_total": f.n_cells_total,
+            "n_cells_identified_wbc": f.n_cells_identified_wbc,
+            "cell_counts": f.cell_counts,
+            "cell_percentages_all": f.cell_percentages_all,
+            "cell_percentages_clinical": f.cell_percentages_clinical,
+            "attributes": f.attributes,
+            "report_ready": f.report_ready,
+            "grounding_index": f.grounding_index,
+        }
+
+    if state.classification is not None:
+        clf = state.classification
+        snapshot["leukemia_classification"] = {
+            "predicted_class": clf.predicted_class,
+            "confidence": float(clf.confidence),
+            "rationale": clf.rationale,
+            "scores": {k: float(v) for k, v in clf.scores.items()},
+        }
+
+    return snapshot
 
 # ---------------------------------------------------------------------------
 # The orchestrator
@@ -438,7 +565,11 @@ class Orchestrator:
         llm_explain=None,  # optional callable (system, user) -> str for EXPLAIN
         reflection_agent=None,           # ReflectionAgent | None — enables agency
         max_reflect_iterations: int = 2,
+        enable_lineage_guard: bool = True,
     ):
+        # from agentic_hematology.test_reflection_agent import FakeReflectionAgent
+
+        # self.reflection_agent = FakeReflectionAgent()
         self.detector = detector
         self.classifier = classifier or HybridClassifier()
         self.report_generator = report_generator or TemplateReportGenerator()
@@ -449,10 +580,12 @@ class Orchestrator:
         self.llm_explain = llm_explain
         self.reflection_agent = reflection_agent
         self.max_reflect_iterations = max_reflect_iterations
+        self.enable_lineage_guard = enable_lineage_guard
         self._consistency = ReportConsistencyValidator()
         self._llm_guard = LLMOutputValidator()
-        self._template_json = TemplateJsonConsistencyValidator()
-        self._numerical_hallucination = NumericalHallucinationValidator()
+        # The protocol validator covers both consistency and numeric containment.
+        self._template_json = ProtocolReportValidator()
+        self._numerical_hallucination = None
 
     # ------------------------------------------------------------------
     # Entry point
@@ -514,6 +647,9 @@ class Orchestrator:
                 state = classify_node(state, self.classifier)
 
             elif tool == "reflect":
+                state.pre_reflection_snapshot = build_pre_reflection_snapshot(state)
+
+                
                 if self.enable_reflect:
                     state = reflect_node(
                         state,
@@ -537,6 +673,19 @@ class Orchestrator:
                         report_generator=self.report_generator,
                     )
 
+        if self.enable_lineage_guard and "report" in tools:
+            reason = lineage_conflict(state)
+            if reason:
+                state.flagged_for_review = True
+                state.review_reasons.append(reason)
+                state.agent_actions.append({
+                    "iteration": len(state.agent_actions) + 1, "action": "lineage_guard_flag",
+                    "reason": reason, "conf_threshold": None, "error": False,
+                })
+                state.report.markdown += (
+                    "\n\n> **⚠ Flagged for mandatory human review by the lineage guard.** "
+                    f"Reason: {reason}"
+                )
         return state
 
     def _run_explain(
@@ -594,4 +743,5 @@ class Orchestrator:
             attributes=payload.get("attributes", {}),
             report_ready=payload.get("report_ready", {}),
             grounding_index=payload.get("grounding_index", {}),
+            case_record=payload if "report_ready" in payload and "cell_percentages_clinical" in payload else {},
         )

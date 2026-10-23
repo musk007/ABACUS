@@ -5,7 +5,13 @@ from collections import Counter, defaultdict
 from typing import Any
 
 from .schemas import AggregatedFindings, DetectionResult
-
+from data_preprocessing.report_protocol import (
+    add_cell,
+    build_case_record,
+    labels_from_prediction,
+    new_store,
+    normalise_cell_type,
+)
 
 BLAST_CLASSES = {"Myeloblast", "Lymphoblast", "Monoblast", "Abnormal promyelocyte"}
 EXCLUDED_CLASSES = {"None", "Unknown"}
@@ -171,6 +177,24 @@ def aggregate(result: DetectionResult, conf_threshold: float = 0.25) -> Aggregat
             ) >= 10.0,
         },
     }
+    # Same record construction as the reference reports, applied to predicted cells.
+    store = new_store()
+    for d in cells:
+        add_cell(store, normalise_cell_type(d.cell_type), labels_from_prediction(d.attributes))
+    case_record = build_case_record(store, n_images=result.n_images, diagnosis=None)
+
+    # Flags, cohort, and alerts seen by the reflection agent come from the same record.
+    rec_rr = case_record["report_ready"]
+    report_ready["diagnostic_flags"] = rec_rr["diagnostic_flags"]
+    report_ready["blast_morphology"] = rec_rr["blast_morphology"]
+    report_ready["cohort_cell_type"] = rec_rr["cohort_cell_type"]
+    report_ready["qc"].update({
+        "n_cells_in_cohort": rec_rr["qc"]["n_cells_in_cohort"],
+        "sparse_annotation_skew_warning": rec_rr["qc"]["sparse_annotation_skew_warning"],
+        "cohort_selection_ambiguous": rec_rr["qc"]["cohort_selection_ambiguous"],
+        "differential_alerts": rec_rr["qc"]["differential_alerts"],
+        "requires_review": rec_rr["qc"]["requires_review"],
+    })
 
     return AggregatedFindings(
         case_id=result.case_id,
@@ -183,6 +207,7 @@ def aggregate(result: DetectionResult, conf_threshold: float = 0.25) -> Aggregat
         attributes=morphology,
         report_ready=report_ready,
         grounding_index=grounding_index,
+        case_record=case_record,
     )
 
 

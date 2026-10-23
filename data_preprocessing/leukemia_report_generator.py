@@ -74,6 +74,7 @@ CELL_PRINT_NAME = {
     "atypical lymphocyte": "Atypical lymphocytes",
     "myelocyte": "Myelocytes",
     "metamyelocyte": "Metamyelocytes",
+    "promonocyte": "Promonocytes",
 }
 
 COHORT_DESCRIBABLE_CELL_TYPES = {
@@ -115,16 +116,18 @@ def classify_case(
     myeloblast_pct = float(clinical.get("myeloblast", 0.0))
     monoblast_pct = float(clinical.get("monoblast", 0.0))
     promonocyte_pct = float(clinical.get("promonocyte", 0.0))
-    myeloid_blast_like_pct = myeloblast_pct + monoblast_pct + promonocyte_pct
+    myeloid_blast_like_pct = report_ready.get(
+        "myeloid_blastlike_percentage_of_wbc",
+        myeloblast_pct + monoblast_pct + promonocyte_pct)
+    abnormal_promyelocyte_pct = float(clinical.get("abnormal promyelocyte", 0.0))
 
     # 1. APML — abnormal promyelocytes are a hard, specific finding.
     if flags.get("abnormal_promyelocytes_present"):
         return Impression(
             primary="Findings consistent with an acute leukaemia showing abnormal promyelocyte morphology",
             rationale=(
-                f"Abnormal promyelocytes dominate the smear "
-                f"({report_ready['dominant_cell_pct']:.1f}% of WBCs) with "
-                f"a blast-equivalent burden of {blast_pct:.1f}%, "
+                f"Abnormal promyelocytes comprise {abnormal_promyelocyte_pct:.1f}% of WBCs, "
+                f"with a blast-equivalent burden of {blast_pct:.1f}%, "
                 f"meeting criteria for acute leukaemia."
             ),
             differential=[
@@ -148,12 +151,13 @@ def classify_case(
             return Impression(
                 primary="Findings consistent with an acute leukaemia of lymphoblastic morphology",
                 rationale=(
-                    f"Lymphoblasts comprise {blast_pct:.1f}% of WBCs, "
+                    f"Lymphoblasts comprise {lymphoblast_pct:.1f}% of WBCs "
+                    f"(blast-equivalent burden of {blast_pct:.1f}%), "
                     f"exceeding the 20% blast threshold for acute leukaemia."
                 ),
                 differential=[
                     "B- or T-lymphoblastic leukaemia/lymphoma.",
-                    "Mixed-phenotype acute leukaemia (excluded by immunophenotyping).",
+                    "Mixed-phenotype acute leukaemia (to be excluded by immunophenotyping).",
                 ],
                 recommended_workup=[
                     "Flow cytometric immunophenotyping for lineage assignment "
@@ -169,13 +173,14 @@ def classify_case(
             return Impression(
                 primary="Findings consistent with an acute leukaemia showing monocytic differentiation",
                 rationale=(
-                    f"Monoblasts comprise {blast_pct:.1f}% of WBCs, "
+                    f"Monoblasts comprise {monoblast_pct:.1f}% of WBCs "
+                    f"(blast-equivalent burden of {blast_pct:.1f}%), "
                     f"consistent with a monocytic-lineage acute leukaemia."
                 ),
                 differential=[
                     "Acute myelomonocytic leukaemia.",
                     "AML with KMT2A rearrangement (frequently monocytic).",
-                    "Blastic plasmacytoid dendritic cell neoplasm (excluded by immunophenotyping).",
+                    "Blastic plasmacytoid dendritic cell neoplasm (to be excluded by immunophenotyping).",
                 ],
                 recommended_workup=[
                     "Flow cytometric immunophenotyping (CD33, CD64, CD11b, CD14, "
@@ -190,13 +195,14 @@ def classify_case(
             return Impression(
                 primary="Findings consistent with an acute leukaemia of myeloblastic morphology",
                 rationale=(
-                    f"Myeloblasts comprise {blast_pct:.1f}% of WBCs, "
+                    f"Myeloblasts comprise {myeloblast_pct:.1f}% of WBCs "
+                    f"(blast-equivalent burden of {blast_pct:.1f}%), "
                     f"exceeding the 20% blast threshold for acute leukaemia."
                 ),
                 differential=[
                     "AML with recurrent genetic abnormalities (per WHO/ICC).",
                     "Acute myeloid leukaemia.",
-                    "Mixed-phenotype acute leukaemia (excluded by immunophenotyping).",
+                    "Mixed-phenotype acute leukaemia (to be excluded by immunophenotyping).",
                 ],
                 recommended_workup=[
                     "Flow cytometric immunophenotyping (CD13, CD33, CD117, MPO, HLA-DR).",
@@ -260,7 +266,7 @@ def classify_case(
         return Impression(
             primary=primary,
             rationale=(
-                f"{dominant.capitalize()}s comprise {blast_pct:.1f}% of WBCs. "
+                f"The blast-equivalent burden is {blast_pct:.1f}% of WBCs. "
                 f"While below the classic 20% acute threshold, this remains a "
                 f"highly abnormal circulating blast population and is suspicious "
                 f"for an incipient acute leukaemia pattern."
@@ -291,7 +297,7 @@ def classify_case(
             primary="Findings consistent with an acute leukaemia showing monocytic differentiation",
             rationale=(
                 f"Monocytic-lineage predominance (promonocytes {promonocyte_pct:.1f}%) "
-                f"with circulating blasts ({blast_pct:.1f}%) is suspicious for a monocytic AML pattern "
+                f"with a blast-equivalent burden of {blast_pct:.1f}% is suspicious for a monocytic AML pattern "
                 f"under sparse annotation conditions."
             ),
             differential=[
@@ -330,16 +336,16 @@ def classify_case(
                 rationale=(
                     f"Left-shifted granulocytic series with the full spectrum of "
                     f"maturation (myelocytes, metamyelocytes, neutrophils), "
-                    f"and a blast burden of {blast_pct:.1f}% "
-                    f"(below the 20% threshold for blast phase) supports a "
-                    f"chronic-phase CML pattern.{basophil_note}"
+                    f"and a blast-equivalent burden of {blast_pct:.1f}% "
+                    f"(below the 20% threshold for blast phase) is compatible with a "
+                    f"chronic myeloproliferative pattern.{basophil_note}"
                 ),
                 differential=[
                     "Chronic myeloid leukaemia — requires BCR::ABL1 confirmation.",
                     "Leukemoid reaction or severe infection/sepsis, particularly if basophils are absent.",
                     "Other MPN (PV, ET, primary myelofibrosis).",
                     "Atypical CML, BCR::ABL1 negative.",
-                    "CML in accelerated or blast phase (excluded by blast count and morphology).",
+                    "CML in accelerated or blast phase (to be excluded by blast count and bone marrow morphology).",
                 ],
                 recommended_workup=[
                     "BCR::ABL1 testing by RT-PCR (qualitative and quantitative) — diagnostic.",
@@ -362,7 +368,7 @@ def classify_case(
             ),
             differential=[
                 "Chronic lymphocytic leukaemia / small lymphocytic lymphoma.",
-                "Mantle cell lymphoma in leukemic phase (excluded by CD5+/CD23+/cyclin D1- profile).",
+                "Mantle cell lymphoma in leukemic phase (to be excluded by immunophenotyping; CLL shows a CD5+/CD23+/cyclin D1- profile).",
                 "Prolymphocytic leukemia (>55% prolymphocytes).",
                 "Reactive lymphocytosis (e.g. viral) — typically polyclonal.",
             ],
@@ -382,7 +388,7 @@ def classify_case(
         rationale=(
             f"The smear shows abnormal findings (dominant cell type: "
             f"{dominant}, {report_ready['dominant_cell_pct']:.1f}% of WBCs; "
-            f"blast burden {blast_pct:.1f}%) that do not meet criteria for "
+            f"blast-equivalent burden of {blast_pct:.1f}%) that do not meet criteria for "
             f"a specific WHO/ICC entity on morphology alone."
         ),
         differential=[
@@ -436,6 +442,7 @@ def build_blast_morphology_paragraph(case: dict[str, Any]) -> str:
     cohort_type = rr.get("cohort_cell_type") or rr["dominant_cell_type"]
     if cohort_type not in COHORT_DESCRIBABLE_CELL_TYPES or cohort_n == 0:
         return ""
+    cohort_label = CELL_PRINT_NAME.get(cohort_type, cohort_type.capitalize() + "s").lower()
 
     morph = rr["blast_morphology"]
 
@@ -450,7 +457,7 @@ def build_blast_morphology_paragraph(case: dict[str, Any]) -> str:
     baso, baso_pct = d("cytoplasmic_basophilia")
     vac, vac_pct = d("cytoplasmic_vacuoles")
 
-    cohort_label = CELL_PRINT_NAME.get(cohort_type, cohort_type).lower()
+    # cohort_label = CELL_PRINT_NAME.get(cohort_type, cohort_type).lower()
 
     return (
         f"**Cohort morphology (n = {cohort_n} {cohort_label}):** "
@@ -469,6 +476,18 @@ def build_flags_line(case: dict[str, Any]) -> str:
     if not positive:
         return "**Diagnostic flags:** None triggered."
     return "**Diagnostic flags:** " + "; ".join(positive) + "."
+
+ALERTS_RENDERED_INLINE = {"CML_PATTERN_NO_BASOPHILIA"}   # already stated in the CML rationale
+
+
+def build_alerts_line(case: dict[str, Any]) -> str:
+    alerts = case["report_ready"]["qc"].get("differential_alerts", [])
+    items = [a for a in alerts if a.get("code") not in ALERTS_RENDERED_INLINE]
+    if not items:
+        return ""
+    return "**Review alerts:** " + " ".join(
+        f"{a['message']} {a.get('recommendation', '')}".strip() for a in items
+    )
 
 
 def build_qc_line(case: dict[str, Any]) -> str:
@@ -518,11 +537,14 @@ REPORT_TEMPLATE = """# Hematology Report — Case {case_id}
 
 {flags_line}
 
+{alerts_line}
+
 {impression_block}
 
 {qc_line}
 
 {scope_line}
+
 ---
 *Automated multi-image peripheral blood smear analysis. Findings are intended to support — not replace — review by a board-certified hematopathologist.*
 """
@@ -550,6 +572,7 @@ def generate_report(case_id: str, case: dict[str, Any]) -> str:
         "impression_block": build_impression_block(impression),
         "qc_line": build_qc_line(case),
         "scope_line": build_scope_line(case),
+        "alerts_line": build_alerts_line(case),
     }
 
     report = REPORT_TEMPLATE.format(**sections)

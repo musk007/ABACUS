@@ -132,6 +132,11 @@ def main() -> None:
         val=args.val,
         cache=cache,
         amp=True,
+        single_cls=False,
+        degrees=180.0,
+        flipud=0.5,
+        close_mosaic=10,
+        deterministic=True,
     )
     best = Path(results.save_dir) / "weights" / "best.pt"
     print(f"Done. Best weights: {best}")

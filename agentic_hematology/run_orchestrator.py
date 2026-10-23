@@ -11,6 +11,7 @@ Two modes:
       --case-id 12 \\
       --backend stub --stub-source examples/sample_cases.json \\
       --instruction "Generate a full diagnostic report"
+      --max-new-tokens 1000
 
   # Production — YOLOv11 + EfficientNet:
   python run_orchestrator.py \\
@@ -20,6 +21,7 @@ Two modes:
       --effnet-weights weights/best_attr.pt \\
       --images "data/PT-0042/*.png" \\
       --instruction "Generate a full diagnostic report"
+      --max-new-tokens 1000
 
   # Production — attribute ablation with DinoBloom linear probes:
   python run_orchestrator.py \\
@@ -31,6 +33,7 @@ Two modes:
       --classifier-model weights/leukemia_gbm.pkl \\
       --images "data/PT-0042/*.png" \\
       --instruction "Generate a full diagnostic report"
+      --max-new-tokens 1000
 """
 
 from __future__ import annotations
@@ -505,7 +508,7 @@ def main() -> int:
              "Set --backend dinobloom to select DinoBloom without passing this flag.",
     )
     p.add_argument("--stub-source")
-    p.add_argument("--yolo-weights", default="/home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/runs/detector/yolo11m_wbc/weights/best.pt")
+    p.add_argument("--yolo-weights", default="/home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/runs/detector/train_folds/fold0/weights/best.pt")
     p.add_argument("--effnet-weights", default=str(DEFAULT_EFFNET_WEIGHTS))
     p.add_argument("--effnet-predicts-celltype", action="store_true")
     p.add_argument(
@@ -561,7 +564,7 @@ def main() -> int:
     p.add_argument("--report-backend", choices=["template", "local-llm", "claude", "openai"], default="template")
     p.add_argument("--llm-model", help="Local base model path for --report-backend local-llm")
     p.add_argument("--lora-adapter", help="Optional LoRA adapter path for local LLM reports")
-    p.add_argument("--max-new-tokens", type=int, default=768)
+    p.add_argument("--max-new-tokens", type=int, default=1000)
     p.add_argument("--temperature", type=float, default=0.0)
     p.add_argument("--instruction", default="diagnose this case")
     p.add_argument("--findings-json",type=Path,help="Run REPORT_FROM_JSON from a precomputed AggregatedFindings JSON file.",)
@@ -615,7 +618,7 @@ def main() -> int:
         llm_explain = llm_client.complete
 
         if not args.no_reflect:
-            reflection_agent = ReflectionAgent(llm_client)
+            reflection_agent = ReflectionAgent(llm_client, min_conf_threshold=args.conf_threshold)
             print("Reflection agent enabled.", flush=True)
 
         if not args.no_router_agent:

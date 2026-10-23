@@ -1,0 +1,302 @@
+{
+  "class_names": [
+    "Acute leukemia",
+    "MDS",
+    "MDS/MPN",
+    "MPN",
+    "Lymphoma",
+    "Plasma cell neoplasm",
+    "Reactive changes",
+    "Healthy"
+  ],
+  "lld_to_caitomorph": {
+    "ALL": "Acute leukemia",
+    "AML": "Acute leukemia",
+    "APML": "Acute leukemia",
+    "CML": "MPN",
+    "CLL": "Lymphoma"
+  },
+  "n_patients": 13,
+  "n_scored": 13,
+  "malignancy_detection": {
+    "n_detected_at_0.5": 13,
+    "mean_prob": 0.9677035808563232,
+    "median_prob": 0.9741732478141785,
+    "min_prob": 0.8923483490943909
+  },
+  "patients": [
+    {
+      "patient_id": "15",
+      "lld_label": "AML",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Acute leukemia",
+      "prediction_prob": 0.8464029431343079,
+      "malignancy_prob": 0.9901350140571594,
+      "predicted_hb": 8.636751651763916,
+      "n_cells": 220,
+      "probabilities": {
+        "Acute leukemia": 0.8464029431343079,
+        "MDS": 0.01175034698098898,
+        "MDS/MPN": 0.005726003088057041,
+        "MPN": 0.004759912844747305,
+        "Lymphoma": 0.07733605057001114,
+        "Plasma cell neoplasm": 0.04415977746248245,
+        "Reactive changes": 0.006239065434783697,
+        "Healthy": 0.0036258120089769363
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "18",
+      "lld_label": "ALL",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Acute leukemia",
+      "prediction_prob": 0.5305467844009399,
+      "malignancy_prob": 0.9741732478141785,
+      "predicted_hb": 8.311961889266968,
+      "n_cells": 46,
+      "probabilities": {
+        "Acute leukemia": 0.5305467844009399,
+        "MDS": 0.21834015846252441,
+        "MDS/MPN": 0.009729381650686264,
+        "MPN": 0.006643594708293676,
+        "Lymphoma": 0.05806906148791313,
+        "Plasma cell neoplasm": 0.1508442908525467,
+        "Reactive changes": 0.022867640480399132,
+        "Healthy": 0.0029591075144708157
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "21",
+      "lld_label": "CLL",
+      "expected_entity": "Lymphoma",
+      "prediction": "MPN",
+      "prediction_prob": 0.5124526023864746,
+      "malignancy_prob": 0.9736084938049316,
+      "predicted_hb": 6.934870898723602,
+      "n_cells": 290,
+      "probabilities": {
+        "Acute leukemia": 0.029538344591856003,
+        "MDS": 0.003944786731153727,
+        "MDS/MPN": 0.17314709722995758,
+        "MPN": 0.5124526023864746,
+        "Lymphoma": 0.24493511021137238,
+        "Plasma cell neoplasm": 0.009590568020939827,
+        "Reactive changes": 0.01895282045006752,
+        "Healthy": 0.00743865454569459
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "23",
+      "lld_label": "APML",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Acute leukemia",
+      "prediction_prob": 0.31835952401161194,
+      "malignancy_prob": 0.8923483490943909,
+      "predicted_hb": 9.508551061153412,
+      "n_cells": 253,
+      "probabilities": {
+        "Acute leukemia": 0.31835952401161194,
+        "MDS": 0.05626235529780388,
+        "MDS/MPN": 0.04097533971071243,
+        "MPN": 0.059801749885082245,
+        "Lymphoma": 0.17062821984291077,
+        "Plasma cell neoplasm": 0.24632112681865692,
+        "Reactive changes": 0.10359103977680206,
+        "Healthy": 0.004060654900968075
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "28",
+      "lld_label": "CML",
+      "expected_entity": "MPN",
+      "prediction": "Lymphoma",
+      "prediction_prob": 0.41898760199546814,
+      "malignancy_prob": 0.9448981881141663,
+      "predicted_hb": 9.163650780916214,
+      "n_cells": 389,
+      "probabilities": {
+        "Acute leukemia": 0.1524708867073059,
+        "MDS": 0.007756424602121115,
+        "MDS/MPN": 0.22274360060691833,
+        "MPN": 0.0838785171508789,
+        "Lymphoma": 0.41898760199546814,
+        "Plasma cell neoplasm": 0.059061117470264435,
+        "Reactive changes": 0.05133966729044914,
+        "Healthy": 0.003762172069400549
+      },
+      "attention_sum": 0.9999999403953552
+    },
+    {
+      "patient_id": "31",
+      "lld_label": "CML",
+      "expected_entity": "MPN",
+      "prediction": "Lymphoma",
+      "prediction_prob": 0.2340758591890335,
+      "malignancy_prob": 0.9371901154518127,
+      "predicted_hb": 10.787757247686386,
+      "n_cells": 432,
+      "probabilities": {
+        "Acute leukemia": 0.20117144286632538,
+        "MDS": 0.006512361578643322,
+        "MDS/MPN": 0.2247660607099533,
+        "MPN": 0.22167548537254333,
+        "Lymphoma": 0.2340758591890335,
+        "Plasma cell neoplasm": 0.048988960683345795,
+        "Reactive changes": 0.05701140686869621,
+        "Healthy": 0.005798429250717163
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "34",
+      "lld_label": "AML",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Plasma cell neoplasm",
+      "prediction_prob": 0.4059104919433594,
+      "malignancy_prob": 0.9856946468353271,
+      "predicted_hb": 9.270944118499756,
+      "n_cells": 96,
+      "probabilities": {
+        "Acute leukemia": 0.3476385474205017,
+        "MDS": 0.04686877876520157,
+        "MDS/MPN": 0.009740665555000305,
+        "MPN": 0.006040642503648996,
+        "Lymphoma": 0.16949553787708282,
+        "Plasma cell neoplasm": 0.4059104919433594,
+        "Reactive changes": 0.010700130835175514,
+        "Healthy": 0.0036051683127880096
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "40",
+      "lld_label": "AML",
+      "expected_entity": "Acute leukemia",
+      "prediction": "MDS/MPN",
+      "prediction_prob": 0.39613181352615356,
+      "malignancy_prob": 0.9899290204048157,
+      "predicted_hb": 8.532705307006836,
+      "n_cells": 142,
+      "probabilities": {
+        "Acute leukemia": 0.21867159008979797,
+        "MDS": 0.303119033575058,
+        "MDS/MPN": 0.39613181352615356,
+        "MPN": 0.013314190320670605,
+        "Lymphoma": 0.03285735845565796,
+        "Plasma cell neoplasm": 0.02583501674234867,
+        "Reactive changes": 0.006769469473510981,
+        "Healthy": 0.003301525954157114
+      },
+      "attention_sum": 0.9999999403953552
+    },
+    {
+      "patient_id": "43",
+      "lld_label": "AML",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Acute leukemia",
+      "prediction_prob": 0.7009487152099609,
+      "malignancy_prob": 0.9846892356872559,
+      "predicted_hb": 10.365191668272018,
+      "n_cells": 146,
+      "probabilities": {
+        "Acute leukemia": 0.7009487152099609,
+        "MDS": 0.056857891380786896,
+        "MDS/MPN": 0.0065422081388533115,
+        "MPN": 0.006109732203185558,
+        "Lymphoma": 0.07391275465488434,
+        "Plasma cell neoplasm": 0.14031797647476196,
+        "Reactive changes": 0.011704988777637482,
+        "Healthy": 0.0036057487595826387
+      },
+      "attention_sum": 0.9999999403953552
+    },
+    {
+      "patient_id": "45",
+      "lld_label": "AML",
+      "expected_entity": "Acute leukemia",
+      "prediction": "MDS/MPN",
+      "prediction_prob": 0.3634890913963318,
+      "malignancy_prob": 0.9873223900794983,
+      "predicted_hb": 7.1200063824653625,
+      "n_cells": 270,
+      "probabilities": {
+        "Acute leukemia": 0.3213629722595215,
+        "MDS": 0.26462554931640625,
+        "MDS/MPN": 0.3634890913963318,
+        "MPN": 0.007978638634085655,
+        "Lymphoma": 0.014826898463070393,
+        "Plasma cell neoplasm": 0.015039277262985706,
+        "Reactive changes": 0.010182084515690804,
+        "Healthy": 0.002495483960956335
+      },
+      "attention_sum": 0.9999999403953552
+    },
+    {
+      "patient_id": "4",
+      "lld_label": "ALL",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Plasma cell neoplasm",
+      "prediction_prob": 0.3683919310569763,
+      "malignancy_prob": 0.9838235378265381,
+      "predicted_hb": 7.184547305107117,
+      "n_cells": 161,
+      "probabilities": {
+        "Acute leukemia": 0.23020899295806885,
+        "MDS": 0.29174673557281494,
+        "MDS/MPN": 0.009675984270870686,
+        "MPN": 0.0060915700159966946,
+        "Lymphoma": 0.07770828902721405,
+        "Plasma cell neoplasm": 0.3683919310569763,
+        "Reactive changes": 0.013306583277881145,
+        "Healthy": 0.0028699536342173815
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "6",
+      "lld_label": "ALL",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Acute leukemia",
+      "prediction_prob": 0.4243967533111572,
+      "malignancy_prob": 0.9627924561500549,
+      "predicted_hb": 10.15965023636818,
+      "n_cells": 106,
+      "probabilities": {
+        "Acute leukemia": 0.4243967533111572,
+        "MDS": 0.25287240743637085,
+        "MDS/MPN": 0.009978733956813812,
+        "MPN": 0.007307201623916626,
+        "Lymphoma": 0.2059166133403778,
+        "Plasma cell neoplasm": 0.06232074648141861,
+        "Reactive changes": 0.03543982654809952,
+        "Healthy": 0.0017676918068900704
+      },
+      "attention_sum": 1.0
+    },
+    {
+      "patient_id": "8",
+      "lld_label": "ALL",
+      "expected_entity": "Acute leukemia",
+      "prediction": "Lymphoma",
+      "prediction_prob": 0.5262838006019592,
+      "malignancy_prob": 0.9735418558120728,
+      "predicted_hb": 9.180736392736435,
+      "n_cells": 131,
+      "probabilities": {
+        "Acute leukemia": 0.06616722792387009,
+        "MDS": 0.10418899357318878,
+        "MDS/MPN": 0.006001455709338188,
+        "MPN": 0.0033511039800941944,
+        "Lymphoma": 0.5262838006019592,
+        "Plasma cell neoplasm": 0.2675492763519287,
+        "Reactive changes": 0.02332858368754387,
+        "Healthy": 0.0031295910011976957
+      },
+      "attention_sum": 1.0
+    }
+  ]
+}

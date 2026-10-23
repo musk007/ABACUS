@@ -1,0 +1,79 @@
+diff --git a/verl/trainer/main_ppo.py b/verl/trainer/main_ppo.py
+index 9b4064c..b4a5505 100644
+--- a/verl/trainer/main_ppo.py
++++ b/verl/trainer/main_ppo.py
+@@ -129,6 +129,7 @@ class TaskRunnerV1:
+     def run(self, config: DictConfig):
+         """Run the PPO training process."""
+         import transfer_queue as tq
++        # import transfer_queue as tq
+ 
+         from verl.trainer.ppo.v1 import get_trainer_cls
+ 
+@@ -140,14 +141,16 @@ class TaskRunnerV1:
+         self.config = config
+ 
+         # initialize transfer queue
+-        tq.init(config.transfer_queue)
++        if hasattr(tq, "init"):
++            tq.init(config.transfer_queue)
+         try:
+             self.trainer = trainer_cls(config=config)
+             self.trainer.init()
+             self.init_agent_loop_manager()
+             self.trainer.fit(self.agent_loop_manager)
+         finally:
+-            tq.close()
++            if hasattr(tq, "close"):
++                tq.close()
+ 
+ 
+ @hydra.main(config_path="config", config_name="ppo_trainer", version_base=None)
+diff --git a/verl/trainer/ppo/v1/replay_buffer.py b/verl/trainer/ppo/v1/replay_buffer.py
+index 1218613..f7fe764 100644
+--- a/verl/trainer/ppo/v1/replay_buffer.py
++++ b/verl/trainer/ppo/v1/replay_buffer.py
+@@ -19,7 +19,7 @@ from collections import defaultdict
+ import numpy as np
+ import transfer_queue as tq
+ from omegaconf import DictConfig
+-from transfer_queue import KVBatchMeta
++from transfer_queue import BatchMeta, KVBatchMeta
+ 
+ logger = logging.getLogger(__name__)
+ logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "INFO"))
+diff --git a/verl/utils/fsdp_utils.py b/verl/utils/fsdp_utils.py
+index 31b4fc0..f30b409 100644
+--- a/verl/utils/fsdp_utils.py
++++ b/verl/utils/fsdp_utils.py
+@@ -12,6 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
++from __future__ import annotations
++
+ import functools
+ import itertools
+ import json
+@@ -50,6 +52,12 @@ elif version.parse(torch.__version__) >= version.parse("2.4"):
+     from torch.distributed._composable.fsdp import CPUOffloadPolicy, FSDPModule, MixedPrecisionPolicy, fully_shard
+ 
+     fully_shard_module = torch.distributed._composable.fsdp
++    try:
++        from torch.distributed.tensor import DTensor, Shard
++        from torch.distributed.tensor._dtensor_spec import DTensorSpec
++    except ImportError:
++        DTensor = None  # type: ignore[misc, assignment]
++        DTensorSpec = None  # type: ignore[misc, assignment]
+ else:
+     fully_shard, MixedPrecisionPolicy, FSDPModule, CPUOffloadPolicy, fully_shard_module = None, None, None, None, None
+ 
+@@ -725,7 +733,7 @@ def collect_lora_params(module: FSDP, layered_summon: bool, base_sync_done: bool
+                 # only FSDP1 needs the explicit summon context.
+                 is_fsdp1 = fsdp_version(module) == 1
+                 summon_ctx = (
+-                    FSDP.summon_full_params(module, writeback=False, offload_to_cpu=True) if is_fsdp1 else nullcontext()
++                    FSDP.summon_full_params(module, writeback=False, offload_to_cpu=False) if is_fsdp1 else nullcontext()
+                 )
+                 with summon_ctx:
+                     lora_params = get_peft_model_state_dict(peft_model)

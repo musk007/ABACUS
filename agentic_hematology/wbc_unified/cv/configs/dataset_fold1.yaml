@@ -1,0 +1,20 @@
+path: /home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/generated/det_dataset_fold1
+train: images/train
+val: images/test
+test: images/test
+nc: 14
+names:
+- None
+- Myeloblast
+- Lymphoblast
+- Neutrophil
+- Atypical lymphocyte
+- Promonocyte
+- Monoblast
+- Lymphocyte
+- Myelocyte
+- Abnormal promyelocyte
+- Monocyte
+- Metamyelocyte
+- Eosinophil
+- Basophil

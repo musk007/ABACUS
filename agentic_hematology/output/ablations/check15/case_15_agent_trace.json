@@ -1,0 +1,16 @@
+{
+  "patient_id": "15",
+  "dataset_source": "lld",
+  "routing_notes": [],
+  "agent_actions": [
+    {
+      "iteration": 1,
+      "action": "proceed",
+      "reason": "high detection confidence and sufficient informative cells support the AML diagnosis",
+      "conf_threshold": null
+    }
+  ],
+  "n_reflect_iterations": 1,
+  "flagged_for_review": false,
+  "review_reasons": []
+}

@@ -7,7 +7,7 @@ import sys
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
-from data_preprocessing.report_prompt import prompt as MORPH_SYSTEM_PROMPT
+from data_preprocessing.report_protocol import run_report_protocol, labels_from_prediction
 from .schemas import AggregatedFindings, GroundedReport, LeukemiaClassification
 
 
@@ -49,17 +49,7 @@ class TemplateReportGenerator(BaseReportGenerator):
         classification: LeukemiaClassification | None,
         instruction: str | None = None,
     ) -> GroundedReport:
-        from report.src.template_report import generate_template_report
-
-        summary = _summary_with_agent_context(findings, classification, instruction)
-        markdown = generate_template_report(summary, self.cfg)
-        markdown = _append_quantitative_summary(markdown, findings)
-        markdown = _append_grounding(markdown, findings, classification)
-        return GroundedReport(
-            markdown=markdown,
-            grounding_index=findings.grounding_index,
-            backend="template",
-        )
+        return _protocol_report(findings, classification, None, backend="template")
 
 
 class LocalLLMReportGenerator(BaseReportGenerator):
@@ -69,7 +59,7 @@ class LocalLLMReportGenerator(BaseReportGenerator):
         self,
         model_path: str | Path | None = None,
         adapter_path: str | Path | None = None,
-        max_new_tokens: int = 768,
+        max_new_tokens: int = 1000,
         temperature: float = 0.0,
     ):
         cfg = _load_default_cfg()
@@ -96,39 +86,18 @@ class LocalLLMReportGenerator(BaseReportGenerator):
         instruction: str | None = None,
     ) -> GroundedReport:
         from report.src.llm_infer import generate_from_messages, load_model_and_tokenizer
-        from report.src.template_report import generate_template_report
 
         if self._model is None or self._tokenizer is None:
-            self._model, self._tokenizer = load_model_and_tokenizer(
-                self.model_path, self.adapter_path
-            )
+            self._model, self._tokenizer = load_model_and_tokenizer(self.model_path, self.adapter_path)
 
-        summary = _summary_with_agent_context(findings, classification, instruction)
-        template_md = generate_template_report(summary, _load_default_cfg())
+        def complete(system: str, user: str) -> str:
+            messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
+            return generate_from_messages(
+                self._model, self._tokenizer, messages,
+                max_new_tokens=self.max_new_tokens, temperature=self.temperature,
+            ).strip()
 
-        messages = [
-            {"role": "system", "content": MORPH_SYSTEM_PROMPT},
-            {
-                "role": "user",
-                "content": (
-                    f"---JSON---\n{json.dumps(summary, indent=2)}\n\n"
-                    f"---REPORT---\n{template_md}"
-                ),
-            },
-        ]
-        morph = generate_from_messages(
-            self._model, self._tokenizer, messages,
-            max_new_tokens=self.max_new_tokens, temperature=self.temperature,
-        ).strip()
-
-        markdown = _insert_morphology(template_md, morph)
-        markdown = _append_quantitative_summary(markdown, findings)
-        markdown = _append_grounding(markdown, findings, classification)
-        return GroundedReport(
-            markdown=markdown,
-            grounding_index=findings.grounding_index,
-            backend="local_llm",
-        )
+        return _protocol_report(findings, classification, complete, backend="local_llm")
 
 
 class ClaudeReportGenerator(TemplateReportGenerator):
@@ -138,35 +107,21 @@ class ClaudeReportGenerator(TemplateReportGenerator):
 class OpenAIReportGenerator(TemplateReportGenerator):
     """Placeholder kept for CLI compatibility; uses template unless extended."""
 
-
-def _summary_with_agent_context(
-    findings: AggregatedFindings,
-    classification: LeukemiaClassification | None,
-    instruction: str | None,
-) -> dict[str, Any]:
-    summary = dict(findings.report_ready)
-    summary["user_instruction"] = instruction or "Diagnose this case"
-    if classification is not None:
-        summary["agentic_classification"] = {
-            "predicted_class": classification.predicted_class,
-            "confidence": classification.confidence,
-            "rationale": classification.rationale,
-            "scores": classification.scores,
-        }
-        summary["disease_label_file"] = classification.predicted_class
-    summary["grounding_index"] = findings.grounding_index
-    return summary
-
-def _insert_morphology(template_md: str, morph: str) -> str:
-    """Insert the LLM paragraph between Cohort morphology and Diagnostic flags,
-    matching how the ground-truth reports were assembled."""
-    if not morph:
-        return template_md
-    marker = "**Diagnostic flags:**"
-    if marker in template_md:
-        head, _, tail = template_md.partition(marker)
-        return f"{head.rstrip()}\n\n{morph}\n\n{marker}{tail}"
-    return f"{template_md.rstrip()}\n\n{morph}"
+def _protocol_report(findings, classification, complete, *, backend: str) -> GroundedReport:
+    """Template -> LLM enrichment -> validation, identical to reference construction.
+    The LLM sees only findings.case_record; appendices are added afterwards."""
+    if not findings.case_record:
+        raise ValueError("findings.case_record is empty; aggregate() must build it")
+    body, info = run_report_protocol(findings.case_id, findings.case_record, complete)
+    markdown = _append_quantitative_summary(body, findings)
+    markdown = _append_grounding(markdown, findings, classification)
+    return GroundedReport(
+        markdown=markdown,
+        grounding_index=findings.grounding_index,
+        backend=backend,
+        protocol_markdown=body,
+        protocol_info=info,
+    )
 
 
 def _append_quantitative_summary(markdown: str, findings: AggregatedFindings) -> str:
@@ -190,15 +145,21 @@ def _append_quantitative_summary(markdown: str, findings: AggregatedFindings) ->
     lines.append("")
     lines.append("| Cell type | Count | % informative WBCs |")
     lines.append("|---|---:|---:|")
-    pct = findings.cell_percentages_clinical
+    pct = findings.case_record.get("cell_percentages_clinical") or findings.cell_percentages_clinical
     for cell_type, count in sorted(
         findings.cell_counts.items(),
         key=lambda item: (-item[1], item[0]),
     ):
-        lines.append(f"| {cell_type} | {count} | {pct.get(cell_type, 0.0)}% |")
+        v = pct.get(cell_type.lower(), pct.get(cell_type, 0.0))
+        lines.append(f"| {cell_type} | {count} | {v:.1f}% |")
 
     return "\n".join(lines)
 
+_ATTR_DISPLAY = {
+    "cell_size": "size", "nuclear_chromatio": "chromatin", "nuclear_shape": "nuclear shape",
+    "nucleolus": "nucleoli", "cytoplasm": "cytoplasm",
+    "cytoplasmic_basophilia": "basophilia", "cytoplasmic_vacuoles": "vacuoles",
+}
 
 def _append_grounding(
     markdown: str,
@@ -222,9 +183,9 @@ def _append_grounding(
     lines.extend(["", "## Cell Grounding", ""])
 
     for cell_id, rec in list(findings.grounding_index.items())[:limit]:
-        attrs = rec.get("attributes", {})
-        pos = [name.replace("_", " ").lower() for name, val in attrs.items() if val]
-        morph = "; ".join(pos[:4]) if pos else "no positive morphology attributes"
+        labels = labels_from_prediction(rec.get("attributes", {}))
+        morph = "; ".join(f"{v} {_ATTR_DISPLAY.get(k, k)}" for k, v in labels.items()) \
+                or "no attribute predictions"
 
         lines.append(
             f"- `{cell_id}` in `{rec['image_id']}` bbox={rec['bbox_xyxy']}: "

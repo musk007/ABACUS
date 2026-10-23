@@ -14,18 +14,18 @@
 
 **Cohort morphology (n = 276 myeloblasts):** predominantly medium cells (93.1%) with scanty (63.8%), moderately basophilic (94.6%) cytoplasm and absent cytoplasmic vacuolation (100.0%); nuclei show open chromatin (100.0%), irregular contours (95.3%), and prominent nucleoli (99.6%).
 
-**Morphologic interpretation:** The blast population is morphologically cohesive, with open nuclear chromatin, irregular nuclear contours, prominent nucleoli, and moderately basophilic cytoplasm supporting an immature blast phenotype. Cytoplasmic amount is the main heterogeneous feature: scant cytoplasm is dominant but borderline at 63.8%, so the cohort is not strongly one-sided for cytoplasmic volume. The lack of cytoplasmic vacuolation and the uniform prominence of nucleoli provide no morphologic discordance with an acute blast process.
+**Morphologic interpretation:** The myeloblast cohort shows a strongly conserved immature nuclear pattern, with uniformly open chromatin, nearly universal prominent nucleoli, and strongly predominant irregular nuclear contours. Predominantly medium cell size and consistently moderate cytoplasmic basophilia accompany this nuclear immaturity. Cytoplasmic volume is more variable, with scant cytoplasm only weakly dominant, whereas cytoplasmic vacuolation is uniformly absent.
 
 **Diagnostic flags:** blasts present; blast threshold met.
 
-**Impression:** Acute Myeloid Leukemia (AML).
+**Impression:** Findings consistent with an acute leukaemia of myeloblastic morphology. Definitive classification requires clinical correlation and ancillary studies.
 
-Myeloblasts comprise 88.5% of WBCs, exceeding the 20% blast threshold for acute leukemia.
+Myeloblasts comprise 88.5% of WBCs (blast-equivalent burden of 88.5%), exceeding the 20% blast threshold for acute leukaemia.
 
 **Differential considerations:**
 - AML with recurrent genetic abnormalities (per WHO/ICC).
-- AML, not otherwise specified.
-- Mixed-phenotype acute leukemia (excluded by immunophenotyping).
+- Acute myeloid leukaemia.
+- Mixed-phenotype acute leukaemia (excluded by immunophenotyping).
 
 **Recommended workup:**
 - Flow cytometric immunophenotyping (CD13, CD33, CD117, MPO, HLA-DR).
@@ -33,7 +33,9 @@ Myeloblasts comprise 88.5% of WBCs, exceeding the 20% blast threshold for acute 
 - Cytogenetics and FISH for recurrent AML abnormalities.
 - Molecular panel: NPM1, FLT3-ITD/TKD, CEBPA, RUNX1, TP53, and AML fusion screen.
 
-**QC:** 56 FOVs; 312/329 cells classifiable (5.2% artefact); cohort cell count = 276; global canvas stitching inactive.
+**QC:** 56 FOVs; 312/329 cells classifiable (5.2% artefact); cohort cell count = 276.
+
+**Not assessed:** erythrocyte and platelet morphology, dysplastic features, smear staining quality, and whether fields originate from the optimal monolayer zone. Findings are based on leukocyte morphology only.
 
 ---
 *Automated multi-image peripheral blood smear analysis. Findings are intended to support — not replace — review by a board-certified hematopathologist.*

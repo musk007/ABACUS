@@ -1,0 +1,344 @@
+{
+  "yolo_weights": "wbc_unified/cv/runs/detector/train_folds/fold3/weights/best.pt",
+  "dinobloom_weights": "/home/roba.majzoub/DinoBloom-L.pth",
+  "dinobloom_attr_weights": "wbc_unified/cv/runs/attribute_dinobloom/folds/fold3_attr_dinobloom.pt",
+  "dinobloom_variant": "l",
+  "conf_threshold": 0.25,
+  "feature_source": "detection_pipeline",
+  "label_source": "lld_image_filenames",
+  "image_root": "/home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/generated/det_dataset/images",
+  "attribute_head": "dinobloom_mlp",
+  "classifier_backend": "lightgbm",
+  "feature_names": [
+    "attr_cell_size__large_mean_prob",
+    "attr_cell_size__medium_mean_prob",
+    "attr_cell_size__small_mean_prob",
+    "attr_cytoplasm__mean_prob",
+    "attr_cytoplasm__positive_pct",
+    "attr_cytoplasmic_basophilia__mean_prob",
+    "attr_cytoplasmic_basophilia__positive_pct",
+    "attr_cytoplasmic_vacuoles__mean_prob",
+    "attr_cytoplasmic_vacuoles__positive_pct",
+    "attr_nuclear_chromatin__mean_prob",
+    "attr_nuclear_chromatin__positive_pct",
+    "attr_nuclear_shape__mean_prob",
+    "attr_nuclear_shape__positive_pct",
+    "attr_nucleolus__mean_prob",
+    "attr_nucleolus__positive_pct",
+    "blast_pct",
+    "blast_pool_percentage_of_wbc",
+    "group_blasts_pct",
+    "group_intermediate_myeloid_pct",
+    "group_lymphoid_pct",
+    "group_mature_granulocytes_pct",
+    "group_monocytic_pct",
+    "n_cells_identified_wbc",
+    "n_cells_informative",
+    "pct_abnormal_promyelocyte",
+    "pct_atypical_lymphocyte",
+    "pct_basophil",
+    "pct_eosinophil",
+    "pct_lymphoblast",
+    "pct_lymphocyte",
+    "pct_metamyelocyte",
+    "pct_monoblast",
+    "pct_monocyte",
+    "pct_myeloblast",
+    "pct_myelocyte",
+    "pct_neutrophil",
+    "pct_promonocyte"
+  ],
+  "classes": [
+    "ALL",
+    "AML",
+    "APML",
+    "CLL",
+    "CML"
+  ],
+  "n_train": 36,
+  "n_test": 10,
+  "test_evaluation": {
+    "backend": "lightgbm",
+    "accuracy": 0.7,
+    "n_train": 36,
+    "n_test": 10,
+    "classification_report": "              precision    recall  f1-score   support\n\n         ALL       0.67      0.50      0.57         4\n         AML       0.60      0.75      0.67         4\n        APML       0.00      0.00      0.00         0\n         CLL       1.00      1.00      1.00         1\n         CML       1.00      1.00      1.00         1\n\n    accuracy                           0.70        10\n   macro avg       0.65      0.65      0.65        10\nweighted avg       0.71      0.70      0.70        10\n",
+    "confusion_matrix_labels": [
+      "ALL",
+      "AML",
+      "APML",
+      "CLL",
+      "CML"
+    ],
+    "confusion_matrix": [
+      [
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "predictions": {
+      "10": {
+        "patient_id": "10",
+        "true_label": "ALL",
+        "predicted_class": "AML",
+        "confidence": 0.9949965034390311,
+        "class_probabilities": {
+          "ALL": 0.004961545032239387,
+          "AML": 0.9949965034390311,
+          "APML": 1.1302294315876628e-05,
+          "CLL": 1.97783571209897e-05,
+          "CML": 1.08708772927607e-05
+        },
+        "split": "test"
+      },
+      "1": {
+        "patient_id": "1",
+        "true_label": "ALL",
+        "predicted_class": "AML",
+        "confidence": 0.8104372965146478,
+        "class_probabilities": {
+          "ALL": 0.1894737214121897,
+          "AML": 0.8104372965146478,
+          "APML": 2.3431164275376356e-05,
+          "CLL": 4.3311265227033775e-05,
+          "CML": 2.2239643659946487e-05
+        },
+        "split": "test"
+      },
+      "29": {
+        "patient_id": "29",
+        "true_label": "ALL",
+        "predicted_class": "ALL",
+        "confidence": 0.7592759875423478,
+        "class_probabilities": {
+          "ALL": 0.7592759875423478,
+          "AML": 0.24067627070458283,
+          "APML": 1.1017073317131605e-05,
+          "CLL": 2.4275124736525427e-05,
+          "CML": 1.2449555015687559e-05
+        },
+        "split": "test"
+      },
+      "33": {
+        "patient_id": "33",
+        "true_label": "AML",
+        "predicted_class": "ALL",
+        "confidence": 0.9957894685472558,
+        "class_probabilities": {
+          "ALL": 0.9957894685472558,
+          "AML": 0.001597079418951097,
+          "APML": 0.0006622237232676684,
+          "CLL": 0.0011877487893774909,
+          "CML": 0.0007634795211479376
+        },
+        "split": "test"
+      },
+      "42": {
+        "patient_id": "42",
+        "true_label": "AML",
+        "predicted_class": "AML",
+        "confidence": 0.9882191982119617,
+        "class_probabilities": {
+          "ALL": 0.008112964327441354,
+          "AML": 0.9882191982119617,
+          "APML": 0.003553504552907352,
+          "CLL": 7.207464397437158e-05,
+          "CML": 4.2258263715255716e-05
+        },
+        "split": "test"
+      },
+      "44": {
+        "patient_id": "44",
+        "true_label": "AML",
+        "predicted_class": "AML",
+        "confidence": 0.9858920503984928,
+        "class_probabilities": {
+          "ALL": 0.01408070312027151,
+          "AML": 0.9858920503984928,
+          "APML": 7.430369525154255e-06,
+          "CLL": 1.2757430862012077e-05,
+          "CML": 7.058680848591115e-06
+        },
+        "split": "test"
+      },
+      "5": {
+        "patient_id": "5",
+        "true_label": "ALL",
+        "predicted_class": "ALL",
+        "confidence": 0.9998139627636252,
+        "class_probabilities": {
+          "ALL": 0.9998139627636252,
+          "AML": 5.510086714433056e-05,
+          "APML": 3.5482782695646776e-05,
+          "CLL": 6.131267793833498e-05,
+          "CML": 3.414090859649937e-05
+        },
+        "split": "test"
+      },
+      "15": {
+        "patient_id": "15",
+        "true_label": "AML",
+        "predicted_class": "AML",
+        "confidence": 0.996351859336687,
+        "class_probabilities": {
+          "ALL": 0.0036350183679552356,
+          "AML": 0.996351859336687,
+          "APML": 3.628434650194562e-06,
+          "CLL": 5.922365078644251e-06,
+          "CML": 3.571495628734837e-06
+        },
+        "split": "test"
+      },
+      "21": {
+        "patient_id": "21",
+        "true_label": "CLL",
+        "predicted_class": "CLL",
+        "confidence": 0.999987550346644,
+        "class_probabilities": {
+          "ALL": 1.731366723061412e-06,
+          "AML": 3.892133126045461e-06,
+          "APML": 3.476692761601331e-06,
+          "CLL": 0.999987550346644,
+          "CML": 3.3494607451915007e-06
+        },
+        "split": "test"
+      },
+      "31": {
+        "patient_id": "31",
+        "true_label": "CML",
+        "predicted_class": "CML",
+        "confidence": 0.9998236005737479,
+        "class_probabilities": {
+          "ALL": 2.652679208629538e-06,
+          "AML": 3.4246894580467135e-06,
+          "APML": 0.00016047866308744327,
+          "CLL": 9.843394498097118e-06,
+          "CML": 0.9998236005737479
+        },
+        "split": "test"
+      }
+    },
+    "feature_importances": {
+      "attr_nuclear_shape__positive_pct": 0.10680088386938374,
+      "attr_cell_size__medium_mean_prob": 0.06678124232752271,
+      "attr_cytoplasmic_vacuoles__mean_prob": 0.058679106309845325,
+      "attr_cell_size__small_mean_prob": 0.05769702921679352,
+      "attr_cell_size__large_mean_prob": 0.05524183648416401,
+      "pct_lymphocyte": 0.0537687208445863,
+      "attr_cytoplasm__mean_prob": 0.04615762337343481,
+      "attr_nucleolus__mean_prob": 0.044684507733857105,
+      "blast_pct": 0.0427203535477535,
+      "attr_nuclear_chromatin__mean_prob": 0.03977412226859808,
+      "group_mature_granulocytes_pct": 0.03486373680333906,
+      "group_lymphoid_pct": 0.03314510189049841,
+      "pct_myeloblast": 0.0321630247974466,
+      "pct_basophil": 0.02970783206481709,
+      "attr_nuclear_shape__mean_prob": 0.029216793518291186,
+      "attr_cytoplasm__positive_pct": 0.028725754971765282,
+      "attr_cytoplasmic_basophilia__mean_prob": 0.02602504296587282,
+      "pct_eosinophil": 0.025534004419346917,
+      "pct_lymphoblast": 0.024306408053032164,
+      "attr_cytoplasmic_basophilia__positive_pct": 0.02356985023324331,
+      "n_cells_identified_wbc": 0.023078811686717406,
+      "pct_abnormal_promyelocyte": 0.01939602258777314,
+      "pct_neutrophil": 0.016940829855143627,
+      "pct_myelocyte": 0.016204272035354777,
+      "attr_nuclear_chromatin__positive_pct": 0.014485637122514118,
+      "group_intermediate_myeloid_pct": 0.013994598575988216,
+      "pct_metamyelocyte": 0.007856616744414437,
+      "group_monocytic_pct": 0.007365578197888534,
+      "attr_cytoplasmic_vacuoles__positive_pct": 0.0058924625583108275,
+      "blast_pool_percentage_of_wbc": 0.0056469432850478765,
+      "attr_nucleolus__positive_pct": 0.005155904738521974,
+      "n_cells_informative": 0.0027007120058924624,
+      "pct_monocyte": 0.0009820770930518046,
+      "group_blasts_pct": 0.0004910385465259023,
+      "pct_monoblast": 0.00024551927326295114,
+      "pct_atypical_lymphocyte": 0.0,
+      "pct_promonocyte": 0.0
+    }
+  },
+  "split": {
+    "train": [
+      "11",
+      "12",
+      "13",
+      "14",
+      "16",
+      "17",
+      "19",
+      "20",
+      "22",
+      "25",
+      "27",
+      "2",
+      "30",
+      "32",
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "3",
+      "41",
+      "46",
+      "47",
+      "48",
+      "7",
+      "9",
+      "18",
+      "23",
+      "28",
+      "34",
+      "40",
+      "43",
+      "45",
+      "4",
+      "6",
+      "8"
+    ],
+    "test": [
+      "10",
+      "1",
+      "29",
+      "33",
+      "42",
+      "44",
+      "5",
+      "15",
+      "21",
+      "31"
+    ]
+  }
+}

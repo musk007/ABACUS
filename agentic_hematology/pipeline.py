@@ -46,7 +46,7 @@ def reflect_node(
     *,
     agent: ReflectionAgent | None = None,
     classifier: HybridClassifier | None = None,
-    max_iterations: int = 2,
+    max_iterations: int = 4,
 ) -> PipelineState:
     """
     Agentic reflection loop.
@@ -92,25 +92,6 @@ def reflect_node(
             break
 
         if decision.action == AgentAction.FLAG_FOR_REVIEW:
-            if re_aggregate_count < max_reaggregations:
-                decision.action = AgentAction.RE_AGGREGATE
-                decision.reason = (
-                    "flag_for_review requested before re-aggregation budget was exhausted; "
-                    "forcing re_aggregate first"
-                )
-                decision.conf_threshold = min(0.9, state.conf_threshold + 0.15)
-
-                state.agent_actions[-1] = {"iteration": iteration, **decision.to_dict()}
-
-                state.conf_threshold = decision.conf_threshold
-                re_aggregate_count += 1
-
-                state = aggregate_node(state)
-                if classifier is not None:
-                    state = classify_node(state, classifier)
-
-                continue
-
             state.flagged_for_review = True
             state.review_reasons.append(decision.reason)
             break

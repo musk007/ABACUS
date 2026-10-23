@@ -1,0 +1,38 @@
+path: /home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/generated/det_dataset
+train: images/train
+val: images/test
+test: images/test
+nc: 14
+names:
+- None
+- Myeloblast
+- Lymphoblast
+- Neutrophil
+- Atypical lymphocyte
+- Promonocyte
+- Monoblast
+- Lymphocyte
+- Myelocyte
+- Abnormal promyelocyte
+- Monocyte
+- Metamyelocyte
+- Eosinophil
+- Basophil
+data_root: /l/users/roba.majzoub/LLD_organized_C1
+attr_manifest: /home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/generated/attr_manifest.csv
+celltype_manifest: /home/roba.majzoub/research/AgenticHematology/agentic_hematology/wbc_unified/cv/generated/celltype_manifest.csv
+attr_names:
+- Cell_Size
+- Nuclear_Chromatin
+- Nuclear_Shape
+- Nucleolus
+- Cytoplasm
+- Cytoplasmic_Basophilia
+- Cytoplasmic_Vacuoles
+binary_attrs:
+- Nuclear_Chromatin
+- Nuclear_Shape
+- Nucleolus
+- Cytoplasm
+- Cytoplasmic_Basophilia
+- Cytoplasmic_Vacuoles

@@ -1,0 +1,132 @@
+{
+  "11": {
+    "patient_id": "11",
+    "true_label": "ALL",
+    "predicted_class": "AML",
+    "confidence": 0.9609466492706541,
+    "class_probabilities": {
+      "ALL": 0.038930018270602336,
+      "AML": 0.9609466492706541,
+      "CLL": 6.800912087900522e-05,
+      "CML": 5.532333786442389e-05
+    },
+    "split": "test"
+  },
+  "19": {
+    "patient_id": "19",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.9999245760701453,
+    "class_probabilities": {
+      "ALL": 2.0800507296260975e-05,
+      "AML": 0.9999245760701453,
+      "CLL": 2.9170833372708153e-05,
+      "CML": 2.545258918564743e-05
+    },
+    "split": "test"
+  },
+  "22": {
+    "patient_id": "22",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.9879894419516101,
+    "class_probabilities": {
+      "ALL": 0.011957970228475336,
+      "AML": 0.9879894419516101,
+      "CLL": 2.8987907987625637e-05,
+      "CML": 2.3599911926955806e-05
+    },
+    "split": "test"
+  },
+  "27": {
+    "patient_id": "27",
+    "true_label": "CML",
+    "predicted_class": "CML",
+    "confidence": 0.9999748144402858,
+    "class_probabilities": {
+      "ALL": 5.935654873597534e-06,
+      "AML": 4.72288149752734e-06,
+      "CLL": 1.452702334309928e-05,
+      "CML": 0.9999748144402858
+    },
+    "split": "test"
+  },
+  "36": {
+    "patient_id": "36",
+    "true_label": "AML",
+    "predicted_class": "AML",
+    "confidence": 0.9960914341460454,
+    "class_probabilities": {
+      "ALL": 0.0038533315816787687,
+      "AML": 0.9960914341460454,
+      "CLL": 2.9542361807845127e-05,
+      "CML": 2.5691910468013667e-05
+    },
+    "split": "test"
+  },
+  "3": {
+    "patient_id": "3",
+    "true_label": "ALL",
+    "predicted_class": "AML",
+    "confidence": 0.544586245653686,
+    "class_probabilities": {
+      "ALL": 0.4553162536392608,
+      "AML": 0.544586245653686,
+      "CLL": 5.2025322179612745e-05,
+      "CML": 4.5475384873697366e-05
+    },
+    "split": "test"
+  },
+  "18": {
+    "patient_id": "18",
+    "true_label": "ALL",
+    "predicted_class": "ALL",
+    "confidence": 0.9821690991445724,
+    "class_probabilities": {
+      "ALL": 0.9821690991445724,
+      "AML": 0.017714985854438835,
+      "CLL": 6.187857089131635e-05,
+      "CML": 5.403643009740896e-05
+    },
+    "split": "test"
+  },
+  "23": {
+    "patient_id": "23",
+    "true_label": "APML",
+    "predicted_class": "AML",
+    "confidence": 0.9999285718750393,
+    "class_probabilities": {
+      "ALL": 1.530316051310066e-05,
+      "AML": 0.9999285718750393,
+      "CLL": 3.096895799527469e-05,
+      "CML": 2.515600645242257e-05
+    },
+    "split": "test"
+  },
+  "40": {
+    "patient_id": "40",
+    "true_label": "AML",
+    "predicted_class": "ALL",
+    "confidence": 0.5607958772748505,
+    "class_probabilities": {
+      "ALL": 0.5607958772748505,
+      "AML": 0.4348578580629121,
+      "CLL": 0.0023028295566467974,
+      "CML": 0.0020434351055906084
+    },
+    "split": "test"
+  },
+  "8": {
+    "patient_id": "8",
+    "true_label": "ALL",
+    "predicted_class": "AML",
+    "confidence": 0.976465323426023,
+    "class_probabilities": {
+      "ALL": 0.023464372856054405,
+      "AML": 0.976465323426023,
+      "CLL": 3.7531857030623705e-05,
+      "CML": 3.277186089215713e-05
+    },
+    "split": "test"
+  }
+}

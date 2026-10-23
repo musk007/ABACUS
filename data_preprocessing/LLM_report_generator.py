@@ -1,3 +1,4 @@
+
 """
 enrich_report_with_llm.py
 
@@ -50,6 +51,7 @@ import sys
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
+from report_protocol import run_report_protocol
 
 
 # ---------------------------------------------------------------------------
@@ -61,114 +63,18 @@ from typing import Any
 # OPENAI_API_KEY = ""
 
 
-OPENAI_MODEL    = "gpt-5.5"
+
+OPENAI_MODEL    = "gpt-6-astra"
 
 
-# ---------------------------------------------------------------------------
-# Prompt
-# ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = """You are a hematopathologist assistant. You will receive TWO inputs for one case:
-1. STRUCTURED FINDINGS JSON — the full output of an automated cell-detection pipeline
-2. TEMPLATE REPORT — a deterministically-generated markdown report derived from that JSON
-
-Your task is to produce a SHORT complementary "Morphologic interpretation" section that adds clinical reasoning the rule-based template cannot express. The template prints only the dominant value per attribute; you have access to the full distribution and may reference subordinate values where they are clinically meaningful.
-
-# What to produce
-
-Output exactly one section titled "**Morphologic interpretation:**" containing 3 to 5 sentences of running prose. Nothing else — no headers, no bullets, no preamble, no closing remarks, no recommended workup, no restated impression, no QC commentary.
-
-# What the section should do
-
-1. Describe the morphologic pattern of the cohort and any clinically meaningful heterogeneity.
-2. Surface clinically relevant subordinate findings from the JSON that the template's dominant-only prose hides:
-   - Size heterogeneity / pleomorphism (a substantial minority of small or large cells alongside the dominant population)
-   - Nuclear shape sub-categories (cleaved or folded nuclei, prominent irregular minority alongside a regular dominant)
-   - Substantial minorities of prominent nucleoli, scanty cytoplasm, or basophilic cytoplasm that would shift sub-entity favouring
-3. Flag borderline attribute dominances. A `dominance_pct` below approximately 65% means the cohort is not strongly one-sided — qualify the report's stated dominant value accordingly.
-4. Morphology may support or argue against specific morphologic patterns, but do not provide a definitive diagnosis or rank differential diagnoses. Morphology should be presented as supportive evidence only.
-5. If the cohort morphology is internally inconsistent with the impression, say so plainly.
-
-# Hard constraints (violations invalidate the output)
-
-- Do not mention FAB classifications, FAB subtypes, or compare findings against FAB categories.
-- Numbers: do not introduce any numeric value not literally present in either input. You may quote percentages from `cell_percentages_clinical`, `blast_morphology`, or the report verbatim.
-- Source of truth for cohort morphology: use ONLY the `report_ready.blast_morphology` block, which is computed over the selected cohort (n_cells_in_cohort) — this cohort may be a blast population or a mature lymphoid population depending on the case. The top-level `attributes` block is computed over all annotated objects (including artefacts) and must not be cited as cohort statistics, though you may reference its subordinate percentages when explicitly discussing the broader smear rather than the cohort.
-- Do not interpret `code_4`, `code_3`, or any `code_N` placeholder as a morphology value — these represent non-informative / artefact cells. Treat them as missing data, not as a finding, and do not mention them in the output.
-- Do not use `metadata_filename_diagnosis` as a confirmed diagnosis — it is dataset training metadata, not clinical truth. Reason from morphology only.
-- Do not invent any clinical data absent from the inputs: no age, sex, CBC indices, symptoms, history, immunophenotype, cytogenetics, or molecular results.
-- Do not invent any morphologic finding not present in the attribute distributions: no Auer rods, smudge cells, faggot cells, hand-mirror cells, granules, vacuoles, or features beyond what the JSON describes.
-- Do not recommend any test, follow-up, treatment, or workup.
-- Do not restate the impression, the differential table, the QC line, or the diagnostic flags.
-- Do not hedge with empty qualifiers ("may potentially possibly suggest"). Use direct clinical voice: "is consistent with", "shows", "demonstrates", "is characterized by", "is borderline for", and "argues against" when discussing morphologic features. Avoid using "favours" to rank disease entities.
-- If the JSON lacks a `report_ready.blast_morphology` block or `n_cells_in_cohort` is zero, output nothing.
-- Do not replace the differential diagnosis section generated elsewhere in the report.
-Do not assign a definitive diagnosis solely from morphology. Morphologic findings may be described as compatible with or supportive of a disease category when appropriate, but diagnostic certainty should not be implied.
-
-# Style
-
-- Clinical, terse, declarative. Audience is a hematopathologist who will sign the report.
-- Running prose. No numbered or bulleted lists.
-- Reference attributes by morphologic name, not JSON key: "nuclear chromatin" not "nuclear_chromatio"; "cytoplasmic basophilia" not "cytoplasmic_basophilia".
-- Refer to the cohort by its actual cell type — e.g. "the lymphoblast cohort", "the atypical lymphocyte cohort" — or simply "the cohort". Do not call it a blast population unless the cohort cell type is a blast.
-- Output will be inserted between the "Cohort morphology" block and the "Impression" line of the template report. Match the surrounding tone.
-
-"""
-
-
-USER_TEMPLATE = """---JSON---
-{json_blob}
-
----REPORT---
-{report_md}
-"""
 
 
 # ---------------------------------------------------------------------------
 # Numeric containment guard
 # ---------------------------------------------------------------------------
 
-NUMERIC_TOKEN_RE = re.compile(r"(?<![A-Za-z_])(\d+(?:\.\d+)?)")
 
-DEFAULT_WHITELIST: set[str] = {
-    "20",                    # WHO/ICC blast threshold
-    "10",                    # accelerated phase CML threshold
-    "5",                     # lymphocytosis threshold
-    "2",                     # basophilia threshold
-}
-
-
-def _flatten_numbers(obj: Any, out: set[str]) -> None:
-    if isinstance(obj, dict):
-        for v in obj.values():
-            _flatten_numbers(v, out)
-    elif isinstance(obj, list):
-        for v in obj:
-            _flatten_numbers(v, out)
-    elif isinstance(obj, (int, float)):
-        out.add(str(obj))
-        if isinstance(obj, float):
-            out.add(f"{obj:.1f}")
-            out.add(f"{round(obj, 1)}")
-    elif isinstance(obj, str):
-        out.update(NUMERIC_TOKEN_RE.findall(obj))
-
-
-def extract_allowed_numbers(case_json: dict, report_md: str) -> set[str]:
-    allowed: set[str] = set(DEFAULT_WHITELIST)
-    _flatten_numbers(case_json, allowed)
-    allowed.update(NUMERIC_TOKEN_RE.findall(report_md))
-    return allowed
-
-
-def find_novel_numbers(text: str, allowed: set[str]) -> list[str]:
-    novel: list[str] = []
-    seen: set[str] = set()
-    for tok in NUMERIC_TOKEN_RE.findall(text):
-        if tok not in allowed and tok not in seen:
-            novel.append(tok)
-            seen.add(tok)
-    return novel
 
 
 # ---------------------------------------------------------------------------
@@ -210,186 +116,33 @@ def build_backend(name: str) -> BaseBackend:
     raise ValueError(f"Unknown backend: {name!r}")
 
 
-# ---------------------------------------------------------------------------
-# Section generation with retry-on-hallucination
-# ---------------------------------------------------------------------------
-
-def generate_morphologic_interpretation(
-    backend: BaseBackend,
-    case_json: dict,
-    report_md: str,
-    max_retries: int = 1,
-) -> tuple[str | None, list[str]]:
-    """
-    Returns (section_text, issues). section_text is None if the LLM
-    decided to skip or all retries failed validation. `issues` lists any
-    novel-number violations seen across attempts.
-    """
-    # Cheap up-front check: if there's no blast cohort, skip without calling.
-    rr = case_json.get("report_ready", {})
-    cohort_n = rr.get("qc", {}).get("n_cells_in_cohort", 0)
-    if cohort_n == 0 or "blast_morphology" not in rr:
-        return None, ["no blast cohort to interpret"]
-
-    user_msg = USER_TEMPLATE.format(
-        json_blob=json.dumps(case_json, indent=2),
-        report_md=report_md,
-    )
-    allowed = extract_allowed_numbers(case_json, report_md)
-    issues: list[str] = []
-
-    for attempt in range(max_retries + 1):
-        output = backend.complete(SYSTEM_PROMPT, user_msg)
-        if output.strip().upper().startswith("SKIP"):
-            return None, []
-
-        novel = find_novel_numbers(output, allowed)
-        if not novel:
-            return output, []
-
-        issues.append(
-            f"attempt {attempt + 1}: novel numbers {novel}"
-        )
-        # Append retry feedback for the next attempt.
-        user_msg = (
-            USER_TEMPLATE.format(
-                json_blob=json.dumps(case_json, indent=2),
-                report_md=report_md,
-            )
-            + "\n\n---RETRY FEEDBACK---\n"
-            f"Your previous output contained numeric value(s) not present in "
-            f"the inputs: {', '.join(novel)}. Regenerate using ONLY numbers "
-            f"that appear verbatim in the JSON or the report. Do not perform "
-            f"any new calculation."
-        )
-
-    return None, issues
-
-
-# ---------------------------------------------------------------------------
-# Insertion — place the new section before "**Diagnostic flags:**"
-# ---------------------------------------------------------------------------
-
-def insert_section(report_md: str, section: str) -> str:
-    """
-    Insert `section` immediately before the "**Diagnostic flags:**" line.
-    Falls back to inserting before "**Impression:**" if flags are absent,
-    and finally to appending at the end.
-    """
-    section = section.rstrip() + "\n"
-    for anchor in ("**Diagnostic flags:**", "**Impression:**"):
-        idx = report_md.find(anchor)
-        if idx != -1:
-            # Find the start of the line containing the anchor.
-            line_start = report_md.rfind("\n", 0, idx) + 1
-            return (
-                report_md[:line_start]
-                + section
-                + "\n"
-                + report_md[line_start:]
-            )
-    # Append if neither anchor is present.
-    return report_md.rstrip() + "\n\n" + section
-
-
-# ---------------------------------------------------------------------------
-# Case-id resolution from filename
-# ---------------------------------------------------------------------------
-
-CASE_ID_RE = re.compile(r"case_([^_]+(?:_[^_]+)*?)_report")
-
-
-def case_id_from_filename(path: Path) -> str | None:
-    m = CASE_ID_RE.search(path.stem)
-    return m.group(1) if m else None
-
-
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
-
-def _process_one(
-    case_id: str,
-    case_json: dict,
-    report_in: Path,
-    report_out: Path,
-    backend: BaseBackend,
-) -> bool:
-    report_md = report_in.read_text()
-    section, issues = generate_morphologic_interpretation(
-        backend, case_json, report_md
-    )
-
-    if section is None:
-        msg = "no LLM section added"
-        if issues:
-            msg += f" (issues: {issues})"
-        print(f"  [{case_id}] {msg}")
-        # Still write the report unchanged so the output dir mirrors the input.
-        report_out.parent.mkdir(parents=True, exist_ok=True)
-        report_out.write_text(report_md)
-        return False
-
-    enriched = insert_section(report_md, section)
-    report_out.parent.mkdir(parents=True, exist_ok=True)
-    report_out.write_text(enriched)
-    print(f"  [{case_id}] enriched -> {report_out}")
-    return True
-
-
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--case-json", required=True, help="Path to the cases JSON.")
+    p.add_argument("--reports-out", required=True, help="Directory for accepted reference reports.")
+    p.add_argument("--case-id", default=None, help="Optional single case id.")
     p.add_argument("--backend", choices=["openai"], default="openai")
-    p.add_argument("--case-id", help="Single case id (with --report-in/--report-out).")
-    p.add_argument("--report-in", help="Single input report path.")
-    p.add_argument("--report-out", help="Single output report path.")
-    p.add_argument("--reports-in", help="Directory of input *.md reports.")
-    p.add_argument("--reports-out", help="Directory for enriched reports.")
     args = p.parse_args()
 
     cases = json.loads(Path(args.case_json).read_text())
+    ids = [args.case_id] if args.case_id else list(cases)
+    out_dir = Path(args.reports_out)
+    out_dir.mkdir(parents=True, exist_ok=True)
     backend = build_backend(args.backend)
 
-    # Single-case mode.
-    if args.case_id and args.report_in and args.report_out:
-        if args.case_id not in cases:
-            print(f"ERROR: case {args.case_id!r} not in JSON", file=sys.stderr)
-            return 2
-        _process_one(
-            args.case_id,
-            cases[args.case_id],
-            Path(args.report_in),
-            Path(args.report_out),
-            backend,
-        )
-        return 0
+    log, n_ok = {}, 0
+    for cid in ids:
+        report_md, info = run_report_protocol(cid, cases[cid], backend.complete)
+        log[cid] = info
+        if info["validation"]["passed"]:          # rejected reports are not written
+            (out_dir / f"case_{cid}_report.md").write_text(report_md)
+            n_ok += 1
+        print(f"[{'PASS' if info['validation']['passed'] else 'FAIL'}] case {cid} "
+              f"enriched={info['enriched']} attempts={info['attempts']} issues={info['issues']}")
 
-    # Batch mode.
-    if args.reports_in and args.reports_out:
-        n_done = n_skip = 0
-        for path in sorted(Path(args.reports_in).glob("*.md")):
-            cid = case_id_from_filename(path)
-            if cid is None:
-                print(f"  [skip] cannot parse case id from {path.name}")
-                n_skip += 1
-                continue
-            if cid not in cases:
-                print(f"  [skip] case {cid!r} not in JSON")
-                n_skip += 1
-                continue
-            out_path = Path(args.reports_out) / path.name
-            ok = _process_one(cid, cases[cid], path, out_path, backend)
-            n_done += int(ok)
-        print(f"\nDone. Enriched: {n_done}; skipped/unchanged: {n_skip}")
-        return 0
-
-    print(
-        "ERROR: provide either --case-id + --report-in + --report-out (single), "
-        "or --reports-in + --reports-out (batch).",
-        file=sys.stderr,
-    )
-    return 2
+    (out_dir / "_protocol_log.json").write_text(json.dumps(log, indent=2))
+    print(f"\n{n_ok}/{len(ids)} reports accepted.")
+    return 0
 
 
 if __name__ == "__main__":

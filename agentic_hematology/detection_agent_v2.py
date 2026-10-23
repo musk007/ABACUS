@@ -54,14 +54,17 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 ATTRIBUTE_ORDER = [
+    "Cell_Size",
     "Nuclear_Chromatin",
     "Nuclear_Shape",
-    "Nucleus",
+    "Nucleolus",
     "Cytoplasm",
     "Cytoplasmic_Basophilia",
     "Cytoplasmic_Vacuoles",
 ]
-
+CELL_SIZE_ATTR = "Cell_Size"
+CELL_SIZE_STATES = ("small", "medium", "large")
+BINARY_ATTRIBUTE_ORDER = [a for a in ATTRIBUTE_ORDER if a != CELL_SIZE_ATTR]
 
 @runtime_checkable
 class CropAttributeClassifier(Protocol):
@@ -233,7 +236,8 @@ class EfficientNetAttributeClassifier:
         ckpt = torch.load(weights_path, map_location=self.device)
         if isinstance(ckpt, dict) and "model" in ckpt:
             self.model = build_attribute_model(
-                num_attrs=len(ATTRIBUTE_ORDER),
+                num_binary=len(BINARY_ATTRIBUTE_ORDER),
+                num_size=3,
                 backbone=ckpt.get("backbone", "efficientnet_b0"),
                 pretrained=False,
             )
@@ -263,25 +267,34 @@ class EfficientNetAttributeClassifier:
 
         batch = torch.stack([self._preprocess(c) for c in crops]).to(self.device)
         with torch.no_grad():
-            raw = self.model(batch)
+            bin_logits, size_logits = self.model(batch)
+
+        bin_probs = torch.sigmoid(bin_logits)
+        size_probs = torch.softmax(size_logits, dim=1)
 
         results = []
-        probs_all = torch.sigmoid(raw)
         for i in range(batch.shape[0]):
             attrs: dict[str, float] = {}
             attr_probs: dict[str, float] = {}
-            for j, attr in enumerate(ATTRIBUTE_ORDER):
-                prob = float(probs_all[i, j].item())
+            for j, attr in enumerate(BINARY_ATTRIBUTE_ORDER):
+                prob = float(bin_probs[i, j].item())
                 attrs[attr] = prob
                 attr_probs[attr] = prob
+            for k, state in enumerate(CELL_SIZE_STATES):
+                key = f"{CELL_SIZE_ATTR}_{state}"
+                prob = float(size_probs[i, k].item())
+                attrs[key] = prob
+                attr_probs[key] = prob
+            attrs[CELL_SIZE_ATTR] = float(size_probs[i].argmax().item())
             results.append((attrs, attr_probs, None, None))
         return results
 
     def _preprocess(self, crop: Any):
         import numpy as np
+        from PIL import Image
 
         torch = self._torch
-        crop = crop.resize((self.image_size, self.image_size))
+        crop = crop.resize((self.image_size, self.image_size), Image.BILINEAR)
         arr = np.asarray(crop, dtype=np.float32) / 255.0
         x = torch.from_numpy(arr).permute(2, 0, 1).float()
         return (x - self._mean) / self._std
@@ -306,7 +319,7 @@ class TwoStageDetectionAgent(BaseDetectionAgent):
         self,
         localizer: YOLOv11Localizer,
         attribute_classifier: CropAttributeClassifier,
-        crop_padding: int = 4,
+        crop_padding: float = 0.15,
         prefer_efficientnet_celltype: bool = False,
         attribute_head_name: str = "attribute",
     ):
@@ -348,10 +361,12 @@ class TwoStageDetectionAgent(BaseDetectionAgent):
                 crops = []
                 for c in cells:
                     x1, y1, x2, y2 = c["bbox_xyxy"]
-                    x1 = max(0, int(x1) - self.crop_padding)
-                    y1 = max(0, int(y1) - self.crop_padding)
-                    x2 = min(W, int(x2) + self.crop_padding)
-                    y2 = min(H, int(y2) + self.crop_padding)
+                    px = self.crop_padding * (x2 - x1)
+                    py = self.crop_padding * (y2 - y1)
+                    x1 = max(0, int(x1 - px))
+                    y1 = max(0, int(y1 - py))
+                    x2 = min(W, int(x2 + px))
+                    y2 = min(H, int(y2 + py))
                     crops.append(im.crop((x1, y1, x2, y2)))
 
                 if not crops:

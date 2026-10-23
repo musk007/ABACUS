@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# LoRA SFT | Qwen3.5-2B | verl FSDP
+# LoRA SFT | Qwen3-VL-4B-Instruct | morphology paragraph | verl FSDP
 # Usage: bash verl_scripts/run_sft.sh <nproc_per_node> [hydra overrides...]
 # Small datasets: prefer nproc=1 to avoid multi-GPU checkpoint OOM
 
@@ -25,15 +25,15 @@ mkdir -p "$(dirname "$HYDRA_RUN_DIR")" "$SAVE_PATH"
 [ -f "$MODEL_PATH/config.json" ] || { echo "Missing base model: $MODEL_PATH"; exit 1; }
 [ -f "$TRAIN_FILE" ] || { echo "Missing $TRAIN_FILE — run: bash verl_scripts/train.sh data"; exit 1; }
 
-TOTAL_EPOCHS="${TOTAL_EPOCHS:-5}"
-STEPS_PER_EPOCH="${STEPS_PER_EPOCH:-10}"
-TOTAL_STEPS="${TOTAL_TRAINING_STEPS:-$((TOTAL_EPOCHS * STEPS_PER_EPOCH))}"
+# 33 train samples / batch 4 ≈ 8 steps/epoch; epochs is only an upper bound, training stops at TOTAL_STEPS
+TOTAL_EPOCHS="${TOTAL_EPOCHS:-8}"
+TOTAL_STEPS="${TOTAL_TRAINING_STEPS:-50}"
 SAVE_FREQ="${SAVE_FREQ:-$TOTAL_STEPS}"
 MAX_CKPT="${MAX_CKPT_TO_KEEP:-1}"
 TEST_FREQ="${TEST_FREQ:-25}"
 LR="${LR:-1e-4}"
 MAX_LEN="${MAX_LENGTH:-4096}"
-TRUNCATION="${TRUNCATION:-left}"
+TRUNCATION="${TRUNCATION:-error}"  # left-truncation would cut the GT system prompt
 MODEL_DTYPE="${MODEL_DTYPE:-bf16}"
 ATTN_IMPLEMENTATION="${ATTN_IMPLEMENTATION:-sdpa}"
 
