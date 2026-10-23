@@ -14,12 +14,6 @@ Every number in a generated report must already appear in the evidence record,
 the deterministic template, or a fixed set of guideline thresholds; sections
 that violate containment are regenerated once, then dropped.
 
-> **Note on `pipeline/run.sh`.** The repository contains an older end-to-end
-> driver (`pipeline/run.sh` and the `pipeline/sbatch_*.sh` wrappers) that trains
-> the **EfficientNet-B0** attribute head and fine-tunes **Qwen3.5-2B** with an
-> SFT **and** a GRPO stage. That is *not* the configuration reported in the
-> paper. The commands below are the per-component invocations for the reported
-> configuration: DinoBloom-L probe, SFT only. See §9.
 
 ---
 
