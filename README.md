@@ -527,7 +527,7 @@ Open before the repo is usable by anyone else:
 
 ---
 
-## Citation
+<!-- ## Citation
 
 ```bibtex
 @inproceedings{abacus2027,
@@ -536,5 +536,5 @@ Open before the repo is usable by anyone else:
   author    = {TODO: full author list},
   booktitle = {IEEE International Symposium on Biomedical Imaging (ISBI)},
   year      = {2027}
-}
+} -->
 ```
